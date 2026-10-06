@@ -19,16 +19,13 @@ export function SiteFooter() {
         <div>
           <h2 className="font-display text-sm font-semibold text-ink">Offices</h2>
           <div className="mt-4 space-y-4 text-sm text-muted">
-            <p>
-              <span className="font-semibold text-ink">Tiruppur</span>
-              <br />
-              2nd Floor, Alagendira Towers, Bungalow Stop, Tiruppur – 641602
-            </p>
-            <p>
-              <span className="font-semibold text-ink">Palladam</span>
-              <br />
-              271 A3, Chinnaiyah Garden, Kosavampalayam Road, Palladam – 641664
-            </p>
+            {site.offices.map((office) => (
+              <p key={office.city}>
+                <span className="font-semibold text-ink">{office.city}</span>
+                <br />
+                {office.address}
+              </p>
+            ))}
           </div>
         </div>
 
