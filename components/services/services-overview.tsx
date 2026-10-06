@@ -1,40 +1,42 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { MarketingPage } from "@/components/layout/marketing-page";
 import { PageHero } from "@/components/layout/page-hero";
 import { Container, Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import {
-  CountersSection,
   ProjectClose,
-  ResultsSection,
   StrengthsSection,
-  TestimonialsSection,
 } from "@/components/marketing/proof-sections";
 import {
-  additionalServicePages,
+  RelatedServices,
+  ServiceCard,
+  ServiceContactCta,
+} from "@/components/services/service-card";
+import {
+  allServices,
   cityPages,
-  digitalSuiteIntro,
-  digitalSuiteServices,
+  digitalMarketingProcess,
+  serviceCategories,
+  serviceDetailPages,
+  servicesPageIntro,
 } from "@/content/services";
 import { processSteps } from "@/content/about";
-import { certifications } from "@/content/proof";
-import { Badge } from "@/components/ui/badge";
 import { site } from "@/content/site";
 
 export function ServicesOverviewPage() {
   return (
     <MarketingPage transparentHeader>
       <PageHero
-        title={digitalSuiteIntro.title}
-        description={digitalSuiteIntro.description}
+        eyebrow={servicesPageIntro.eyebrow}
+        title={servicesPageIntro.title}
+        description={servicesPageIntro.description}
       >
-        <p className="mb-6 text-white/70">{digitalSuiteIntro.closer}</p>
         <div className="flex flex-wrap gap-3">
           <Button asChild variant="signal" size="lg">
-            <a href={site.phoneHref}>Call now</a>
+            <Link href="/contact">Get quote</Link>
           </Button>
           <Button
             asChild
@@ -42,60 +44,86 @@ export function ServicesOverviewPage() {
             size="lg"
             className="border-white/30 text-white hover:bg-white/10 hover:text-white"
           >
-            <Link href="/contact">Get quote</Link>
+            <a href={site.phoneHref}>Call now</a>
           </Button>
         </div>
       </PageHero>
 
-      <Section>
+      <Section tone="surface">
         <Container>
           <SectionHeader
-            eyebrow="What we offer"
+            eyebrow="Overview"
             title="Our services"
-            description="Every Digital Suite service named on the previous website, with the published one-line description."
+            description="Get brand growth, connect with your target audience and meet your revenue goals with are following services"
           />
-          <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {digitalSuiteServices.map((item) => (
-              <StaggerItem key={item.slug}>
-                <Card interactive className="h-full">
-                  <CardTitle>{item.title}</CardTitle>
-                  <CardDescription>{item.description}</CardDescription>
-                  {item.overview ? (
-                    <Link
-                      href={item.href}
-                      className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy"
-                    >
-                      Learn more
-                      <ArrowRight className="size-4" />
-                    </Link>
-                  ) : null}
-                </Card>
-              </StaggerItem>
+          <div className="flex flex-wrap gap-2">
+            {serviceCategories.map((category) => (
+              <a
+                key={category.id}
+                href={`#${category.id}`}
+                className="rounded-md border border-line bg-surface px-3 py-1.5 text-sm font-medium text-ink transition hover:border-navy/30 focus-ring"
+              >
+                {category.title}
+              </a>
             ))}
-          </Stagger>
-          <Reveal className="mt-8">
-            <p className="text-sm text-muted">And much more.</p>
-          </Reveal>
+          </div>
         </Container>
       </Section>
+
+      {serviceCategories.map((category) => {
+        const items = allServices.filter(
+          (service) => service.category === category.id,
+        );
+        if (items.length === 0) return null;
+
+        return (
+          <Section key={category.id} id={category.id}>
+            <Container>
+              <SectionHeader
+                eyebrow="Category"
+                title={category.title}
+                description={category.description}
+              />
+              <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {items.map((service) => (
+                  <StaggerItem key={service.slug}>
+                    <ServiceCard service={service} />
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </Container>
+          </Section>
+        );
+      })}
 
       <Section tone="surface">
         <Container>
           <SectionHeader
-            title="Also published on campaign pages"
-            description="Longer service write-ups that appeared on Infozub landing pages."
+            title="The digital marketing process"
+            description="Build, Operate and Manage — the working model published with Digital Suite."
           />
-          <div className="grid gap-4 md:grid-cols-3">
-            {additionalServicePages.map((item) => (
-              <Card key={item.slug} interactive>
-                <CardTitle>{item.title}</CardTitle>
-                <CardDescription>{item.description}</CardDescription>
-                <Button asChild variant="link" className="mt-3 px-0">
-                  <Link href={item.href}>Learn more</Link>
-                </Button>
-              </Card>
+          <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {processSteps.map((step, index) => (
+              <StaggerItem key={step.title}>
+                <Card className="h-full">
+                  <p className="font-mono text-xs text-muted">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <CardTitle className="mt-2">{step.title}</CardTitle>
+                  <CardDescription>{step.body}</CardDescription>
+                </Card>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
+          <Reveal className="mt-6">
+            <ul className="flex flex-wrap gap-2" aria-label="Process steps">
+              {digitalMarketingProcess.map((label) => (
+                <li key={label}>
+                  <Badge variant="neutral">{label}</Badge>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </Container>
       </Section>
 
@@ -123,39 +151,16 @@ export function ServicesOverviewPage() {
 
       <Section tone="surface">
         <Container>
-          <SectionHeader title="The digital marketing process" />
-          <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step, index) => (
-              <StaggerItem key={step.title}>
-                <Card className="h-full">
-                  <p className="font-mono text-xs text-muted">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <CardTitle className="mt-2">{step.title}</CardTitle>
-                  <CardDescription>{step.body}</CardDescription>
-                </Card>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <ul className="flex flex-wrap gap-2">
-            {certifications.map((name) => (
-              <li key={name}>
-                <Badge variant="neutral">{name}</Badge>
-              </li>
-            ))}
-          </ul>
+          <SectionHeader
+            title="Explore detailed services"
+            description="Longer write-ups for Google Ads, social, SEO, email, influencer marketing, and website development."
+          />
+          <RelatedServices services={serviceDetailPages} />
+          <ServiceContactCta className="mt-10" />
         </Container>
       </Section>
 
       <StrengthsSection />
-      <CountersSection />
-      <ResultsSection />
-      <TestimonialsSection />
       <ProjectClose />
     </MarketingPage>
   );

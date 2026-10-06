@@ -30,6 +30,11 @@ export const primaryNavigation: readonly NavItem[] = [
     label: "Digital Suite",
     children: [
       {
+        href: "/services",
+        label: "All services",
+        description: "Paid media, social, web, and sales support",
+      },
+      {
         href: "/digital-suite",
         label: "Overview",
         description: "Premier digital marketing services",
