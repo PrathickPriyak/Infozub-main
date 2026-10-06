@@ -3,8 +3,11 @@ import { AcademyPage } from "@/components/academy/academy-page";
 import { academySeo } from "@/content/academy";
 
 export const metadata: Metadata = {
-  title: "Academy",
+  title: academySeo.title,
   description: academySeo.description,
+  alternates: {
+    canonical: "/academy",
+  },
 };
 
 export default function Page() {

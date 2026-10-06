@@ -274,6 +274,27 @@
     background-image: linear-gradient(160deg, var(--ink) 0%, var(--navy) 100%);
   }
 
+  /* Academy entry — signal-forward band, still Signal Navy brand */
+  .academy-surface {
+    position: relative;
+  }
+
+  .academy-surface::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(15, 174, 154, 0.12), transparent 60%),
+      linear-gradient(180deg, transparent 0%, rgba(216, 245, 240, 0.35) 45%, transparent 100%);
+    z-index: 0;
+  }
+
+  .academy-surface > * {
+    position: relative;
+    z-index: 1;
+  }
+
   .shadow-elevated {
     box-shadow: var(--shadow-md);
   }

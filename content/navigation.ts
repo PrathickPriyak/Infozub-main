@@ -51,7 +51,7 @@ export const primaryNavigation: readonly NavItem[] = [
       },
     ],
   },
-  { href: "/courses", label: "Academy" },
+  { href: "/academy", label: "Academy" },
   { href: "/ventures", label: "Ventures" },
   { href: "/clients", label: "Clients" },
   { href: "/careers", label: "Careers" },

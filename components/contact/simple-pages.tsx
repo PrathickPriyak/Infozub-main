@@ -103,7 +103,7 @@ export function VenturesPage() {
               about Digital Marketing.
             </p>
             <Button asChild variant="outline" className="mt-5">
-              <Link href="/courses">View courses</Link>
+              <Link href="/academy">View courses</Link>
             </Button>
           </Card>
           <Card>

@@ -85,7 +85,7 @@ export const homeAcademy = {
   title: "Become a successful digital marketer",
   body: "Digital Academy is a destination for ambitious individuals who aspire to learn about Digital Marketing and build a career on their own terms.",
   label: "INFOZUB Digital Academy",
-  cta: { href: "/courses", label: "View Courses" },
+  cta: { href: "/academy", label: "View Courses" },
 } as const;
 
 export const homeVentures = {
