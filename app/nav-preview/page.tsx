@@ -53,7 +53,7 @@ export default async function NavPreviewPage({ searchParams }: PageProps) {
             </div>
           ) : null}
 
-          <Container className="relative py-20 md:py-28">
+          <Container className="relative pb-20 pt-28 md:pb-28 md:pt-32">
             <Badge variant={solidMode ? "signal" : "outline"}>
               Header preview
             </Badge>

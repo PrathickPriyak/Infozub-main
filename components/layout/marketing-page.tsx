@@ -19,6 +19,9 @@ export function MarketingPage({
         transparentOnHero={transparentHeader}
         inverseOnHero={transparentHeader}
       />
+      {!transparentHeader ? (
+        <div className="h-16 md:h-[6.5rem]" aria-hidden />
+      ) : null}
       <main id="main">{children}</main>
       <SiteFooter />
     </>

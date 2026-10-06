@@ -36,7 +36,7 @@ export function PageHero({
         </div>
       ) : null}
       <Container className="relative pb-16 pt-28 md:pb-20 md:pt-32">
-        <Reveal>
+        <Reveal mode="mount">
           {eyebrow ? (
             <Badge
               variant={inverse ? "outline" : "signal"}

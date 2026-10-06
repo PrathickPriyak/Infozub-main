@@ -10,15 +10,32 @@ export function Reveal({
   children,
   className,
   delay = 0,
+  mode = "view",
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
+  /** `mount` for above-the-fold content so it never waits on intersection. */
+  mode?: "view" | "mount";
 }) {
   const reduced = usePrefersReducedMotion();
 
   if (reduced) {
     return <div className={className}>{children}</div>;
+  }
+
+  if (mode === "mount") {
+    return (
+      <motion.div
+        className={className}
+        initial="hidden"
+        animate="visible"
+        variants={fadeUp}
+        transition={{ delay }}
+      >
+        {children}
+      </motion.div>
+    );
   }
 
   return (

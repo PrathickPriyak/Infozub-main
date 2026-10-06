@@ -111,6 +111,7 @@ export default function DesignSystemPage() {
     <>
       <SkipLink />
       <SiteHeader />
+      <div className="h-16 md:h-[6.5rem]" aria-hidden />
       <main id="main">
         <Section pattern="dots" className="pb-12 pt-14 md:pb-16 md:pt-20">
           <Container>

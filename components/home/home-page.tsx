@@ -83,7 +83,7 @@ function Hero() {
       </div>
 
       <Container className="relative grid items-center gap-12 pb-20 pt-28 md:pb-28 md:pt-32 lg:grid-cols-[1.1fr_0.9fr]">
-        <Reveal>
+        <Reveal mode="mount">
           <Badge
             variant="outline"
             className="border-white/20 bg-white/5 text-white"
@@ -120,7 +120,7 @@ function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.08}>
+        <Reveal mode="mount" delay={0.08}>
           <HomeHeroVisual />
         </Reveal>
       </Container>
