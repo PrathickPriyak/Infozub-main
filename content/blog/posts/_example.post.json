@@ -1,0 +1,21 @@
+{
+  "_comment": "TEMPLATE ONLY — filename starts with underscore so it is not published. Copy to {slug}.json and fill fields when migrating a WordPress post. The live Infozub site had 0 published posts at audit (October 2026).",
+  "slug": "example-post-slug",
+  "title": "Example post title",
+  "excerpt": "Short summary for cards and SEO description fallback.",
+  "contentHtml": "<p>Article body as HTML. Paste WordPress content.rendered here when migrating.</p>",
+  "publishedAt": "2026-01-15T10:00:00.000Z",
+  "updatedAt": "2026-01-15T10:00:00.000Z",
+  "author": {
+    "name": "Logesh",
+    "role": "Founder"
+  },
+  "categories": ["digital-marketing"],
+  "featured": false,
+  "coverImage": null,
+  "seo": {
+    "title": "Example post title - INFOZUB",
+    "description": "Short summary for cards and SEO description fallback."
+  },
+  "legacyUrl": "https://infozub.com/example-post-slug/"
+}
