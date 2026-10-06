@@ -237,7 +237,7 @@ export function AcademyPage() {
               <p className="font-mono text-xs font-semibold uppercase tracking-wide text-signal">
                 INFOZUB Digital Academy
               </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold text-white md:text-4xl">
+              <h2 className="mt-4 font-display text-2xl font-semibold text-white sm:text-3xl md:text-4xl">
                 {academyCta.title}
               </h2>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

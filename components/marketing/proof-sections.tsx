@@ -139,7 +139,7 @@ export function ProjectClose() {
           <TextReveal
             as="h2"
             text="Ready to start a project?"
-            className="font-display text-3xl font-semibold text-white md:text-4xl"
+            className="font-display text-2xl font-semibold text-white sm:text-3xl md:text-4xl"
           />
           <p className="mx-auto mt-4 max-w-xl text-white/75">
             Get your business engaged with the perfect audience.

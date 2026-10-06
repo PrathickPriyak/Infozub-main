@@ -44,7 +44,7 @@ export function ProjectsGrid() {
                   startTransition(() => setFilter(category.id))
                 }
                 className={cn(
-                  "rounded-md border px-3.5 py-2 text-sm font-medium transition focus-ring",
+                  "inline-flex min-h-11 items-center rounded-md border px-3.5 py-2 text-sm font-medium transition focus-ring",
                   active
                     ? "border-navy bg-navy text-white"
                     : "border-line bg-surface text-ink hover:border-navy/30",

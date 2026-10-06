@@ -120,6 +120,6 @@ export function getJobSlugs(): string[] {
 export const resumeCta = {
   title: "Don’t see the right role?",
   description: `Send us your resume. Email ${resumeEmail}, or use the application form.`,
-  emailLabel: `Send your resume to ${resumeEmail}`,
+  emailLabel: "Email resume",
   applyLabel: "Open application form",
 } as const;

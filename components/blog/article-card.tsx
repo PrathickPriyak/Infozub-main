@@ -53,7 +53,7 @@ export function ArticleCard({
         </div>
       ) : null}
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex min-w-0 flex-1 flex-col p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
           {post.categories.map((category) => (
             <Badge key={category} variant="neutral">

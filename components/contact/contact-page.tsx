@@ -185,7 +185,7 @@ export function ContactPage() {
       <Section tone="ink">
         <Container className="text-center">
           <Reveal>
-            <h2 className="font-display text-3xl font-semibold text-white md:text-4xl">
+            <h2 className="font-display text-2xl font-semibold text-white sm:text-3xl md:text-4xl">
               {contactCta.title}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm text-white/75 md:text-base">

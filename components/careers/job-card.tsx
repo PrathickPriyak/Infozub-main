@@ -77,11 +77,11 @@ export function CareersEmptyOpenings() {
       <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted md:text-base">
         {resumeCta.description}
       </p>
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
-        <Button asChild variant="signal">
+      <div className="mt-6 flex w-full flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        <Button asChild variant="signal" className="w-full sm:w-auto">
           <a href={`mailto:${resumeEmail}`}>{resumeCta.emailLabel}</a>
         </Button>
-        <Button asChild variant="outline">
+        <Button asChild variant="outline" className="w-full sm:w-auto">
           <Link href="/careers/apply">{resumeCta.applyLabel}</Link>
         </Button>
       </div>

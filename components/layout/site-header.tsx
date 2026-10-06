@@ -51,25 +51,25 @@ export function SiteHeader({
             : "border-white/10 bg-ink/25 text-white",
         )}
       >
-        <div className="mx-auto flex h-10 max-w-6xl items-center justify-between gap-4 px-4 text-xs sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-10 max-w-6xl min-w-0 items-center justify-between gap-3 px-4 text-xs sm:gap-4 sm:px-6 lg:px-8">
           <a
             href={site.phoneHref}
-            className="inline-flex items-center gap-2 rounded-sm text-white/90 transition hover:text-white focus-ring"
+            className="inline-flex min-h-10 shrink-0 items-center gap-2 rounded-sm text-white/90 transition hover:text-white focus-ring"
           >
             <Phone className="size-3.5" aria-hidden />
             <span>{site.phoneDisplay}</span>
           </a>
           <a
             href={site.emailHref}
-            className="inline-flex items-center gap-2 rounded-sm text-white/90 transition hover:text-white focus-ring"
+            className="inline-flex min-h-10 min-w-0 items-center gap-2 truncate rounded-sm text-white/90 transition hover:text-white focus-ring"
           >
-            <Mail className="size-3.5" aria-hidden />
-            <span>{site.email}</span>
+            <Mail className="size-3.5 shrink-0" aria-hidden />
+            <span className="truncate">{site.email}</span>
           </a>
         </div>
       </div>
 
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-6xl min-w-0 items-center justify-between gap-3 px-4 sm:gap-4 sm:px-6 lg:px-8">
         <BrandMark inverse={inverse} />
 
         <DesktopNav inverse={inverse} />

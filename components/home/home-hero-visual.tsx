@@ -20,7 +20,7 @@ export function HomeHeroVisual({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative isolate overflow-hidden rounded-2xl border border-white/10 bg-ink-soft/60 p-5 shadow-elevated md:p-7",
+        "relative isolate min-w-0 overflow-hidden rounded-2xl border border-white/10 bg-ink-soft/60 p-4 shadow-elevated sm:p-5 md:p-7",
         className,
       )}
     >
@@ -36,7 +36,7 @@ export function HomeHeroVisual({ className }: { className?: string }) {
       <p className="relative font-mono text-[11px] uppercase tracking-[0.18em] text-white/50">
         Premier Digital Suite
       </p>
-      <p className="relative mt-2 font-display text-xl font-semibold text-white">
+      <p className="relative mt-2 font-display text-lg font-semibold text-white sm:text-xl">
         Engage the right audience, online.
       </p>
 
@@ -44,10 +44,10 @@ export function HomeHeroVisual({ className }: { className?: string }) {
         {previewStats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-3"
+            className="min-w-0 rounded-xl border border-white/10 bg-white/5 px-3 py-3"
           >
             <dt className="text-[11px] leading-snug text-white/55">{stat.label}</dt>
-            <dd className="mt-1 font-display text-lg font-semibold tabular-nums text-white">
+            <dd className="mt-1 break-words font-display text-lg font-semibold tabular-nums text-white">
               {stat.value.toLocaleString("en-IN")}
               {stat.suffix}
             </dd>
@@ -59,7 +59,7 @@ export function HomeHeroVisual({ className }: { className?: string }) {
         {orbits.map((node) => (
           <motion.span
             key={node.label}
-            className="absolute rounded-full border border-signal/40 bg-signal/15 px-2.5 py-1 text-[11px] font-medium text-white/90"
+            className="absolute max-w-[40%] truncate rounded-full border border-signal/40 bg-signal/15 px-2 py-1 text-[10px] font-medium text-white/90 sm:max-w-none sm:px-2.5 sm:text-[11px]"
             style={{ left: node.x, top: node.y }}
             animate={
               reduced

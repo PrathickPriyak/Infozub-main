@@ -20,7 +20,7 @@ export function BrandMark({
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center gap-2.5 rounded-md focus-ring",
+        "group inline-flex min-h-11 items-center gap-2.5 rounded-md focus-ring",
         className,
       )}
       aria-label={`${site.legalName} home`}

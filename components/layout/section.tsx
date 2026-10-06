@@ -21,7 +21,7 @@ export function Container({
   return (
     <div
       className={cn(
-        "mx-auto w-full px-4 sm:px-6 lg:px-8",
+        "mx-auto w-full min-w-0 px-4 sm:px-6 lg:px-8",
         widths[width],
         className,
       )}
@@ -57,7 +57,7 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "relative overflow-hidden py-16 md:py-24",
+        "relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24",
         tones[tone],
         className,
       )}
@@ -101,11 +101,11 @@ export function SectionHeader({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="font-display text-3xl font-semibold tracking-tight text-ink md:text-4xl">
+      <h2 className="font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl md:text-4xl">
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 text-base leading-relaxed text-muted md:text-lg">
+        <p className="mt-3 text-sm leading-relaxed text-muted sm:mt-4 sm:text-base md:text-lg">
           {description}
         </p>
       ) : null}

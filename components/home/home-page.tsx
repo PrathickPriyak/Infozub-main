@@ -83,7 +83,7 @@ function Hero() {
         <div className="absolute inset-0 bg-grid-fade opacity-40" />
       </div>
 
-      <Container className="relative grid items-center gap-12 pb-20 pt-28 md:pb-28 md:pt-32 lg:grid-cols-[1.1fr_0.9fr]">
+      <Container className="relative grid min-w-0 items-center gap-10 pb-16 pt-24 sm:gap-12 sm:pb-20 sm:pt-28 md:pb-28 md:pt-32 lg:grid-cols-[1.1fr_0.9fr]">
         <Reveal mode="mount">
           <Badge
             variant="outline"
@@ -94,15 +94,15 @@ function Hero() {
           <TextReveal
             as="h1"
             text={homeHero.headline}
-            className="mt-5 block max-w-xl font-display text-4xl font-semibold tracking-tight !text-white md:text-6xl"
+            className="mt-4 block max-w-xl font-display text-3xl font-semibold tracking-tight !text-white sm:mt-5 sm:text-4xl md:text-5xl xl:text-6xl"
           />
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/80 md:text-xl">
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 sm:mt-5 sm:text-lg md:text-xl">
             {homeHero.supporting}
           </p>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/60 md:text-base">
             {homeHero.detail}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
             <Magnetic>
               <Button asChild variant="signal" size="lg">
                 <Link href={homeHero.primaryCta.href}>
@@ -250,7 +250,7 @@ function Academy() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
             {homeAcademy.eyebrow}
           </p>
-          <h2 className="mt-3 font-display text-3xl font-semibold tracking-tight text-white md:text-4xl">
+          <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
             {homeAcademy.title}
           </h2>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">
@@ -288,7 +288,7 @@ function Stats() {
           {counters.map((stat) => (
             <StaggerItem key={stat.label}>
               <Card className="h-full">
-                <p className="font-display text-3xl font-semibold text-ink md:text-4xl">
+                <p className="font-display text-2xl font-semibold text-ink sm:text-3xl md:text-4xl">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </p>
                 <p className="mt-2 text-sm text-muted">{stat.label}</p>
@@ -400,7 +400,7 @@ function CloseCta() {
     <Section tone="ink">
       <Container className="text-center">
         <Reveal>
-          <h2 className="font-display text-3xl font-semibold tracking-tight text-white md:text-4xl">
+          <h2 className="font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
             {homeCta.title}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-white/75 md:text-lg">

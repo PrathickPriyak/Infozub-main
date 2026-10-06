@@ -28,7 +28,9 @@ export function MarketingPage({
         <div className="h-16 md:h-[6.5rem]" aria-hidden />
       ) : null}
       <PageEnter>
-        <main id="main">{children}</main>
+        <main id="main" className="min-w-0 overflow-x-clip">
+          {children}
+        </main>
         <SiteFooter />
       </PageEnter>
     </>

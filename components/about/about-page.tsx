@@ -91,7 +91,7 @@ export function AboutPage() {
               <p className="mt-4 text-base leading-relaxed text-ink">
                 {aboutIntro.teamLine}
               </p>
-              <p className="mt-6 font-display text-4xl font-semibold tabular-nums text-ink">
+              <p className="mt-6 font-display text-3xl font-semibold tabular-nums text-ink sm:text-4xl">
                 2013
               </p>
               <p className="mt-1 text-sm text-muted">Founded · May 2013</p>
@@ -290,7 +290,7 @@ export function AboutPage() {
             {counters.map((stat) => (
               <StaggerItem key={stat.label}>
                 <Card className="h-full">
-                  <p className="font-display text-3xl font-semibold text-ink md:text-4xl">
+                  <p className="font-display text-2xl font-semibold text-ink sm:text-3xl md:text-4xl">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </p>
                   <p className="mt-2 text-sm text-muted">{stat.label}</p>

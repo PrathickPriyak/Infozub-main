@@ -34,17 +34,15 @@ export function CareersPage() {
         <p className="mb-6 max-w-2xl text-sm text-white/75 md:text-base">
           {careersHero.contactLine}
         </p>
-        <div className="flex flex-wrap gap-3">
-          <Button asChild variant="signal" size="lg">
-            <a href={`mailto:${resumeEmail}`}>
-              Send your resume to {resumeEmail}
-            </a>
+        <div className="flex w-full max-w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Button asChild variant="signal" size="lg" className="w-full sm:w-auto">
+            <a href={`mailto:${resumeEmail}`}>Email resume</a>
           </Button>
           <Button
             asChild
             variant="outline"
             size="lg"
-            className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+            className="w-full border-white/30 text-white hover:bg-white/10 hover:text-white sm:w-auto"
           >
             <Link href="/careers/apply">Apply now</Link>
           </Button>
@@ -224,17 +222,15 @@ export function CareersApplyPage() {
         title="Apply to INFOZUB"
         description="Submit the INFOZUB job application form. Preferred work locations and designation options match the previous careers apply page."
       >
-        <div className="flex flex-wrap gap-3">
-          <Button asChild variant="signal" size="lg">
-            <a href={`mailto:${resumeEmail}`}>
-              Or email {resumeEmail}
-            </a>
+        <div className="flex w-full max-w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+          <Button asChild variant="signal" size="lg" className="w-full sm:w-auto">
+            <a href={`mailto:${resumeEmail}`}>Email {resumeEmail}</a>
           </Button>
           <Button
             asChild
             variant="outline"
             size="lg"
-            className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+            className="w-full border-white/30 text-white hover:bg-white/10 hover:text-white sm:w-auto"
           >
             <Link href="/careers">Back to careers</Link>
           </Button>

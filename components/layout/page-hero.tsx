@@ -36,7 +36,7 @@ export function PageHero({
           <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-64 rounded-full bg-signal/20 blur-3xl" />
         </div>
       ) : null}
-      <Container className="relative pb-16 pt-28 md:pb-20 md:pt-32">
+      <Container className="relative pb-12 pt-24 sm:pb-16 sm:pt-28 md:pb-20 md:pt-32">
         <Reveal mode="mount">
           {eyebrow ? (
             <Badge
@@ -52,21 +52,23 @@ export function PageHero({
             as="h1"
             text={title}
             className={cn(
-              "mt-5 block max-w-3xl font-display text-4xl font-semibold tracking-tight md:text-5xl",
+              "mt-4 block max-w-3xl font-display text-3xl font-semibold tracking-tight sm:mt-5 sm:text-4xl md:text-5xl",
               inverse ? "!text-white" : "text-ink",
             )}
           />
           {description ? (
             <p
               className={cn(
-                "mt-5 max-w-2xl text-lg leading-relaxed",
+                "mt-4 max-w-2xl text-base leading-relaxed sm:mt-5 sm:text-lg",
                 inverse ? "text-white/75" : "text-muted",
               )}
             >
               {description}
             </p>
           ) : null}
-          {children ? <div className="mt-8">{children}</div> : null}
+          {children ? (
+            <div className="mt-6 max-w-full sm:mt-8">{children}</div>
+          ) : null}
         </Reveal>
       </Container>
     </section>

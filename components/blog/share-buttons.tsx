@@ -39,8 +39,10 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
   }
 
   return (
-    <div className={cn("flex flex-wrap items-center gap-2", className)}>
-      <p className="mr-1 text-sm font-medium text-muted">Share</p>
+    <div className={cn("flex max-w-full flex-wrap items-center gap-2", className)}>
+      <p className="mr-1 w-full text-sm font-medium text-muted sm:mr-1 sm:w-auto">
+        Share
+      </p>
       <Button type="button" variant="outline" size="sm" onClick={nativeShare}>
         <Share2 className="size-4" aria-hidden />
         Share

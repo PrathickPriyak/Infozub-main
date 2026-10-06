@@ -40,7 +40,7 @@ export function CourseCard({ course, className, compact = false }: CourseCardPro
       <a
         href={course.href}
         rel="noreferrer"
-        className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-signal-strong focus-ring rounded-sm"
+        className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-signal-strong focus-ring rounded-sm"
       >
         Start Course
         <ArrowUpRight
