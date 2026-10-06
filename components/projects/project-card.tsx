@@ -49,7 +49,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         className,
       )}
     >
-      <div className="relative aspect-[16/11] overflow-hidden bg-mist">
+      <div className="relative aspect-[16/11] overflow-hidden bg-mist media-zoom">
         {image ? (
           <motion.div
             className="absolute inset-[-8%]"
@@ -60,7 +60,7 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
               alt={image.alt}
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="object-cover"
             />
           </motion.div>
         ) : null}

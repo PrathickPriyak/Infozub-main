@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { Magnetic } from "@/components/motion/magnetic";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
+import { TextReveal } from "@/components/motion/text-reveal";
 import { AnimatedCounter } from "@/components/motion/animated-counter";
 import { HomeHeroVisual } from "@/components/home/home-hero-visual";
 import {
@@ -77,8 +78,8 @@ function Hero() {
         className="pointer-events-none absolute inset-0 opacity-70"
         aria-hidden
       >
-        <div className="absolute -left-24 top-0 size-[32rem] rounded-full bg-navy blur-3xl" />
-        <div className="absolute bottom-0 right-0 size-[24rem] rounded-full bg-signal/25 blur-3xl" />
+        <div className="ambient-orb absolute -left-24 top-0 size-[32rem] rounded-full bg-navy blur-3xl" />
+        <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-[24rem] rounded-full bg-signal/25 blur-3xl" />
         <div className="absolute inset-0 bg-grid-fade opacity-40" />
       </div>
 
@@ -90,9 +91,11 @@ function Hero() {
           >
             {site.legalName}
           </Badge>
-          <h1 className="mt-5 max-w-xl font-display text-4xl font-semibold tracking-tight text-white md:text-6xl">
-            {homeHero.headline}
-          </h1>
+          <TextReveal
+            as="h1"
+            text={homeHero.headline}
+            className="mt-5 block max-w-xl font-display text-4xl font-semibold tracking-tight !text-white md:text-6xl"
+          />
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/80 md:text-xl">
             {homeHero.supporting}
           </p>

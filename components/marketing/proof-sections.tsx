@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { AnimatedCounter } from "@/components/motion/animated-counter";
+import { Magnetic } from "@/components/motion/magnetic";
+import { TextReveal } from "@/components/motion/text-reveal";
 import {
   counters,
   namedResults,
@@ -24,7 +26,7 @@ export function CountersSection() {
         <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {counters.map((stat) => (
             <StaggerItem key={stat.label}>
-              <Card className="h-full">
+              <Card className="h-full transition-transform duration-300 hover:-translate-y-0.5">
                 <p className="font-display text-3xl font-semibold text-ink">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </p>
@@ -86,7 +88,7 @@ export function TestimonialsSection() {
         <Stagger className="grid gap-4 md:grid-cols-2">
           {testimonials.map((item) => (
             <StaggerItem key={item.name}>
-              <figure className="h-full rounded-xl border border-line bg-surface p-6 shadow-soft">
+              <figure className="h-full rounded-xl border border-line bg-surface p-6 shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-elevated">
                 <blockquote className="whitespace-pre-line text-sm leading-relaxed text-muted">
                   {item.quote}
                 </blockquote>
@@ -114,7 +116,7 @@ export function StrengthsSection() {
         <Stagger className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {strengths.map((item) => (
             <StaggerItem key={item}>
-              <div className="flex min-h-16 items-center rounded-xl border border-line bg-mist/60 px-4 py-3 font-medium text-ink">
+              <div className="flex min-h-16 items-center rounded-xl border border-line bg-mist/60 px-4 py-3 font-medium text-ink transition-[transform,border-color,background-color] duration-300 hover:-translate-y-0.5 hover:border-navy/20 hover:bg-surface">
                 {item}
               </div>
             </StaggerItem>
@@ -127,23 +129,26 @@ export function StrengthsSection() {
 
 export function ProjectClose() {
   return (
-    <Section tone="ink">
-      <Container className="text-center">
+    <Section tone="ink" className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <div className="ambient-orb absolute -left-16 top-1/2 size-64 -translate-y-1/2 rounded-full bg-navy blur-3xl" />
+        <div className="ambient-orb ambient-orb-delayed absolute -right-10 top-0 size-56 rounded-full bg-signal/25 blur-3xl" />
+      </div>
+      <Container className="relative text-center">
         <Reveal>
-          <h2 className="font-display text-3xl font-semibold text-white md:text-4xl">
-            Ready to start a project?
-          </h2>
+          <TextReveal
+            as="h2"
+            text="Ready to start a project?"
+            className="font-display text-3xl font-semibold text-white md:text-4xl"
+          />
           <p className="mx-auto mt-4 max-w-xl text-white/75">
             Get your business engaged with the perfect audience.
           </p>
-          <Button
-            asChild
-            variant="signal"
-            size="lg"
-            className="mt-8"
-          >
-            <Link href="/contact">Get in touch</Link>
-          </Button>
+          <Magnetic className="mt-8">
+            <Button asChild variant="signal" size="lg">
+              <Link href="/contact">Get in touch</Link>
+            </Button>
+          </Magnetic>
         </Reveal>
       </Container>
     </Section>

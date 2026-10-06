@@ -39,7 +39,7 @@ export function ArticleCard({
       {post.coverImage ? (
         <div
           className={cn(
-            "relative overflow-hidden bg-mist",
+            "relative overflow-hidden bg-mist media-zoom",
             featured ? "aspect-[16/10] sm:w-[44%] sm:aspect-auto sm:min-h-[240px]" : "aspect-[16/10]",
           )}
         >
@@ -48,7 +48,7 @@ export function ArticleCard({
             alt={post.coverImage.alt}
             fill
             sizes={featured ? "(max-width: 768px) 100vw, 44vw" : "(max-width: 768px) 100vw, 33vw"}
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="object-cover"
           />
         </div>
       ) : null}

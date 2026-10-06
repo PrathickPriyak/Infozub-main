@@ -48,7 +48,7 @@ export function Reveal({
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.18, margin: "0px 0px -8% 0px" }}
       variants={fadeUp}
       transition={{ delay }}
     >
@@ -75,7 +75,7 @@ export function Stagger({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.12, margin: "0px 0px -6% 0px" }}
       variants={staggerContainer}
     >
       {children}

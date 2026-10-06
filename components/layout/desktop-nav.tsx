@@ -87,9 +87,9 @@ export function DesktopNav({ inverse = false }: DesktopNavProps) {
                 <ActiveMarker inverse={inverse} active={active} />
               </NavigationMenu.Trigger>
 
-              <NavigationMenu.Content className="absolute left-0 top-full pt-3 data-[motion=from-start]:animate-[nav-content-in_180ms_ease-out] data-[motion=from-end]:animate-[nav-content-in_180ms_ease-out]">
+              <NavigationMenu.Content className="absolute left-0 top-full pt-3 data-[state=open]:animate-[nav-content-in_180ms_ease-out]">
                 <ul
-                  className="w-72 overflow-hidden rounded-xl border border-line bg-surface p-2 shadow-elevated"
+                  className="w-72 overflow-hidden rounded-xl border border-line bg-surface p-2 shadow-elevated transition-shadow duration-200"
                   aria-label={`${item.label} submenu`}
                 >
                   {item.children?.map((child) => {

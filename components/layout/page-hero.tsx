@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Container } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/motion/reveal";
+import { TextReveal } from "@/components/motion/text-reveal";
 import { cn } from "@/lib/utils";
 
 type PageHeroProps = {
@@ -31,8 +32,8 @@ export function PageHero({
     >
       {inverse ? (
         <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <div className="absolute -left-20 top-0 size-72 rounded-full bg-navy blur-3xl" />
-          <div className="absolute bottom-0 right-0 size-64 rounded-full bg-signal/20 blur-3xl" />
+          <div className="ambient-orb absolute -left-20 top-0 size-72 rounded-full bg-navy blur-3xl" />
+          <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-64 rounded-full bg-signal/20 blur-3xl" />
         </div>
       ) : null}
       <Container className="relative pb-16 pt-28 md:pb-20 md:pt-32">
@@ -47,14 +48,14 @@ export function PageHero({
               {eyebrow}
             </Badge>
           ) : null}
-          <h1
+          <TextReveal
+            as="h1"
+            text={title}
             className={cn(
-              "mt-5 max-w-3xl font-display text-4xl font-semibold tracking-tight md:text-5xl",
+              "mt-5 block max-w-3xl font-display text-4xl font-semibold tracking-tight md:text-5xl",
               inverse ? "!text-white" : "text-ink",
             )}
-          >
-            {title}
-          </h1>
+          />
           {description ? (
             <p
               className={cn(
