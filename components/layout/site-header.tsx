@@ -74,7 +74,19 @@ export function SiteHeader({
 
         <DesktopNav inverse={inverse} />
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
+          <a
+            href={site.phoneHref}
+            className={cn(
+              "inline-flex size-11 items-center justify-center rounded-md sm:hidden focus-ring",
+              inverse
+                ? "text-white hover:bg-white/10"
+                : "text-ink hover:bg-navy/5",
+            )}
+            aria-label={`Call ${site.phoneDisplay}`}
+          >
+            <Phone className="size-5" aria-hidden />
+          </a>
           <Button
             asChild
             variant={inverse ? "secondary" : "signal"}

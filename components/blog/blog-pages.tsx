@@ -73,7 +73,7 @@ export function BlogIndexPage({ category }: BlogIndexProps) {
           {allPosts.length === 0 ? (
             <Reveal>
               <div
-                className="rounded-2xl border border-dashed border-line bg-mist/60 px-6 py-14 text-center md:px-10"
+                className="rounded-2xl border border-line bg-mist/40 px-6 py-14 text-center md:px-10"
                 role="status"
               >
                 <span className="mx-auto inline-flex size-12 items-center justify-center rounded-full bg-signal-soft text-signal-strong">

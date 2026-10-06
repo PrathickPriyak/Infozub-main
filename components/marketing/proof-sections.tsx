@@ -52,17 +52,19 @@ export function ResultsSection() {
         <Stagger className="grid gap-5 md:grid-cols-2">
           {namedResults.map((item) => (
             <StaggerItem key={item.client}>
-              <Card interactive className="h-full">
-                <CardTitle>{item.client}</CardTitle>
-                <ul className="mt-4 space-y-2 text-sm text-muted">
-                  {item.highlights.map((line) => (
-                    <li key={line} className="flex gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
-                      {line}
-                    </li>
-                  ))}
-                </ul>
-              </Card>
+              <Link href={item.href} className="block h-full rounded-xl focus-ring">
+                <Card interactive className="h-full">
+                  <CardTitle>{item.client}</CardTitle>
+                  <ul className="mt-4 space-y-2 text-sm text-muted">
+                    {item.highlights.map((line) => (
+                      <li key={line} className="flex gap-2">
+                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
+                </Card>
+              </Link>
             </StaggerItem>
           ))}
         </Stagger>

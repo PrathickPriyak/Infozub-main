@@ -34,6 +34,7 @@ export const counters = [
 export const namedResults = [
   {
     client: "Suzuki Motorcycle (Tamilnadu)",
+    href: "/projects/suzuki-motorcycle-tamilnadu",
     highlights: [
       "84,000+ Leads Generated",
       "52,000+ Leads Verified (Tele Calling)",
@@ -42,6 +43,7 @@ export const namedResults = [
   },
   {
     client: "Bharath Electronics and Appliances",
+    href: "/projects/bharath-electronics-and-appliances",
     highlights: [
       "40,000+ Leads Generated",
       "1M+ Digital Impressions / Month",

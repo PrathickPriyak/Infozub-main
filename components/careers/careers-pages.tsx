@@ -6,7 +6,6 @@ import { Container, Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
-import { ProjectClose } from "@/components/marketing/proof-sections";
 import {
   CareersResumeCta,
   JobOpeningsList,
@@ -121,8 +120,6 @@ export function CareersPage() {
           </ul>
         </Container>
       </Section>
-
-      <ProjectClose />
     </MarketingPage>
   );
 }
@@ -216,8 +213,6 @@ export function JobDetailPage({ slug }: { slug: string }) {
           <CareersResumeCta />
         </Container>
       </Section>
-
-      <ProjectClose />
     </MarketingPage>
   );
 }

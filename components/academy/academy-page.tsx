@@ -12,7 +12,6 @@ import { Container, Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
-import { ProjectClose } from "@/components/marketing/proof-sections";
 import {
   AcademyCategoryCard,
   AcademyExternalCta,
@@ -22,7 +21,6 @@ import {
   academyAudience,
   academyBenefits,
   academyCategories,
-  academyCourses,
   academyCta,
   academyHero,
   academyIntro,
@@ -120,7 +118,7 @@ export function AcademyPage() {
                       description={category.description}
                       courseCount={courses.length}
                       icon={categoryIcons[category.id]}
-                      href="#all-courses"
+                      href={`#category-${category.id}`}
                     />
                   </StaggerItem>
                 );
@@ -192,13 +190,26 @@ export function AcademyPage() {
               title="All Academy courses"
               description="Start Course links open the Digital Academy platform — the source of truth for lessons and enrollment."
             />
-            <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {academyCourses.map((course) => (
-                <StaggerItem key={course.slug}>
-                  <CourseCard course={course} compact />
-                </StaggerItem>
-              ))}
-            </Stagger>
+            <div className="space-y-12">
+              {academyCategories.map((category) => {
+                const courses = getCoursesForCategory(category.courseSlugs);
+                return (
+                  <div key={category.id} id={`category-${category.id}`}>
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
+                      {category.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted">{category.description}</p>
+                    <Stagger className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {courses.map((course) => (
+                        <StaggerItem key={course.slug}>
+                          <CourseCard course={course} compact />
+                        </StaggerItem>
+                      ))}
+                    </Stagger>
+                  </div>
+                );
+              })}
+            </div>
           </Container>
         </Section>
 
@@ -267,8 +278,6 @@ export function AcademyPage() {
           </Container>
         </Section>
       </div>
-
-      <ProjectClose />
     </MarketingPage>
   );
 }

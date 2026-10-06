@@ -1,19 +1,39 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/layout/brand-mark";
 import { Separator } from "@/components/ui/separator";
+import { homeHero } from "@/content/home";
 import { site } from "@/content/site";
-import { footerLegalLinks, socialLinks } from "@/content/navigation";
+import {
+  footerLegalLinks,
+  primaryNavigation,
+  socialLinks,
+} from "@/content/navigation";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-surface">
-      <div className="mx-auto grid min-w-0 max-w-6xl gap-10 px-4 py-12 sm:px-6 sm:py-14 md:grid-cols-[1.2fr_1fr_1fr] lg:px-8">
-        <div className="min-w-0 space-y-4">
+      <div className="mx-auto grid min-w-0 max-w-6xl gap-10 px-4 py-12 sm:px-6 sm:py-14 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+        <div className="min-w-0 space-y-4 md:col-span-2 lg:col-span-1">
           <BrandMark />
           <p className="max-w-sm text-sm leading-relaxed text-muted">
-            {site.legalName} — digital marketing, growth systems, and digital
-            academy for ambitious brands.
+            {site.legalName}. {homeHero.supporting}
           </p>
+        </div>
+
+        <div className="min-w-0">
+          <h2 className="font-display text-sm font-semibold text-ink">Explore</h2>
+          <ul className="mt-4 grid gap-x-4 gap-y-1 sm:grid-cols-2 lg:grid-cols-1">
+            {primaryNavigation.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="inline-flex min-h-11 items-center rounded-sm text-sm text-muted hover:text-ink focus-ring"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="min-w-0">
@@ -66,7 +86,7 @@ export function SiteFooter() {
 
       <div className="mx-auto flex min-w-0 max-w-6xl flex-col gap-3 px-4 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <p>
-          All Rights Reserved. © {new Date().getFullYear()} – {site.name}®.
+          © {new Date().getFullYear()} {site.name}®. All rights reserved.
         </p>
         <div className="flex flex-wrap gap-x-4 gap-y-2">
           {footerLegalLinks.map((item) => (

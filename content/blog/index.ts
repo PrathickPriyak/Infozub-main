@@ -37,7 +37,7 @@ export const blogHero = {
 export const blogEmpty = {
   title: "No articles published yet",
   description:
-    "The previous INFOZUB website did not have public blog posts. When articles are ready, they will be listed here with categories, featured stories, and full article pages.",
+    "No articles are published yet. When INFOZUB publishes insights, they will appear here.",
   ctaLabel: "Talk to INFOZUB",
   ctaHref: "/contact",
 } as const;

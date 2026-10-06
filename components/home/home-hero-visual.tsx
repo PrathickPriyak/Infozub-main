@@ -34,14 +34,16 @@ export function HomeHeroVisual({ className }: { className?: string }) {
         Engage the right audience, online.
       </p>
 
-      <dl className="relative mt-6 grid gap-3 sm:grid-cols-3">
+      <dl className="relative mt-6 space-y-2">
         {previewStats.map((stat) => (
           <div
             key={stat.label}
-            className="min-w-0 rounded-xl border border-white/10 bg-white/5 px-3 py-3"
+            className="flex min-w-0 items-baseline justify-between gap-4 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 sm:px-4"
           >
-            <dt className="text-[11px] leading-snug text-white/55">{stat.label}</dt>
-            <dd className="mt-1 break-words font-display text-lg font-semibold tabular-nums text-white">
+            <dt className="min-w-0 text-[11px] leading-snug text-white/55">
+              {stat.label}
+            </dt>
+            <dd className="shrink-0 font-display text-base font-semibold tabular-nums tracking-tight text-white sm:text-lg">
               {stat.value.toLocaleString("en-IN")}
               {stat.suffix}
             </dd>

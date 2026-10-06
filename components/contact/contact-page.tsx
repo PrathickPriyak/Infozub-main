@@ -4,9 +4,8 @@ import { MarketingPage } from "@/components/layout/marketing-page";
 import { PageHero } from "@/components/layout/page-hero";
 import { Container, Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { Card, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
-import { ProjectClose } from "@/components/marketing/proof-sections";
 import { ContactForm } from "@/components/contact/contact-form";
 import {
   contactCta,
@@ -102,29 +101,6 @@ export function ContactPage() {
         </Container>
       </Section>
 
-      <Section id="address">
-        <Container>
-          <SectionHeader
-            eyebrow="Address"
-            title="INFOZUB BRANCHES"
-            description="Our Locations"
-          />
-          <div className="grid gap-4 md:grid-cols-2">
-            {contactOffices.map((office) => (
-              <Card key={office.id} className="h-full">
-                <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-                  <MapPin className="size-4" aria-hidden />
-                  {office.title}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-ink md:text-base">
-                  {office.address}
-                </p>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
       <Section tone="surface" id="contact-form">
         <Container>
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
@@ -157,16 +133,24 @@ export function ContactPage() {
       <Section id="locations">
         <Container>
           <SectionHeader
-            eyebrow="Map"
-            title="Our Locations"
-            description="INFOZUB branch locations from the published contact page maps."
+            eyebrow="Address"
+            title="INFOZUB BRANCHES"
+            description="Our Locations"
           />
           <div className="grid gap-6 lg:grid-cols-2">
             {contactOffices.map((office) => (
-              <div key={office.id} className="overflow-hidden rounded-2xl border border-line bg-mist shadow-soft">
-                <div className="border-b border-line px-4 py-3">
-                  <CardTitle className="text-base">{office.title}</CardTitle>
-                  <p className="mt-1 text-sm text-muted">{office.address}</p>
+              <div
+                key={office.id}
+                className="overflow-hidden rounded-2xl border border-line bg-mist shadow-soft"
+              >
+                <div className="border-b border-line px-4 py-4 sm:px-5">
+                  <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                    <MapPin className="size-4" aria-hidden />
+                    {office.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink md:text-base">
+                    {office.address}
+                  </p>
                 </div>
                 <iframe
                   title={`Map — ${office.map.label}`}
@@ -213,8 +197,6 @@ export function ContactPage() {
           </Reveal>
         </Container>
       </Section>
-
-      <ProjectClose />
     </MarketingPage>
   );
 }

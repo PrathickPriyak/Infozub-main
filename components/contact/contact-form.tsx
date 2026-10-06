@@ -170,10 +170,6 @@ export function ContactForm({ className }: { className?: string }) {
       noValidate
       aria-busy={submitting}
     >
-      <h3 className="font-display text-xl font-semibold tracking-tight text-ink md:text-2xl">
-        {contactFormMeta.heading}
-      </h3>
-
       <div
         className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
         aria-hidden="true"
@@ -241,10 +237,9 @@ export function ContactForm({ className }: { className?: string }) {
         </Field>
 
         <Field
-          label="Select"
+          label="What can we help you with?"
           htmlFor={`${formId}-interest`}
           error={errors.interest}
-          hint="What can we help you with?"
         >
           <select
             id={`${formId}-interest`}

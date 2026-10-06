@@ -37,6 +37,7 @@ import {
   strengthsLine,
   testimonials,
 } from "@/content/proof";
+import { digitalSuiteServices } from "@/content/services";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -52,6 +53,14 @@ const capabilityIcons = [
   Cpu,
   PhoneCall,
 ] as const;
+
+function hrefForCapability(title: string): string {
+  const match = digitalSuiteServices.find(
+    (service) => service.title.toLowerCase() === title.toLowerCase(),
+  );
+  if (match?.overview) return match.href;
+  return "/digital-suite";
+}
 
 export function HomePage() {
   return (
@@ -152,14 +161,9 @@ function Intro() {
             <p className="mt-4 text-base leading-relaxed text-muted">
               {homeIntro.teamLine}
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6">
               <Button asChild variant="primary">
                 <Link href="/about">About INFOZUB</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href={homeHero.primaryCta.href}>
-                  {homeHero.primaryCta.label}
-                </Link>
               </Button>
             </div>
           </Card>
@@ -183,15 +187,20 @@ function Capabilities() {
             const Icon = capabilityIcons[index] ?? Share2;
             return (
               <StaggerItem key={item.title}>
-                <Card interactive className="h-full">
-                  <div className="flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong">
-                    <Icon className="size-5" aria-hidden />
-                  </div>
-                  <CardTitle className="mt-4">{item.title}</CardTitle>
-                  {"description" in item && item.description ? (
-                    <CardDescription>{item.description}</CardDescription>
-                  ) : null}
-                </Card>
+                <Link
+                  href={hrefForCapability(item.title)}
+                  className="block h-full rounded-xl focus-ring"
+                >
+                  <Card interactive className="h-full">
+                    <div className="flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong">
+                      <Icon className="size-5" aria-hidden />
+                    </div>
+                    <CardTitle className="mt-4">{item.title}</CardTitle>
+                    {"description" in item && item.description ? (
+                      <CardDescription>{item.description}</CardDescription>
+                    ) : null}
+                  </Card>
+                </Link>
               </StaggerItem>
             );
           })}
@@ -257,7 +266,7 @@ function Academy() {
             {homeAcademy.body}
           </p>
           <p className="mt-3 text-sm font-medium text-white/55">
-            {homeAcademy.label}
+            {homeAcademy.label} — lessons and enrollment on academy.infozub.com
           </p>
         </Reveal>
         <Reveal>
@@ -312,19 +321,24 @@ function Results() {
         />
         <Stagger className="grid gap-5 md:grid-cols-2">
           {namedResults.map((item) => (
-            <StaggerItem key={item.client}>
-              <Card interactive className="h-full">
-                <CardTitle>{item.client}</CardTitle>
-                <ul className="mt-4 space-y-2 text-sm text-muted">
-                  {item.highlights.map((line) => (
-                    <li key={line} className="flex gap-2">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
-                      {line}
-                    </li>
-                  ))}
-                </ul>
-              </Card>
-            </StaggerItem>
+              <StaggerItem key={item.client}>
+                <Link
+                  href={item.href}
+                  className="block h-full rounded-xl focus-ring"
+                >
+                  <Card interactive className="h-full">
+                    <CardTitle>{item.client}</CardTitle>
+                    <ul className="mt-4 space-y-2 text-sm text-muted">
+                      {item.highlights.map((line) => (
+                        <li key={line} className="flex gap-2">
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                          {line}
+                        </li>
+                      ))}
+                    </ul>
+                  </Card>
+                </Link>
+              </StaggerItem>
           ))}
         </Stagger>
         <Reveal className="mt-8">
@@ -347,7 +361,7 @@ function Testimonials() {
           description="Reviews published on the Infozub homepage."
         />
         <Stagger className="grid gap-4 md:grid-cols-2">
-          {testimonials.map((item) => (
+          {testimonials.slice(0, 4).map((item) => (
             <StaggerItem key={item.name}>
               <figure className="h-full rounded-xl border border-line bg-surface p-6 shadow-soft">
                 <blockquote className="whitespace-pre-line text-sm leading-relaxed text-muted">
@@ -360,6 +374,11 @@ function Testimonials() {
             </StaggerItem>
           ))}
         </Stagger>
+        <Reveal className="mt-8">
+          <Button asChild variant="outline">
+            <Link href="/reviews">Read all reviews</Link>
+          </Button>
+        </Reveal>
       </Container>
     </Section>
   );
@@ -471,9 +490,6 @@ function Contact() {
             >
               {site.email}
             </a>
-            <Button asChild variant="signal" size="sm" className="mt-4">
-              <Link href="/contact">Get in touch</Link>
-            </Button>
           </Card>
         </div>
       </Container>
