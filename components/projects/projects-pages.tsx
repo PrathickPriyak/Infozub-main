@@ -65,7 +65,15 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
 
   return (
     <MarketingPage transparentHeader>
-      <PageHero title={project.title} description={project.description}>
+      <PageHero
+        title={project.title}
+        description={project.description}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Projects", href: "/projects" },
+          { label: project.title },
+        ]}
+      >
         <div className="mb-6 flex flex-wrap gap-2">
           <Badge
             variant="outline"

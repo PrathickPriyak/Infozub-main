@@ -149,6 +149,11 @@ export function BlogArticlePage({ slug }: { slug: string }) {
         eyebrow="Article"
         title={post.title}
         description={post.excerpt}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: post.title },
+        ]}
       >
         <div className="mb-4 flex flex-wrap gap-2">
           {post.categories.map((category) => (

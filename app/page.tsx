@@ -1,22 +1,27 @@
 import { HomePage } from "@/components/home/home-page";
-import { homeSeo } from "@/content/home";
+import { JsonLdScript } from "@/components/seo/json-ld-script";
+import { pageSeo } from "@/content/seo/pages";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { webPageJsonLd } from "@/lib/seo/json-ld";
 
-export const metadata = {
-  title: {
-    absolute: homeSeo.title,
-  },
-  description: homeSeo.description,
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: homeSeo.title,
-    description: homeSeo.description,
-    url: "/",
-    type: "website",
-  },
-};
+export const metadata = buildMetadata({
+  title: pageSeo.home.title,
+  description: pageSeo.home.description,
+  path: pageSeo.home.path,
+  absoluteTitle: true,
+});
 
 export default function Page() {
-  return <HomePage />;
+  return (
+    <>
+      <JsonLdScript
+        data={webPageJsonLd({
+          title: pageSeo.home.title,
+          description: pageSeo.home.description,
+          path: "/",
+        })}
+      />
+      <HomePage />
+    </>
+  );
 }

@@ -1,12 +1,32 @@
-import type { Metadata } from "next";
 import { ClientsPage } from "@/components/contact/simple-pages";
+import { JsonLdScript } from "@/components/seo/json-ld-script";
+import { pageSeo } from "@/content/seo/pages";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Clients",
-  description:
-    "INFOZUB - strives the best in the industry. We provide high-quality solutions that are tailored to our client's unique business needs.",
-};
+export const metadata = buildMetadata({
+  title: pageSeo.clients.title,
+  description: pageSeo.clients.description,
+  path: pageSeo.clients.path,
+});
 
 export default function Page() {
-  return <ClientsPage />;
+  return (
+    <>
+      <JsonLdScript
+        data={[
+          webPageJsonLd({
+            title: pageSeo.clients.title,
+            description: pageSeo.clients.description,
+            path: "/clients",
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Clients", path: "/clients" },
+          ]),
+        ]}
+      />
+      <ClientsPage />
+    </>
+  );
 }

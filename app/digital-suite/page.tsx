@@ -1,12 +1,32 @@
-import type { Metadata } from "next";
 import { ServicesOverviewPage } from "@/components/services/services-overview";
+import { JsonLdScript } from "@/components/seo/json-ld-script";
+import { pageSeo } from "@/content/seo/pages";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Digital Marketing Agency in Tamil Nadu, India",
-  description:
-    "Premier Digital Marketing Service Provider in Tamil Nadu, India. Customized Marketing Strategies for your Company's Best Digital ROAS.",
-};
+export const metadata = buildMetadata({
+  title: pageSeo.digitalSuite.title,
+  description: pageSeo.digitalSuite.description,
+  path: pageSeo.digitalSuite.path,
+});
 
 export default function Page() {
-  return <ServicesOverviewPage />;
+  return (
+    <>
+      <JsonLdScript
+        data={[
+          webPageJsonLd({
+            title: pageSeo.digitalSuite.title,
+            description: pageSeo.digitalSuite.description,
+            path: "/digital-suite",
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Digital Suite", path: "/digital-suite" },
+          ]),
+        ]}
+      />
+      <ServicesOverviewPage />
+    </>
+  );
 }

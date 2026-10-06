@@ -1,21 +1,33 @@
-import type { Metadata } from "next";
 import { AboutPage } from "@/components/about/about-page";
-import { aboutSeo } from "@/content/about";
+import { JsonLdScript } from "@/components/seo/json-ld-script";
+import { pageSeo } from "@/content/seo/pages";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: aboutSeo.title,
-  description: aboutSeo.description,
-  alternates: {
-    canonical: "/about",
-  },
-  openGraph: {
-    title: `About | INFOZUB`,
-    description: aboutSeo.description,
-    url: "/about",
-    type: "website",
-  },
-};
+export const metadata = buildMetadata({
+  title: pageSeo.about.title,
+  description: pageSeo.about.description,
+  path: pageSeo.about.path,
+});
 
 export default function Page() {
-  return <AboutPage />;
+  return (
+    <>
+      <JsonLdScript
+        data={[
+          webPageJsonLd({
+            title: pageSeo.about.title,
+            description: pageSeo.about.description,
+            path: "/about",
+            type: "AboutPage",
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
+      />
+      <AboutPage />
+    </>
+  );
 }

@@ -4,6 +4,10 @@ import { Container } from "@/components/layout/section";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
+import {
+  Breadcrumbs,
+  type Crumb,
+} from "@/components/seo/breadcrumbs";
 import { cn } from "@/lib/utils";
 
 type PageHeroProps = {
@@ -12,6 +16,7 @@ type PageHeroProps = {
   description?: string;
   children?: ReactNode;
   tone?: "ink" | "mist";
+  breadcrumbs?: readonly Crumb[];
 };
 
 export function PageHero({
@@ -20,6 +25,7 @@ export function PageHero({
   description,
   children,
   tone = "ink",
+  breadcrumbs,
 }: PageHeroProps) {
   const inverse = tone === "ink";
 
@@ -38,6 +44,16 @@ export function PageHero({
       ) : null}
       <Container className="relative pb-12 pt-24 sm:pb-16 sm:pt-28 md:pb-20 md:pt-32">
         <Reveal mode="mount">
+          {breadcrumbs && breadcrumbs.length > 0 ? (
+            <Breadcrumbs
+              items={breadcrumbs}
+              className={cn(
+                "mb-5",
+                inverse &&
+                  "text-white/65 [&_a]:hover:text-white [&_span[aria-current=page]]:text-white",
+              )}
+            />
+          ) : null}
           {eyebrow ? (
             <Badge
               variant={inverse ? "outline" : "signal"}

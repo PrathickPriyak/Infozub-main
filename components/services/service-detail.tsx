@@ -53,7 +53,15 @@ export function ServiceDetailPage({ slug }: { slug: string }) {
 
   return (
     <MarketingPage transparentHeader>
-      <PageHero title={service.title} description={service.description}>
+      <PageHero
+        title={service.title}
+        description={service.description}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Services", href: "/services" },
+          { label: service.title },
+        ]}
+      >
         <div className="mb-6 flex flex-wrap items-center gap-3">
           <span className="inline-flex size-11 items-center justify-center rounded-md bg-white/10 text-white">
             <ServiceIcon slug={service.slug} className="size-5" />

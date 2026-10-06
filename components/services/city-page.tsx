@@ -23,7 +23,15 @@ export function CityServicePage({ city }: { city: City }) {
 
   return (
     <MarketingPage transparentHeader>
-      <PageHero title={data.title} description={data.description}>
+      <PageHero
+        title={data.title}
+        description={data.description}
+        breadcrumbs={[
+          { label: "Home", href: "/" },
+          { label: "Digital Suite", href: "/digital-suite" },
+          { label: city === "coimbatore" ? "Coimbatore" : "Tirupur" },
+        ]}
+      >
         <div className="flex flex-wrap gap-3">
           <Button asChild variant="signal" size="lg">
             <a href={site.phoneHref}>Call now</a>

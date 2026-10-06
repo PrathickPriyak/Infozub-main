@@ -74,6 +74,7 @@ export const mobileHomeLink: NavItem = {
 export const footerLegalLinks = [
   { href: "/copyrights", label: "Copyrights" },
   { href: "/terms", label: "Terms & Privacy" },
+  { href: "/privacy-policy", label: "Privacy Policy" },
   { href: "/payments", label: "Payments" },
 ] as const;
 

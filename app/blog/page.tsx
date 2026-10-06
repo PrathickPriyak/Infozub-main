@@ -1,18 +1,19 @@
-import type { Metadata } from "next";
 import { BlogIndexPage } from "@/components/blog/blog-pages";
-import { blogSeo, getCategoryBySlug } from "@/content/blog";
+import { JsonLdScript } from "@/components/seo/json-ld-script";
+import { getCategoryBySlug } from "@/content/blog";
+import { pageSeo } from "@/content/seo/pages";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 
 type Props = {
   searchParams: Promise<{ category?: string }>;
 };
 
-export const metadata: Metadata = {
-  title: blogSeo.title,
-  description: blogSeo.description,
-  alternates: {
-    canonical: "/blog",
-  },
-};
+export const metadata = buildMetadata({
+  title: pageSeo.blog.title,
+  description: pageSeo.blog.description,
+  path: pageSeo.blog.path,
+});
 
 export default async function Page({ searchParams }: Props) {
   const params = await searchParams;
@@ -21,5 +22,23 @@ export default async function Page({ searchParams }: Props) {
       ? params.category
       : undefined;
 
-  return <BlogIndexPage category={category} />;
+  return (
+    <>
+      <JsonLdScript
+        data={[
+          webPageJsonLd({
+            title: pageSeo.blog.title,
+            description: pageSeo.blog.description,
+            path: "/blog",
+            type: "CollectionPage",
+          }),
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Blog", path: "/blog" },
+          ]),
+        ]}
+      />
+      <BlogIndexPage category={category} />
+    </>
+  );
 }
