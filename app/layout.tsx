@@ -1,6 +1,3 @@
-import type { Metadata } from "next";
-import { Outfit, Source_Sans_3, IBM_Plex_Mono } from "next/font/google";
-import { ReducedMotionProvider } from "@/components/motion/reduced-motion";
 import { JsonLdScript } from "@/components/seo/json-ld-script";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 import {
@@ -9,6 +6,8 @@ import {
   TWITTER_HANDLE,
   absoluteUrl,
 } from "@/lib/seo/site";
+import { Outfit, Source_Sans_3 } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -23,12 +22,11 @@ const sourceSans = Source_Sans_3({
   display: "swap",
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0a1628",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_ORIGIN),
@@ -90,14 +88,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${outfit.variable} ${sourceSans.variable} ${ibmPlexMono.variable} h-full`}
+      className={`${outfit.variable} ${sourceSans.variable} h-full`}
     >
       <body className="min-h-full font-sans">
         <JsonLdScript
           id="organization-website-jsonld"
           data={[organizationJsonLd(), websiteJsonLd()]}
         />
-        <ReducedMotionProvider>{children}</ReducedMotionProvider>
+        {children}
       </body>
     </html>
   );

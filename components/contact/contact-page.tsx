@@ -174,7 +174,6 @@ export function ContactPage() {
                   className="aspect-[4/3] w-full border-0 bg-mist"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
                 />
               </div>
             ))}

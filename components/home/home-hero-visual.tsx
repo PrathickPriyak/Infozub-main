@@ -1,22 +1,16 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { usePrefersReducedMotion } from "@/components/motion/reduced-motion";
-import { counters } from "@/content/proof";
 import { cn } from "@/lib/utils";
+import { counters } from "@/content/proof";
 
 const previewStats = [counters[0], counters[2], counters[4]] as const;
 
 const orbits = [
-  { label: "Facebook", x: "10%", y: "18%", delay: 0 },
-  { label: "Google", x: "72%", y: "14%", delay: 0.4 },
-  { label: "YouTube", x: "78%", y: "62%", delay: 0.8 },
-  { label: "LinkedIn", x: "8%", y: "68%", delay: 1.1 },
-];
+  { label: "Facebook", x: "10%", y: "18%" },
+  { label: "Google", x: "72%", y: "14%" },
+  { label: "YouTube", x: "78%", y: "62%" },
+  { label: "LinkedIn", x: "8%", y: "68%" },
+] as const;
 
 export function HomeHeroVisual({ className }: { className?: string }) {
-  const reduced = usePrefersReducedMotion();
-
   return (
     <div
       className={cn(
@@ -56,29 +50,18 @@ export function HomeHeroVisual({ className }: { className?: string }) {
       </dl>
 
       <div className="relative mt-6 h-36 overflow-hidden rounded-xl border border-white/10 bg-ink/40">
-        {orbits.map((node) => (
-          <motion.span
+        {orbits.map((node, index) => (
+          <span
             key={node.label}
-            className="absolute max-w-[40%] truncate rounded-full border border-signal/40 bg-signal/15 px-2 py-1 text-[10px] font-medium text-white/90 sm:max-w-none sm:px-2.5 sm:text-[11px]"
-            style={{ left: node.x, top: node.y }}
-            animate={
-              reduced
-                ? undefined
-                : { y: [0, -6, 0], opacity: [0.75, 1, 0.75] }
-            }
-            transition={
-              reduced
-                ? undefined
-                : {
-                    duration: 4.2,
-                    repeat: Infinity,
-                    delay: node.delay,
-                    ease: "easeInOut",
-                  }
-            }
+            className="orbit-chip absolute max-w-[40%] truncate rounded-full border border-signal/40 bg-signal/15 px-2 py-1 text-[10px] font-medium text-white/90 sm:max-w-none sm:px-2.5 sm:text-[11px]"
+            style={{
+              left: node.x,
+              top: node.y,
+              animationDelay: `${index * 0.4}s`,
+            }}
           >
             {node.label}
-          </motion.span>
+          </span>
         ))}
         <div
           className="absolute inset-6 rounded-full border border-white/10"

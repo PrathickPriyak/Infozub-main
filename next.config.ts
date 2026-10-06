@@ -4,21 +4,34 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   trailingSlash: false,
   poweredByHeader: false,
+  compress: true,
+  images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [360, 414, 640, 768, 1024, 1280, 1440, 1920],
+    imageSizes: [64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
+  },
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? { exclude: ["error", "warn"] }
+        : false,
+  },
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+  },
   async redirects() {
     return [
-      // WordPress Academy URL → new Academy path (nav label was already “Academy”)
       {
         source: "/courses",
         destination: "/academy",
         permanent: true,
       },
-      // Empty Uncategorized archive
       {
         source: "/category/uncategorized",
         destination: "/blog",
         permanent: false,
       },
-      // Common aliases → preserved WordPress slugs
       {
         source: "/thank-you",
         destination: "/thanks",
@@ -33,6 +46,19 @@ const nextConfig: NextConfig = {
         source: "/terms-and-conditions",
         destination: "/terms",
         permanent: true,
+      },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: "/:all*(svg|jpg|jpeg|png|webp|avif|ico|woff2)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
       },
     ];
   },

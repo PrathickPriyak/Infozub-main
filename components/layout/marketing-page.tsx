@@ -2,9 +2,7 @@ import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipLink } from "@/components/layout/skip-link";
-import { PageEnter } from "@/components/motion/page-enter";
 import { RouteProgress } from "@/components/motion/page-transition";
-import { ScrollProgress } from "@/components/motion/scroll-progress";
 
 type MarketingPageProps = {
   children: ReactNode;
@@ -19,7 +17,6 @@ export function MarketingPage({
     <>
       <SkipLink />
       <RouteProgress />
-      <ScrollProgress />
       <SiteHeader
         transparentOnHero={transparentHeader}
         inverseOnHero={transparentHeader}
@@ -27,12 +24,10 @@ export function MarketingPage({
       {!transparentHeader ? (
         <div className="h-16 md:h-[6.5rem]" aria-hidden />
       ) : null}
-      <PageEnter>
-        <main id="main" className="min-w-0 overflow-x-clip">
-          {children}
-        </main>
-        <SiteFooter />
-      </PageEnter>
+      <main id="main" className="min-w-0 overflow-x-clip">
+        {children}
+      </main>
+      <SiteFooter />
     </>
   );
 }
