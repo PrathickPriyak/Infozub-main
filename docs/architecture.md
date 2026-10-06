@@ -699,6 +699,7 @@ GitHub main/PR
 - Production project mapped to `infozub.com`
 - Redirects configured in `next.config.ts` (or `vercel.json` if preferred)
 - Headers: security defaults (`X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`) in Next config headers
+- Operator runbook: `docs/vercel-deployment.md`
 
 ### Cutover plan (high level)
 

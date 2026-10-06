@@ -12,11 +12,34 @@ function originFromHeader(value: string | null): string | null {
   }
 }
 
+function httpsOriginFromHost(host: string | undefined): string | null {
+  if (!host) return null;
+  const hostname = host.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  if (!hostname) return null;
+  try {
+    return new URL(`https://${hostname}`).origin;
+  } catch {
+    return null;
+  }
+}
+
 function isDevLoopback(origin: string): boolean {
   return (
     origin.startsWith("http://localhost:") ||
     origin.startsWith("http://127.0.0.1:")
   );
+}
+
+/** Origins allowed to POST /api/contact (site + this Vercel deployment). */
+export function allowedContactOrigins(): string[] {
+  const origins = new Set<string>([SITE_ORIGIN]);
+  const deployment = httpsOriginFromHost(process.env.VERCEL_URL);
+  const production = httpsOriginFromHost(
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
+  );
+  if (deployment) origins.add(deployment);
+  if (production) origins.add(production);
+  return [...origins];
 }
 
 /**
@@ -33,7 +56,7 @@ export function isAllowedContactOrigin(request: Request): boolean {
     return process.env.NODE_ENV !== "production";
   }
 
-  if (candidate === SITE_ORIGIN) return true;
+  if (allowedContactOrigins().includes(candidate)) return true;
   if (process.env.NODE_ENV !== "production" && isDevLoopback(candidate)) {
     return true;
   }

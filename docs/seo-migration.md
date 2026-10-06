@@ -150,7 +150,7 @@ These WordPress pages had empty or unusable descriptions. New copy is purpose-ba
 
 ## Sign-off
 
-- [ ] Production `NEXT_PUBLIC_SITE_URL` set in Vercel
+- [ ] Production `NEXT_PUBLIC_SITE_URL` set in Vercel (see `docs/vercel-deployment.md`)
 - [ ] Sitemap submitted in Google Search Console + Bing
 - [ ] Spot-check titles/descriptions against this checklist
 - [ ] Monitor 404s for any missed legacy slugs for 30 days post-cutover
