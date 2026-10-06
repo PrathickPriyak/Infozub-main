@@ -1,20 +1,8 @@
 import Link from "next/link";
 import { BrandMark } from "@/components/layout/brand-mark";
 import { Separator } from "@/components/ui/separator";
-
-const FOOTER_LINKS = [
-  { href: "/copyrights", label: "Copyrights" },
-  { href: "/terms", label: "Terms & Privacy" },
-  { href: "/payments", label: "Payments" },
-] as const;
-
-const SOCIAL = [
-  { href: "https://www.facebook.com/Infozub", label: "Facebook" },
-  { href: "https://x.com/infozubltd", label: "X" },
-  { href: "https://www.linkedin.com/company/infozub-ltd/", label: "LinkedIn" },
-  { href: "https://www.instagram.com/infozub/", label: "Instagram" },
-  { href: "https://www.youtube.com/@infozub", label: "YouTube" },
-] as const;
+import { site } from "@/content/site";
+import { footerLegalLinks, socialLinks } from "@/content/navigation";
 
 export function SiteFooter() {
   return (
@@ -23,8 +11,8 @@ export function SiteFooter() {
         <div className="space-y-4">
           <BrandMark />
           <p className="max-w-sm text-sm leading-relaxed text-muted">
-            Infozub Private Limited — digital marketing, growth systems, and
-            digital academy for ambitious brands.
+            {site.legalName} — digital marketing, growth systems, and digital
+            academy for ambitious brands.
           </p>
         </div>
 
@@ -47,15 +35,21 @@ export function SiteFooter() {
         <div>
           <h2 className="font-display text-sm font-semibold text-ink">Connect</h2>
           <div className="mt-4 space-y-2 text-sm">
-            <a className="block text-muted hover:text-ink" href="tel:+919944640033">
-              +91 99 44 64 00 33
+            <a
+              className="block text-muted hover:text-ink focus-ring rounded-sm"
+              href={site.phoneHref}
+            >
+              {site.phoneDisplay}
             </a>
-            <a className="block text-muted hover:text-ink" href="mailto:info@infozub.com">
-              info@infozub.com
+            <a
+              className="block text-muted hover:text-ink focus-ring rounded-sm"
+              href={site.emailHref}
+            >
+              {site.email}
             </a>
           </div>
           <div className="mt-5 flex flex-wrap gap-3">
-            {SOCIAL.map((item) => (
+            {socialLinks.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -74,9 +68,11 @@ export function SiteFooter() {
       <Separator />
 
       <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-        <p>All Rights Reserved. © {new Date().getFullYear()} – INFOZUB®.</p>
+        <p>
+          All Rights Reserved. © {new Date().getFullYear()} – {site.name}®.
+        </p>
         <div className="flex flex-wrap gap-4">
-          {FOOTER_LINKS.map((item) => (
+          {footerLegalLinks.map((item) => (
             <Link key={item.href} href={item.href} className="hover:text-ink">
               {item.label}
             </Link>

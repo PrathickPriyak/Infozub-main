@@ -86,10 +86,14 @@ Cards are **interaction or grouping containers**, not default decoration.
 
 ## 7. Navigation
 
-- Top bar: phone + email on `md+`
-- Primary nav: text links with underline/offset hover
-- Mobile: sheet drawer, full keyboard access
-- Active state: ink weight + signal underline marker
+- Top bar: phone + email on `md+` (from `content/site.ts`)
+- Primary nav: single source in `content/navigation.ts` — desktop + mobile import the same config
+- Compact Digital Suite dropdown only (city pages justify it; no mega-menu)
+- Active state: `aria-current="page"` + signal underline marker
+- Sticky header with optional transparent → solid transition over heroes (`transparentOnHero` / `inverseOnHero`)
+- Mobile: right sheet with slide animation, focus trap, Escape to close, body scroll lock
+- Preview: `/nav-preview` (noindex) for transparent + solid modes
+- Keyboard: Tab order, Radix menu arrow keys, sheet focus management
 
 ## 8. Forms
 

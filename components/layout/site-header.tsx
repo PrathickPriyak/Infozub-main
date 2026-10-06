@@ -1,108 +1,95 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Phone } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Mail, Phone } from "lucide-react";
 import { BrandMark } from "@/components/layout/brand-mark";
+import { DesktopNav } from "@/components/layout/desktop-nav";
+import { MobileNav } from "@/components/layout/mobile-nav";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { headerCta } from "@/content/navigation";
+import { site } from "@/content/site";
+import { useScrolled } from "@/hooks/use-scrolled";
 import { cn } from "@/lib/utils";
 
-const NAV = [
-  { href: "/about", label: "About" },
-  { href: "/digital-suite", label: "Digital Suite" },
-  { href: "/courses", label: "Academy" },
-  { href: "/ventures", label: "Ventures" },
-  { href: "/clients", label: "Clients" },
-  { href: "/careers", label: "Careers" },
-  { href: "/contact", label: "Contact" },
-] as const;
+export type SiteHeaderProps = {
+  className?: string;
+  /**
+   * When true, the header starts transparent over a hero and becomes solid on scroll.
+   * Disable on pages without a full-bleed dark/light hero.
+   */
+  transparentOnHero?: boolean;
+  /** Force inverse (light-on-dark) text while transparent. */
+  inverseOnHero?: boolean;
+};
 
-export function SiteHeader({ className }: { className?: string }) {
+export function SiteHeader({
+  className,
+  transparentOnHero = false,
+  inverseOnHero = false,
+}: SiteHeaderProps) {
+  const pathname = usePathname();
+  const scrolled = useScrolled(16);
+  const solid = !transparentOnHero || scrolled;
+  const inverse = transparentOnHero && inverseOnHero && !scrolled;
+
   return (
-    <header className={cn("sticky top-0 z-40 border-b border-line/80 bg-mist/85 backdrop-blur-md", className)}>
-      <div className="hidden border-b border-line/70 bg-ink text-white md:block">
-        <div className="mx-auto flex h-10 max-w-6xl items-center justify-between px-4 text-xs sm:px-6 lg:px-8">
+    <header
+      className={cn(
+        "sticky top-0 z-40 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300",
+        solid
+          ? "border-b border-line/80 bg-mist/90 shadow-soft backdrop-blur-md"
+          : "border-b border-transparent bg-transparent",
+        className,
+      )}
+    >
+      <div
+        className={cn(
+          "hidden border-b md:block",
+          solid
+            ? "border-line/70 bg-ink text-white"
+            : "border-white/10 bg-ink/25 text-white",
+        )}
+      >
+        <div className="mx-auto flex h-10 max-w-6xl items-center justify-between gap-4 px-4 text-xs sm:px-6 lg:px-8">
           <a
-            href="tel:+919944640033"
-            className="inline-flex items-center gap-2 text-white/90 transition hover:text-white"
+            href={site.phoneHref}
+            className="inline-flex items-center gap-2 rounded-sm text-white/90 transition hover:text-white focus-ring"
           >
             <Phone className="size-3.5" aria-hidden />
-            +91 99 44 64 00 33
+            <span>{site.phoneDisplay}</span>
           </a>
           <a
-            href="mailto:info@infozub.com"
-            className="text-white/90 transition hover:text-white"
+            href={site.emailHref}
+            className="inline-flex items-center gap-2 rounded-sm text-white/90 transition hover:text-white focus-ring"
           >
-            info@infozub.com
+            <Mail className="size-3.5" aria-hidden />
+            <span>{site.email}</span>
           </a>
         </div>
       </div>
 
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <BrandMark />
+        <BrandMark inverse={inverse} />
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted transition hover:bg-navy/5 hover:text-ink focus-ring"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <DesktopNav inverse={inverse} />
 
         <div className="flex items-center gap-2">
-          <Button asChild variant="signal" size="sm" className="hidden sm:inline-flex">
-            <Link href="/contact">Get in touch</Link>
+          <Button
+            asChild
+            variant={inverse ? "secondary" : "signal"}
+            size="sm"
+            className={cn(
+              "hidden sm:inline-flex",
+              inverse &&
+                "border-transparent bg-white text-ink hover:bg-white/90",
+            )}
+          >
+            <Link href={headerCta.href}>{headerCta.label}</Link>
           </Button>
 
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button
-                variant="secondary"
-                size="icon"
-                className="lg:hidden"
-                aria-label="Open menu"
-              >
-                <Menu className="size-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <SheetTitle>Menu</SheetTitle>
-              <SheetDescription className="sr-only">
-                Site navigation
-              </SheetDescription>
-              <BrandMark compact />
-              <nav className="flex flex-col gap-1" aria-label="Mobile">
-                <Link
-                  href="/"
-                  className="rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-mist"
-                >
-                  Home
-                </Link>
-                {NAV.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-md px-3 py-3 text-base font-medium text-ink hover:bg-mist"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </nav>
-              <Button asChild variant="signal" className="mt-auto">
-                <Link href="/contact">Get in touch</Link>
-              </Button>
-            </SheetContent>
-          </Sheet>
+          {/* Remount on route change so the sheet always starts closed */}
+          <MobileNav key={pathname} inverse={inverse} />
         </div>
       </div>
     </header>
