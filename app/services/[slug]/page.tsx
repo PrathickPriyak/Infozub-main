@@ -5,7 +5,7 @@ import {
   getServiceDetailSlugs,
 } from "@/components/services/service-detail";
 import { JsonLdScript } from "@/components/seo/json-ld-script";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { buildMetadata, missingResourceMetadata } from "@/lib/seo/metadata";
 import { breadcrumbJsonLd, webPageJsonLd } from "@/lib/seo/json-ld";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -17,7 +17,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const service = getServiceDetail(slug);
-  if (!service) return { title: "Service" };
+  if (!service) return missingResourceMetadata;
   return buildMetadata({
     title: service.title,
     description: service.description,

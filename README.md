@@ -12,6 +12,7 @@ Next.js website for **Infozub Private Limited**.
 - `docs/performance-audit.md` — performance notes
 - `docs/security-audit.md` — security notes
 - `docs/vercel-deployment.md` — GitHub → Vercel production deploy
+- `docs/final-qa-report.md` — production QA
 
 ## Develop
 

@@ -17,6 +17,7 @@ import type {
   BlogPostSummary,
 } from "@/content/blog/types";
 import { sanitizeHtml } from "@/lib/security/html";
+import { SITE_ORIGIN } from "@/lib/seo/site";
 
 const postsDirectory = path.join(process.cwd(), "content/blog/posts");
 
@@ -151,6 +152,6 @@ export function formatPostDate(iso: string): string {
 }
 
 export function getPostShareUrl(slug: string, origin?: string): string {
-  const base = origin ?? "https://infozub.com";
+  const base = origin ?? SITE_ORIGIN;
   return `${base.replace(/\/$/, "")}/blog/${slug}`;
 }

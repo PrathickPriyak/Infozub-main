@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { ChevronDown } from "lucide-react";
 import { primaryNavigation } from "@/content/navigation";
 import { isNavBranchActive, isNavItemActive } from "@/lib/navigation";
 import { cn } from "@/lib/utils";
+import type { MouseEvent } from "react";
 
 type DesktopNavProps = {
   inverse?: boolean;
@@ -46,11 +47,28 @@ function ActiveMarker({
 
 export function DesktopNav({ inverse = false }: DesktopNavProps) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  function navigateFromMenu(event: MouseEvent<HTMLAnchorElement>, href: string) {
+    if (
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      event.button !== 0
+    ) {
+      return;
+    }
+    event.preventDefault();
+    router.push(href);
+  }
 
   return (
     <NavigationMenu.Root
       className="relative z-50 hidden lg:flex"
       aria-label="Primary"
+      delayDuration={0}
+      skipDelayDuration={0}
     >
       <NavigationMenu.List className="flex items-center gap-0.5">
         {primaryNavigation.map((item) => {
@@ -108,6 +126,9 @@ export function DesktopNav({ inverse = false }: DesktopNavProps) {
                                 ? "bg-signal-soft text-ink"
                                 : "hover:bg-mist",
                             )}
+                            onClick={(event) =>
+                              navigateFromMenu(event, child.href)
+                            }
                           >
                             <span className="block text-sm font-semibold text-ink">
                               {child.label}

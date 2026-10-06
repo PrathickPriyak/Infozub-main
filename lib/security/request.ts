@@ -57,6 +57,19 @@ export function isAllowedContactOrigin(request: Request): boolean {
   }
 
   if (allowedContactOrigins().includes(candidate)) return true;
+  const host = request.headers.get("host");
+  if (host) {
+    try {
+      if (new URL(candidate).host === host) return true;
+    } catch {
+      // ignore malformed origin
+    }
+  }
+  try {
+    if (candidate === new URL(request.url).origin) return true;
+  } catch {
+    // ignore malformed request URL
+  }
   if (process.env.NODE_ENV !== "production" && isDevLoopback(candidate)) {
     return true;
   }

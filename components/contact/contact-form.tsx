@@ -59,6 +59,19 @@ export function ContactForm({ className }: { className?: string }) {
     if (!validation.ok) {
       setErrors(validation.errors);
       setStatus("error");
+      const fieldOrder: (keyof ContactFieldErrors)[] = [
+        "name",
+        "email",
+        "phone",
+        "interest",
+        "message",
+      ];
+      const firstInvalid = fieldOrder.find((key) => validation.errors[key]);
+      if (firstInvalid) {
+        queueMicrotask(() => {
+          document.getElementById(`${formId}-${firstInvalid}`)?.focus();
+        });
+      }
       return;
     }
 
@@ -98,6 +111,11 @@ export function ContactForm({ className }: { className?: string }) {
 
         setStatus("success");
         setValues(emptyContactFormValues);
+        queueMicrotask(() => {
+          document.getElementById("contact-form")?.scrollIntoView({
+            block: "start",
+          });
+        });
       } catch {
         setFormError(
           `Network error. Please email ${site.email} or call ${site.phoneDisplay}.`,
@@ -128,7 +146,7 @@ export function ContactForm({ className }: { className?: string }) {
           Call us:{" "}
           <a
             href={site.phoneHref}
-            className="text-navy underline-offset-2 hover:underline"
+            className="rounded-sm text-navy underline-offset-2 hover:underline focus-ring"
           >
             {contactFormMeta.successPhone}
           </a>
@@ -296,7 +314,7 @@ export function ContactForm({ className }: { className?: string }) {
           Or email{" "}
           <a
             href={site.emailHref}
-            className="font-semibold text-navy underline-offset-2 hover:underline"
+            className="rounded-sm font-semibold text-navy underline-offset-2 hover:underline focus-ring"
           >
             {site.email}
           </a>

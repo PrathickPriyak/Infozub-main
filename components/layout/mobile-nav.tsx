@@ -49,7 +49,7 @@ function MobileNavItem({
           onClick={onNavigate}
           aria-current={active ? "page" : undefined}
           className={cn(
-            "flex min-h-12 items-center rounded-lg px-3 text-base font-medium transition-colors",
+            "flex min-h-12 items-center rounded-lg px-3 text-base font-medium transition-colors focus-ring",
             active
               ? "bg-signal-soft text-ink"
               : "text-ink hover:bg-mist",
@@ -71,6 +71,7 @@ function MobileNavItem({
         )}
         aria-expanded={open}
         aria-controls={panelId}
+        aria-label={`${item.label} submenu`}
         onClick={() => setOpen((value) => !value)}
       >
         {item.label}
@@ -98,7 +99,7 @@ function MobileNavItem({
                 onClick={onNavigate}
                 aria-current={childActive ? "page" : undefined}
                 className={cn(
-                  "flex min-h-11 flex-col justify-center rounded-md px-3 py-2 transition-colors",
+                  "flex min-h-11 flex-col justify-center rounded-md px-3 py-2 transition-colors focus-ring",
                   childActive
                     ? "bg-mist text-ink"
                     : "text-muted hover:bg-mist hover:text-ink",
@@ -106,7 +107,7 @@ function MobileNavItem({
               >
                 <span className="text-sm font-semibold">{child.label}</span>
                 {child.description ? (
-                  <span className="text-xs text-muted-soft">
+                  <span className="text-xs text-muted">
                     {child.description}
                   </span>
                 ) : null}
@@ -137,7 +138,7 @@ export function MobileNav({ inverse = false }: MobileNavProps) {
           aria-expanded={open}
           aria-controls="mobile-navigation"
         >
-          <Menu className="size-5" />
+          <Menu className="size-5" aria-hidden />
         </Button>
       </SheetTrigger>
 
@@ -177,14 +178,14 @@ export function MobileNav({ inverse = false }: MobileNavProps) {
         <div className="mt-auto space-y-3 border-t border-line bg-mist/70 p-4">
           <a
             href={site.phoneHref}
-            className="flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium text-ink hover:bg-surface"
+            className="flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium text-ink hover:bg-surface focus-ring"
           >
             <Phone className="size-4 text-signal-strong" aria-hidden />
             {site.phoneDisplay}
           </a>
           <a
             href={site.emailHref}
-            className="flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium text-ink hover:bg-surface"
+            className="flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium text-ink hover:bg-surface focus-ring"
           >
             <Mail className="size-4 text-signal-strong" aria-hidden />
             {site.email}

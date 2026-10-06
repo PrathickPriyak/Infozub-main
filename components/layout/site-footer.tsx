@@ -73,7 +73,7 @@ export function SiteFooter() {
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex min-h-11 items-center hover:text-ink"
+              className="inline-flex min-h-11 items-center rounded-sm hover:text-ink focus-ring"
             >
               {item.label}
             </Link>

@@ -89,3 +89,9 @@ export function buildMetadata({
     },
   };
 }
+
+/** Metadata for unknown dynamic slugs before `notFound()` runs. */
+export const missingResourceMetadata: Metadata = {
+  title: "Page not found",
+  robots: { index: false, follow: false },
+};

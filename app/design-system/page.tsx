@@ -163,7 +163,7 @@ export default function DesignSystemPage() {
               </div>
               <Separator />
               <div className="space-y-4">
-                <h1 className="text-3xl font-semibold md:text-5xl">Heading one</h1>
+                <p className="text-3xl font-semibold md:text-5xl">Heading one</p>
                 <h2 className="text-2xl font-semibold md:text-4xl">Heading two</h2>
                 <h3 className="text-xl font-semibold md:text-2xl">Heading three</h3>
                 <h4 className="text-lg font-semibold">Heading four</h4>

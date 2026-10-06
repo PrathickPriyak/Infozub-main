@@ -5,7 +5,7 @@ import {
   getPostBySlug,
   getPostSlugs,
 } from "@/content/blog";
-import { buildMetadata } from "@/lib/seo/metadata";
+import { buildMetadata, missingResourceMetadata } from "@/lib/seo/metadata";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/seo/json-ld";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -17,7 +17,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return { title: "Article" };
+  if (!post) return missingResourceMetadata;
 
   const title = post.seo?.title ?? post.title;
   const description = post.seo?.description ?? post.excerpt;

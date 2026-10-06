@@ -7,13 +7,13 @@
   --navy: #0e2a4a;
   --navy-soft: #1c3d63;
   --signal: #0fae9a;
-  --signal-strong: #0b8f7f;
+  --signal-strong: #0a7a6c;
   --signal-soft: #d8f5f0;
   --mist: #f3f6f9;
   --surface: #ffffff;
   --line: #d5dde8;
   --muted: #5c6b7c;
-  --muted-soft: #8a96a5;
+  --muted-soft: #627181;
   --warning: #c47d1a;
   --danger: #c23b3b;
   --success: #1f8a5b;
@@ -250,15 +250,24 @@
 
   html {
     scroll-behavior: smooth;
-    overflow-x: clip;
+    scroll-padding-top: 5.5rem;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-top: 7.25rem;
+    }
   }
 
   img,
   video,
-  iframe,
   svg {
     max-width: 100%;
     height: auto;
+  }
+
+  iframe {
+    max-width: 100%;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -138,7 +138,7 @@ export function ContactPage() {
                 Prefer email? Write to{" "}
                 <a
                   href={site.emailHref}
-                  className="font-semibold text-navy underline-offset-2 hover:underline"
+                  className="rounded-sm font-semibold text-navy underline-offset-2 hover:underline focus-ring"
                 >
                   {site.email}
                 </a>

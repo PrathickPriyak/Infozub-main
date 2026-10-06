@@ -7,11 +7,13 @@ const isProd = process.env.NODE_ENV === "production";
 
 export const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  isProd
+    ? "script-src 'self' 'unsafe-inline'"
+    : "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "font-src 'self' data:",
-  "connect-src 'self'",
+  isProd ? "connect-src 'self'" : "connect-src 'self' ws: wss:",
   "frame-src https://maps.google.com https://www.google.com https://forms.infozub.com",
   "worker-src 'self' blob:",
   "object-src 'none'",

@@ -50,7 +50,7 @@ export function PageHero({
               className={cn(
                 "mb-5",
                 inverse &&
-                  "text-white/65 [&_a]:hover:text-white [&_span[aria-current=page]]:text-white",
+                  "text-white/75 [&_a]:hover:!text-white [&_span[aria-current=page]]:!text-white",
               )}
             />
           ) : null}
@@ -99,7 +99,10 @@ export function TextLink({
   children: ReactNode;
 }) {
   return (
-    <Link href={href} className="text-navy underline-offset-4 hover:underline">
+    <Link
+      href={href}
+      className="rounded-sm text-navy underline-offset-4 hover:underline focus-ring"
+    >
       {children}
     </Link>
   );

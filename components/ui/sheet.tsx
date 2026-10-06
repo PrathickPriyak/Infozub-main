@@ -68,7 +68,7 @@ export function SheetContent({
       >
         {children}
         <DialogPrimitive.Close className="absolute right-3 top-3 inline-flex size-11 items-center justify-center rounded-md text-muted transition hover:bg-mist hover:text-ink focus-ring">
-          <X className="size-5" />
+          <X className="size-5" aria-hidden />
           <span className="sr-only">Close menu</span>
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>

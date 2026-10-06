@@ -1,6 +1,18 @@
-import type { ReactNode } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
+
+type FieldControlProps = {
+  id?: string;
+  "aria-describedby"?: string;
+  "aria-invalid"?: boolean;
+};
 
 type FieldProps = {
   label: string;
@@ -19,15 +31,29 @@ export function Field({
   children,
   className,
 }: FieldProps) {
+  const hintId = `${htmlFor}-hint`;
+  const errorId = `${htmlFor}-error`;
+  const describedBy = error ? errorId : hint ? hintId : undefined;
+
+  const control = isValidElement(children)
+    ? cloneElement(children as ReactElement<FieldControlProps>, {
+        id: (children as ReactElement<FieldControlProps>).props.id ?? htmlFor,
+        "aria-describedby": describedBy,
+        "aria-invalid": Boolean(error) || undefined,
+      })
+    : children;
+
   return (
     <div className={cn("space-y-2", className)}>
       <Label htmlFor={htmlFor}>{label}</Label>
-      {children}
+      {Children.count(children) === 1 ? control : children}
       {hint && !error ? (
-        <p className="text-xs text-muted-soft">{hint}</p>
+        <p id={hintId} className="text-xs text-muted">
+          {hint}
+        </p>
       ) : null}
       {error ? (
-        <p className="text-xs font-medium text-danger" role="alert">
+        <p id={errorId} className="text-xs font-medium text-danger" role="alert">
           {error}
         </p>
       ) : null}
