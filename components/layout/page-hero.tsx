@@ -50,7 +50,7 @@ export function PageHero({
           <h1
             className={cn(
               "mt-5 max-w-3xl font-display text-4xl font-semibold tracking-tight md:text-5xl",
-              inverse ? "text-white" : "text-ink",
+              inverse ? "!text-white" : "text-ink",
             )}
           >
             {title}

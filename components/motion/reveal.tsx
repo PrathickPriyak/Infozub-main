@@ -28,10 +28,15 @@ export function Reveal({
     return (
       <motion.div
         className={className}
-        initial="hidden"
-        animate="visible"
-        variants={fadeUp}
-        transition={{ delay }}
+        // Start slightly offset but never fully invisible — avoids blank heroes
+        // when JS is slow or screenshots capture the first paint.
+        initial={{ opacity: 0.35, y: 14 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.42,
+          ease: [0.16, 1, 0.3, 1],
+          delay,
+        }}
       >
         {children}
       </motion.div>
