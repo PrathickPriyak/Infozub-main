@@ -1,111 +1,272 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { MarketingPage } from "@/components/layout/marketing-page";
 import { PageHero } from "@/components/layout/page-hero";
 import { Container, Section, SectionHeader } from "@/components/layout/section";
 import { Button } from "@/components/ui/button";
-import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { Reveal } from "@/components/motion/reveal";
+import { Badge } from "@/components/ui/badge";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { ProjectClose } from "@/components/marketing/proof-sections";
+import {
+  CareersResumeCta,
+  JobOpeningsList,
+} from "@/components/careers/job-card";
 import {
   careersHero,
   careersPitch,
-  hiringCategories,
+  getJobBySlug,
+  jobApplicationFormUrl,
+  jobOpenings,
+  openRolesCount,
   resumeEmail,
+  whyWorkWithUs,
   workLocations,
 } from "@/content/careers";
-import { site } from "@/content/site";
 
 export function CareersPage() {
   return (
     <MarketingPage transparentHeader>
-      <PageHero title={careersHero.title} description={careersHero.description}>
-        <Button asChild variant="signal" size="lg">
-          <a href={`mailto:${resumeEmail}`}>Send your resume to {resumeEmail}</a>
-        </Button>
+      <PageHero
+        eyebrow={careersHero.eyebrow}
+        title={careersHero.title}
+        description={careersHero.description}
+      >
+        <p className="mb-6 max-w-2xl text-sm text-white/75 md:text-base">
+          {careersHero.contactLine}
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild variant="signal" size="lg">
+            <a href={`mailto:${resumeEmail}`}>
+              Send your resume to {resumeEmail}
+            </a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+          >
+            <Link href="/careers/apply">Apply now</Link>
+          </Button>
+        </div>
       </PageHero>
 
-      <Section tone="surface">
-        <Container className="max-w-3xl">
-          <p className="text-lg leading-relaxed text-muted">{careersPitch}</p>
-        </Container>
-      </Section>
-
-      <Section>
+      <Section tone="surface" id="why-infozub">
         <Container>
           <SectionHeader
-            title="Roles we hire for"
-            description="These titles appear as options on the public job application form. They are not a confirmed list of live openings."
+            eyebrow="Why work with INFOZUB"
+            title={careersPitch.lead}
+            description={careersPitch.body}
           />
-          <div className="grid gap-3 sm:grid-cols-2">
-            {hiringCategories.map((role) => (
-              <Card key={role}>
-                <CardTitle className="text-base">{role}</CardTitle>
-              </Card>
+          <Stagger className="grid gap-4 md:grid-cols-3">
+            {whyWorkWithUs.map((item) => (
+              <StaggerItem key={item.title}>
+                <div className="h-full rounded-xl border border-line bg-surface p-6 shadow-soft">
+                  <h3 className="font-display text-lg font-semibold text-ink">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">
+                    {item.body}
+                  </p>
+                </div>
+              </StaggerItem>
             ))}
-          </div>
-          <Reveal className="mt-10">
-            <Card className="bg-mist/70">
-              <CardTitle>Don’t see the right role?</CardTitle>
-              <CardDescription>
-                Send your resume to {resumeEmail}. Work locations listed on the
-                application form: {workLocations.join("; ")}.
-              </CardDescription>
-              <div className="mt-5 flex flex-wrap gap-3">
-                <Button asChild variant="signal">
-                  <a href={`mailto:${resumeEmail}`}>Email resume</a>
-                </Button>
-                <Button asChild variant="outline">
-                  <a href="/careers/apply">Open application form</a>
-                </Button>
-              </div>
-            </Card>
+          </Stagger>
+          <Reveal className="mt-8 flex flex-wrap gap-3">
+            <Button asChild variant="outline">
+              <Link href="/about">About INFOZUB</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/contact">Reach Us</Link>
+            </Button>
           </Reveal>
         </Container>
       </Section>
+
+      <Section id="openings">
+        <Container>
+          <SectionHeader
+            eyebrow="Current openings"
+            title={
+              openRolesCount > 0
+                ? `${openRolesCount} open role${openRolesCount === 1 ? "" : "s"}`
+                : "No open roles right now"
+            }
+            description={
+              openRolesCount > 0
+                ? "Published positions at INFOZUB. Select a role for details and apply."
+                : "We are not listing active vacancies on this page at the moment. You can still share your resume with the Careers team."
+            }
+          />
+          <JobOpeningsList jobs={jobOpenings} />
+          {openRolesCount > 0 ? (
+            <CareersResumeCta className="mt-10" />
+          ) : null}
+        </Container>
+      </Section>
+
+      <Section tone="surface">
+        <Container>
+          <SectionHeader
+            title="Work locations"
+            description="Preferences collected on the INFOZUB job application form."
+          />
+          <ul className="grid gap-3 sm:grid-cols-2">
+            {workLocations.map((location) => (
+              <li
+                key={location}
+                className="rounded-xl border border-line bg-surface px-4 py-3 text-sm font-medium text-ink"
+              >
+                {location}
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Section>
+
       <ProjectClose />
     </MarketingPage>
   );
 }
 
-const designations = hiringCategories;
-const locations = workLocations;
+export function JobDetailPage({ slug }: { slug: string }) {
+  const job = getJobBySlug(slug);
+  if (!job) notFound();
 
-export function CareersApplyPage() {
-  const subject = "INFOZUB job application";
-  const body = [
-    "Designation:",
-    "Name:",
-    "Phone:",
-    "Email:",
-    "City:",
-    "Work location preference:",
-    "Educational qualification:",
-    "Currently employed:",
-    "Previous experience:",
-  ].join("%0D%0A");
+  const applyHref = job.applyHref ?? "/careers/apply";
 
   return (
-    <MarketingPage>
-      <PageHero
-        tone="mist"
-        title="Apply"
-        description="The previous site used an embedded application form. Until first-party mail is configured, applications go to the careers email with the same fields."
-      />
+    <MarketingPage transparentHeader>
+      <PageHero title={job.title} description={job.summary}>
+        <div className="mb-6 flex flex-wrap gap-2">
+          <Badge
+            variant="outline"
+            className="border-white/25 bg-white/5 text-white"
+          >
+            {job.type}
+          </Badge>
+          <Badge
+            variant="outline"
+            className="border-white/25 bg-white/5 text-white"
+          >
+            {job.department}
+          </Badge>
+          <Badge
+            variant="outline"
+            className="border-white/25 bg-white/5 text-white"
+          >
+            {job.location}
+          </Badge>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild variant="signal" size="lg">
+            <Link href={applyHref}>Apply for this role</Link>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+          >
+            <Link href="/careers">All openings</Link>
+          </Button>
+        </div>
+      </PageHero>
+
       <Section>
-        <Container className="max-w-2xl">
-          <p className="text-sm text-muted">
-            Preferred locations: {locations.join("; ")}. Designations:{" "}
-            {designations.join(", ")}.
-          </p>
-          <Button asChild variant="signal" className="mt-6">
-            <a
-              href={`mailto:${resumeEmail}?subject=${encodeURIComponent(subject)}&body=${body}`}
-            >
-              Start application email
+        <Container className="max-w-3xl">
+          {job.responsibilities && job.responsibilities.length > 0 ? (
+            <div className="mb-10">
+              <SectionHeader title="Responsibilities" className="mb-4" />
+              <ul className="space-y-3 text-sm leading-relaxed text-muted md:text-base">
+                {job.responsibilities.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-xl border border-line bg-mist/70 px-4 py-3"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          {job.requirements && job.requirements.length > 0 ? (
+            <div className="mb-10">
+              <SectionHeader title="Requirements" className="mb-4" />
+              <ul className="space-y-3 text-sm leading-relaxed text-muted md:text-base">
+                {job.requirements.map((item) => (
+                  <li
+                    key={item}
+                    className="rounded-xl border border-line bg-mist/70 px-4 py-3"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
+          <CareersResumeCta />
+        </Container>
+      </Section>
+
+      <ProjectClose />
+    </MarketingPage>
+  );
+}
+
+export function CareersApplyPage() {
+  return (
+    <MarketingPage transparentHeader>
+      <PageHero
+        eyebrow="Careers"
+        title="Apply to INFOZUB"
+        description="Submit the INFOZUB job application form. Preferred work locations and designation options match the previous careers apply page."
+      >
+        <div className="flex flex-wrap gap-3">
+          <Button asChild variant="signal" size="lg">
+            <a href={`mailto:${resumeEmail}`}>
+              Or email {resumeEmail}
             </a>
           </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-white/30 text-white hover:bg-white/10 hover:text-white"
+          >
+            <Link href="/careers">Back to careers</Link>
+          </Button>
+        </div>
+      </PageHero>
+
+      <Section>
+        <Container>
+          <SectionHeader
+            title="Application form"
+            description="The same public form used on the previous INFOZUB careers apply page. Required fields include designation, contact details, location preference, experience, and resume upload."
+          />
+          <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-soft">
+            <iframe
+              title="INFOZUB job application form"
+              src={jobApplicationFormUrl}
+              className="min-h-[70vh] w-full border-0 bg-white md:min-h-[80vh]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
           <p className="mt-4 text-sm text-muted">
-            Or write directly to {resumeEmail} / {site.phoneDisplay}.
+            If the form does not load, email your resume to{" "}
+            <a
+              href={`mailto:${resumeEmail}`}
+              className="font-semibold text-navy underline-offset-2 hover:underline focus-ring rounded-sm"
+            >
+              {resumeEmail}
+            </a>
+            .
           </p>
+          <CareersResumeCta className="mt-8" />
         </Container>
       </Section>
     </MarketingPage>

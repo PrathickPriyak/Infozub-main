@@ -5,6 +5,9 @@ import { careersSeo } from "@/content/careers";
 export const metadata: Metadata = {
   title: careersSeo.title,
   description: careersSeo.description,
+  alternates: {
+    canonical: "/careers",
+  },
 };
 
 export default function Page() {
