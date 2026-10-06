@@ -16,6 +16,7 @@ import type {
   BlogPost,
   BlogPostSummary,
 } from "@/content/blog/types";
+import { sanitizeHtml } from "@/lib/security/html";
 
 const postsDirectory = path.join(process.cwd(), "content/blog/posts");
 
@@ -63,7 +64,10 @@ function readPostFile(fileName: string): BlogPost | null {
     console.warn(`[blog] Skipping invalid post file: ${fileName}`);
     return null;
   }
-  return parsed;
+  return {
+    ...parsed,
+    contentHtml: sanitizeHtml(parsed.contentHtml),
+  };
 }
 
 /** All published posts, newest first. Skips `_*.json` templates. */

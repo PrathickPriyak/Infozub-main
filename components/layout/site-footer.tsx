@@ -51,7 +51,7 @@ export function SiteFooter() {
                 key={item.href}
                 href={item.href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-line px-3 text-xs font-medium text-muted transition hover:border-navy/20 hover:text-ink focus-ring"
                 aria-label={item.label}
               >

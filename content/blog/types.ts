@@ -24,7 +24,7 @@ export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
-  /** Trusted HTML from migration (WordPress `content.rendered`) or authored HTML. */
+  /** HTML from migration (WordPress `content.rendered`); sanitized on load. */
   contentHtml: string;
   /** ISO 8601 date string */
   publishedAt: string;

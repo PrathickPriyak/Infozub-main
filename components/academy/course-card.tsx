@@ -39,7 +39,8 @@ export function CourseCard({ course, className, compact = false }: CourseCardPro
       )}
       <a
         href={course.href}
-        rel="noreferrer"
+        target="_blank"
+        rel="noopener noreferrer"
         className="mt-5 inline-flex min-h-11 items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-signal-strong focus-ring rounded-sm"
       >
         Start Course
@@ -100,7 +101,7 @@ export function AcademyExternalCta({
 }) {
   return (
     <Button asChild variant="signal" size="lg" className={className}>
-      <a href={href} rel="noreferrer">
+      <a href={href} target="_blank" rel="noopener noreferrer">
         {label}
         <ArrowUpRight className="size-4" aria-hidden />
       </a>

@@ -51,7 +51,7 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
         <a
           href={`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           Facebook
         </a>
@@ -60,7 +60,7 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
         <a
           href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           LinkedIn
         </a>
@@ -69,7 +69,7 @@ export function ShareButtons({ url, title, className }: ShareButtonsProps) {
         <a
           href={`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           X
         </a>

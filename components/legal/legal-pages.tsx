@@ -55,7 +55,7 @@ export function PaymentsPage() {
               <CardTitle>{card.title}</CardTitle>
               <p className="mt-3 text-sm text-muted">{policyNote}</p>
               <Button asChild variant="signal" className="mt-6">
-                <a href={card.ctaHref} rel="noreferrer">
+                <a href={card.ctaHref} target="_blank" rel="noopener noreferrer">
                   {card.ctaLabel}
                 </a>
               </Button>

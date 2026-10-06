@@ -4,14 +4,25 @@ import {
   type ContactSubmissionInput,
 } from "@/lib/contact/schema";
 import { deliverContactSubmission } from "@/lib/contact/submit";
+import {
+  contentLengthExceeds,
+  isAllowedContactOrigin,
+  MAX_CONTACT_BODY_BYTES,
+} from "@/lib/security/request";
 
 export const runtime = "nodejs";
 
 /** Minimum time (ms) a real user typically needs to fill the form. */
 const MIN_FILL_MS = 2500;
 
+const jsonHeaders = { "Cache-Control": "no-store" };
+
 type RateBucket = { count: number; resetAt: number };
 const rateBuckets = new Map<string, RateBucket>();
+
+function json(body: unknown, status: number) {
+  return NextResponse.json(body, { status, headers: jsonHeaders });
+}
 
 function getClientIp(request: Request): string {
   const forwarded = request.headers.get("x-forwarded-for");
@@ -32,44 +43,87 @@ function isRateLimited(ip: string): boolean {
   return bucket.count > max;
 }
 
+function readSubmission(raw: unknown): ContactSubmissionInput | null {
+  if (!raw || typeof raw !== "object") return null;
+  const value = raw as Record<string, unknown>;
+  return {
+    name: typeof value.name === "string" ? value.name : "",
+    email: typeof value.email === "string" ? value.email : "",
+    phone: typeof value.phone === "string" ? value.phone : "",
+    interest:
+      typeof value.interest === "string"
+        ? (value.interest as ContactSubmissionInput["interest"])
+        : "",
+    message: typeof value.message === "string" ? value.message : "",
+    website: typeof value.website === "string" ? value.website : "",
+    startedAt: typeof value.startedAt === "number" ? value.startedAt : undefined,
+  };
+}
+
+export function GET() {
+  return new NextResponse(null, {
+    status: 405,
+    headers: { ...jsonHeaders, Allow: "POST" },
+  });
+}
+
 export async function POST(request: Request) {
-  let body: ContactSubmissionInput;
+  if (!isAllowedContactOrigin(request)) {
+    return json({ ok: false, error: "Invalid request origin." }, 403);
+  }
+
+  if (contentLengthExceeds(request, MAX_CONTACT_BODY_BYTES)) {
+    return json({ ok: false, error: "Request is too large." }, 413);
+  }
+
+  let rawText: string;
   try {
-    body = (await request.json()) as ContactSubmissionInput;
+    rawText = await request.text();
   } catch {
-    return NextResponse.json(
-      { ok: false, error: "Invalid request body." },
-      { status: 400 },
-    );
+    return json({ ok: false, error: "Invalid request body." }, 400);
+  }
+
+  if (rawText.length > MAX_CONTACT_BODY_BYTES) {
+    return json({ ok: false, error: "Request is too large." }, 413);
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(rawText) as unknown;
+  } catch {
+    return json({ ok: false, error: "Invalid request body." }, 400);
+  }
+
+  const body = readSubmission(parsed);
+  if (!body) {
+    return json({ ok: false, error: "Invalid request body." }, 400);
   }
 
   const ip = getClientIp(request);
   if (isRateLimited(ip)) {
-    return NextResponse.json(
+    return json(
       { ok: false, error: "Too many requests. Please try again shortly." },
-      { status: 429 },
+      429,
     );
   }
 
   // Honeypot — bots often fill hidden fields.
   if (body.website && body.website.trim().length > 0) {
-    return NextResponse.json({ ok: true });
+    return json({ ok: true }, 200);
   }
 
-  // Timing trap — instantaneous submits are likely automated.
-  if (typeof body.startedAt === "number") {
-    const elapsed = Date.now() - body.startedAt;
-    if (elapsed >= 0 && elapsed < MIN_FILL_MS) {
-      return NextResponse.json({ ok: true });
-    }
+  // Timing trap — missing or instantaneous submits are treated as automated.
+  if (typeof body.startedAt !== "number" || !Number.isFinite(body.startedAt)) {
+    return json({ ok: true }, 200);
+  }
+  const elapsed = Date.now() - body.startedAt;
+  if (elapsed < 0 || elapsed < MIN_FILL_MS) {
+    return json({ ok: true }, 200);
   }
 
   const validation = validateContactForm(body);
   if (!validation.ok) {
-    return NextResponse.json(
-      { ok: false, errors: validation.errors },
-      { status: 400 },
-    );
+    return json({ ok: false, errors: validation.errors }, 400);
   }
 
   const delivery = await deliverContactSubmission(validation.data, {
@@ -79,11 +133,8 @@ export async function POST(request: Request) {
   });
 
   if (!delivery.ok) {
-    return NextResponse.json(
-      { ok: false, error: delivery.error },
-      { status: 502 },
-    );
+    return json({ ok: false, error: delivery.error }, 502);
   }
 
-  return NextResponse.json({ ok: true, id: delivery.id });
+  return json({ ok: true }, 200);
 }

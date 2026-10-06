@@ -673,20 +673,16 @@ Use Tailwind defaults unless design tokens require otherwise:
 ## Environment variables
 
 ```bash
+# Public (client bundle) — origin only. Do not add tracking IDs unless a
+# production feature actually needs them in the browser.
 NEXT_PUBLIC_SITE_URL=https://infozub.com
-NEXT_PUBLIC_GTM_ID=            # optional
-NEXT_PUBLIC_FACEBOOK_PIXEL_ID= # optional
-NEXT_PUBLIC_TYPEBOT_ID=        # optional; omit to disable chat
-NEXT_PUBLIC_TYPEBOT_API_HOST=  # optional
-FORM_EMAIL_TO=info@infozub.com
-RESEND_API_KEY=                # or SMTP_* 
-FORM_WEBHOOK_URL=              # optional
-BLOB_READ_WRITE_TOKEN=         # resumes
-TURNSTILE_SECRET_KEY=          # optional
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+
+# Server-only — never NEXT_PUBLIC_
+CONTACT_FORM_WEBHOOK_URL=
+CONTACT_FORM_WEBHOOK_TOKEN=
 ```
 
-No WordPress credentials. No `WP_*` env vars.
+No WordPress credentials. No `WP_*` env vars. Do not commit `.env.local`.
 
 ---
 

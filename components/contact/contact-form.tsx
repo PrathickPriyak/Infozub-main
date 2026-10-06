@@ -72,6 +72,7 @@ export function ContactForm({ className }: { className?: string }) {
         const response = await fetch("/api/contact", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
           body: JSON.stringify({
             ...validation.data,
             website: honeypot,

@@ -257,7 +257,8 @@ export function CareersApplyPage() {
               src={jobApplicationFormUrl}
               className="min-h-[70vh] w-full border-0 bg-white md:min-h-[80vh]"
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+              referrerPolicy="strict-origin-when-cross-origin"
+              sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             />
           </div>
           <p className="mt-4 text-sm text-muted">

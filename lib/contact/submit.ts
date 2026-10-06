@@ -7,6 +7,7 @@
  */
 
 import type { ContactFormValues } from "@/lib/contact/schema";
+import { assertSafeWebhookUrl } from "@/lib/security/webhook-url";
 
 export type ContactDeliveryResult =
   | { ok: true; id?: string }
@@ -20,6 +21,8 @@ export type ContactDeliveryContext = {
   userAgent?: string;
 };
 
+const WEBHOOK_TIMEOUT_MS = 8_000;
+
 /**
  * POST JSON to CONTACT_FORM_WEBHOOK_URL when configured.
  * Expected env (server-only): CONTACT_FORM_WEBHOOK_URL
@@ -29,16 +32,18 @@ async function deliverViaWebhook(
   data: ContactFormValues,
   context: ContactDeliveryContext,
 ): Promise<ContactDeliveryResult | null> {
-  const url = process.env.CONTACT_FORM_WEBHOOK_URL;
+  const url = process.env.CONTACT_FORM_WEBHOOK_URL?.trim();
   if (!url) return null;
+
+  const safeUrl = await assertSafeWebhookUrl(url);
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
-  const token = process.env.CONTACT_FORM_WEBHOOK_TOKEN;
+  const token = process.env.CONTACT_FORM_WEBHOOK_TOKEN?.trim();
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const response = await fetch(url, {
+  const response = await fetch(safeUrl, {
     method: "POST",
     headers,
     body: JSON.stringify({
@@ -47,6 +52,8 @@ async function deliverViaWebhook(
       ...data,
       meta: context,
     }),
+    redirect: "error",
+    signal: AbortSignal.timeout(WEBHOOK_TIMEOUT_MS),
   });
 
   if (!response.ok) {
@@ -67,14 +74,15 @@ export async function deliverContactSubmission(
 
     // No webhook configured yet — accept so the UI can be verified.
     // Operators should set CONTACT_FORM_WEBHOOK_URL for production delivery.
+    // Do not log email, phone, name, or message (PII).
     console.info("[contact] submission accepted (no webhook configured)", {
       interest: data.interest,
-      email: data.email,
       receivedAt: context.receivedAt,
     });
-    return { ok: true, id: `local-${Date.now()}` };
+    return { ok: true };
   } catch (error) {
-    console.error("[contact] delivery error", error);
+    const message = error instanceof Error ? error.message : "delivery error";
+    console.error("[contact] delivery error", message);
     return {
       ok: false,
       error: "Something went wrong. Please email info@infozub.com.",

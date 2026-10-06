@@ -3,7 +3,7 @@
   "slug": "example-post-slug",
   "title": "Example post title",
   "excerpt": "Short summary for cards and SEO description fallback.",
-  "contentHtml": "<p>Article body as HTML. Paste WordPress content.rendered here when migrating.</p>",
+  "contentHtml": "<p>Article body as HTML. Paste WordPress content.rendered here when migrating. Scripts and unsafe URLs are stripped on load.</p>",
   "publishedAt": "2026-01-15T10:00:00.000Z",
   "updatedAt": "2026-01-15T10:00:00.000Z",
   "author": {

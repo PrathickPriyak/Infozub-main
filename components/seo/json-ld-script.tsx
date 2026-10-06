@@ -1,11 +1,12 @@
 import type { JsonLd } from "@/lib/seo/json-ld";
+import { serializeJsonLd } from "@/lib/security/json-ld";
 
 type JsonLdScriptProps = {
   data: JsonLd | readonly JsonLd[];
   id?: string;
 };
 
-/** Server-safe JSON-LD script tag. */
+/** Server-safe JSON-LD script tag. Escapes `<` so strings cannot break out. */
 export function JsonLdScript({ data, id }: JsonLdScriptProps) {
   const payload = Array.isArray(data) ? data : [data];
   return (
@@ -13,7 +14,7 @@ export function JsonLdScript({ data, id }: JsonLdScriptProps) {
       id={id}
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(payload.length === 1 ? payload[0] : payload),
+        __html: serializeJsonLd(payload.length === 1 ? payload[0] : payload),
       }}
     />
   );

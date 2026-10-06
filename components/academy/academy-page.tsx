@@ -89,7 +89,8 @@ export function AcademyPage() {
                     Enrollment and lessons stay on{" "}
                     <a
                       href={academyOrigin}
-                      rel="noreferrer"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="font-semibold text-navy underline-offset-2 hover:underline focus-ring rounded-sm"
                     >
                       academy.infozub.com
@@ -247,7 +248,7 @@ export function AcademyPage() {
                   size="lg"
                   className="border-transparent bg-white text-ink hover:bg-mist"
                 >
-                  <a href={academyCta.primary.href} rel="noreferrer">
+                  <a href={academyCta.primary.href} target="_blank" rel="noopener noreferrer">
                     {academyCta.primary.label}
                   </a>
                 </Button>
@@ -257,7 +258,7 @@ export function AcademyPage() {
                   size="lg"
                   className="border-white/30 text-white hover:bg-white/10 hover:text-white"
                 >
-                  <a href={academyOrigin} rel="noreferrer">
+                  <a href={academyOrigin} target="_blank" rel="noopener noreferrer">
                     {academyCta.browseLabel}
                   </a>
                 </Button>

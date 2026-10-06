@@ -203,6 +203,7 @@ export function BlogArticlePage({ slug }: { slug: string }) {
           <article>
             <div
               className="blog-prose space-y-4 text-base leading-relaxed text-muted md:text-lg [&_a]:font-semibold [&_a]:text-navy [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:text-ink [&_h3]:mt-8 [&_h3]:font-display [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-ink [&_li]:ml-5 [&_li]:list-disc [&_p]:text-muted [&_strong]:text-ink"
+              // contentHtml is sanitized on load in content/blog/index.ts
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
             />
           </article>

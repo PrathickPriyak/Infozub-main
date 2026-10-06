@@ -88,7 +88,7 @@ export function ContactPage() {
                       <a
                         href={item.href}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noopener noreferrer"
                         className="inline-flex rounded-md border border-line px-3 py-1.5 text-sm font-medium text-muted transition hover:border-navy/30 hover:text-ink focus-ring"
                       >
                         {item.label}
@@ -173,7 +173,9 @@ export function ContactPage() {
                   src={mapEmbedUrl(office.map.lat, office.map.lng)}
                   className="aspect-[4/3] w-full border-0 bg-mist"
                   loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allow="fullscreen"
+                  allowFullScreen
                 />
               </div>
             ))}

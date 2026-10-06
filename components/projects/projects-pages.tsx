@@ -161,7 +161,7 @@ export function ProjectDetailPage({ slug }: { slug: string }) {
                 </p>
               ) : (
                 <Button asChild variant="outline" className="mt-6">
-                  <a href={project.externalUrl} rel="noreferrer">
+                  <a href={project.externalUrl} target="_blank" rel="noopener noreferrer">
                     Visit project
                   </a>
                 </Button>
