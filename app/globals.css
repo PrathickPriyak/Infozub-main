@@ -266,6 +266,26 @@
   }
 }
 
+@keyframes contact-sheen {
+  0%,
+  100% {
+    background-position: 120% 0;
+  }
+  50% {
+    background-position: -20% 0;
+  }
+}
+
+@keyframes contact-panel-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 @keyframes hero-ring-pulse {
   0%,
   100% {
@@ -598,6 +618,102 @@
     transform: scale(1.01);
   }
 
+  .contact-brand-sheen {
+    background: linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.12) 48%,
+      transparent 62%
+    );
+    background-size: 220% 100%;
+    animation: contact-sheen 7s ease-in-out infinite;
+  }
+
+  .contact-action-card {
+    transition: transform 280ms var(--ease-out);
+  }
+
+  .contact-action-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .contact-icon-bob {
+    animation: orbit-float 3.6s ease-in-out infinite;
+  }
+
+  .contact-icon-bob-delay {
+    animation-delay: -1.2s;
+  }
+
+  .contact-pathway {
+    transition:
+      transform 320ms var(--ease-out),
+      box-shadow 320ms var(--ease-out);
+  }
+
+  .contact-pathway:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(4, 51, 107, 0.16);
+  }
+
+  .contact-pathway:hover .contact-pathway-shine {
+    animation: course-shine 0.85s var(--ease-out);
+  }
+
+  .contact-map-card {
+    transition:
+      transform 320ms var(--ease-out),
+      box-shadow 320ms var(--ease-out);
+  }
+
+  .contact-map-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(4, 51, 107, 0.14);
+  }
+
+  .contact-map-card:hover .contact-map-shine {
+    animation: course-shine 0.9s var(--ease-out);
+  }
+
+  .contact-hero-collage {
+    isolation: isolate;
+  }
+
+  .contact-hero-shot {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    background: var(--ink);
+  }
+
+  .contact-hero-shot-main {
+    inset: 8% 18% 18% 8%;
+    z-index: 1;
+    animation: contact-panel-float 5.5s ease-in-out infinite;
+  }
+
+  .contact-hero-shot-a {
+    width: 42%;
+    aspect-ratio: 4 / 3;
+    right: 0;
+    top: 4%;
+    z-index: 2;
+    animation: contact-panel-float 4.8s ease-in-out infinite;
+    animation-delay: -1.4s;
+  }
+
+  .contact-hero-shot-b {
+    width: 38%;
+    aspect-ratio: 1;
+    left: 2%;
+    bottom: 0;
+    z-index: 2;
+    animation: contact-panel-float 6.2s ease-in-out infinite;
+    animation-delay: -2.2s;
+  }
+
   .academy-surface > * {
     position: relative;
     z-index: 1;
@@ -710,6 +826,13 @@
   .cta-pulse,
   .chat-launcher,
   .chat-panel,
+  .contact-icon-bob,
+  .contact-brand-sheen,
+  .contact-hero-shot-main,
+  .contact-hero-shot-a,
+  .contact-hero-shot-b,
+  .contact-pathway:hover .contact-pathway-shine,
+  .contact-map-card:hover .contact-map-shine,
   body {
     animation: none !important;
   }
@@ -722,7 +845,12 @@
   .group\/media:hover .media-zoom-target,
   .brand-target-aim,
   .course-card,
-  .course-card:hover {
+  .course-card:hover,
+  .contact-action-card,
+  .contact-pathway,
+  .contact-map-card,
+  .contact-brand-panel,
+  .contact-form-shell {
     transition: none !important;
     transform: none !important;
   }

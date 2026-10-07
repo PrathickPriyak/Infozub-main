@@ -84,6 +84,63 @@ export const contactCta = {
   description: `Call ${site.phoneDisplay} or email ${site.email}. Hours: ${site.hours}.`,
 } as const;
 
+/**
+ * Visual pathways on /contact — labels match OpnForm interests;
+ * images are existing site assets (projects / Academy).
+ */
+export const contactPathways = [
+  {
+    id: "digital-marketing",
+    label: "Digital Marketing Suite",
+    description: "Ask about campaigns, leads, and brand growth.",
+    href: "/digital-suite",
+    image: "/projects/suzuki-motorcycle.webp",
+    imageAlt: "Suzuki Motorcycle Tamilnadu project work",
+  },
+  {
+    id: "website",
+    label: "Website Development",
+    description: "Talk to us about websites and digital presence.",
+    href: "/services",
+    image: "/projects/bharath-electronics.webp",
+    imageAlt: "Bharath Electronics and Appliances project work",
+  },
+  {
+    id: "course",
+    label: "Join Course",
+    description: "Enquire about INFOZUB Academy training.",
+    href: "/academy",
+    image: "/academy/smm.webp",
+    imageAlt: "Social Media Marketing course",
+  },
+  {
+    id: "career",
+    label: "Career",
+    description: "Reach the team about openings at INFOZUB.",
+    href: "/careers",
+    image: "/academy/interview.webp",
+    imageAlt: "Interview Success Formula course",
+  },
+] as const;
+
+export const contactHeroVisuals = [
+  {
+    src: "/brand/infozub-logo.jpg",
+    alt: "INFOZUB — Your Targeted Marketing Partner",
+    className: "contact-hero-shot contact-hero-shot-main",
+  },
+  {
+    src: "/projects/suzuki-motorcycle-thumb.webp",
+    alt: "Suzuki Motorcycle Tamilnadu project",
+    className: "contact-hero-shot contact-hero-shot-a",
+  },
+  {
+    src: "/academy/google-ads.webp",
+    alt: "Google Ads Academy course",
+    className: "contact-hero-shot contact-hero-shot-b",
+  },
+] as const;
+
 export function mapEmbedUrl(lat: number, lng: number): string {
   const query = encodeURIComponent(`${lat},${lng}`);
   return `https://maps.google.com/maps?q=${query}&z=15&output=embed`;
