@@ -45,7 +45,7 @@ import { Magnetic } from "@/components/motion/magnetic";
 export const metadata: Metadata = {
   title: "Design System",
   description:
-    "Signal Navy visual system for Infozub Private Limited — tokens, components, and motion.",
+    "Navy + ember visual system for Infozub Private Limited — tokens, components, and motion.",
   robots: {
     index: false,
     follow: false,
@@ -57,6 +57,8 @@ const COLORS = [
   { name: "Navy", token: "--navy", className: "bg-navy" },
   { name: "Signal", token: "--signal", className: "bg-signal" },
   { name: "Signal soft", token: "--signal-soft", className: "bg-signal-soft" },
+  { name: "Ember", token: "--ember", className: "bg-ember" },
+  { name: "Ember soft", token: "--ember-soft", className: "bg-ember-soft" },
   { name: "Mist", token: "--mist", className: "bg-mist border border-line" },
   { name: "Surface", token: "--surface", className: "bg-surface border border-line" },
   { name: "Muted", token: "--muted", className: "bg-muted" },

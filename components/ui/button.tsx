@@ -11,13 +11,13 @@ const buttonVariants = cva(
         primary:
           "bg-ink text-white shadow-soft hover:-translate-y-px hover:bg-ink-soft hover:shadow-elevated",
         signal:
-          "bg-signal text-accent-foreground shadow-soft hover:-translate-y-px hover:bg-signal-strong hover:shadow-elevated motion-safe:hover:shadow-[0_10px_28px_rgba(13,92,173,0.32)]",
+          "bg-ember text-white shadow-soft hover:-translate-y-px hover:bg-ember-strong hover:shadow-elevated motion-safe:hover:shadow-[0_10px_28px_rgba(247,127,0,0.34)]",
         secondary:
           "bg-surface text-ink border border-line shadow-soft hover:-translate-y-px hover:border-navy/25 hover:shadow-elevated",
         outline:
-          "border border-line bg-transparent text-ink hover:border-navy/30 hover:bg-surface active:bg-mist",
-        ghost: "bg-transparent text-ink hover:bg-navy/5",
-        link: "rounded-none bg-transparent px-0 text-navy underline-offset-4 hover:text-signal-strong hover:underline",
+          "border border-line bg-transparent text-ink hover:border-ember/40 hover:bg-ember-soft/40 active:bg-mist",
+        ghost: "bg-transparent text-ink hover:bg-ember/5",
+        link: "rounded-none bg-transparent px-0 text-navy underline-offset-4 hover:text-ember-strong hover:underline",
       },
       size: {
         sm: "min-h-11 px-3.5 py-2 text-sm",

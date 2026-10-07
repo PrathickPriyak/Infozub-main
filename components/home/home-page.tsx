@@ -21,6 +21,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
 import { AnimatedCounter } from "@/components/motion/animated-counter";
 import { HomeHeroVisual } from "@/components/home/home-hero-visual";
+import { TestimonialsCarousel } from "@/components/marketing/testimonials-carousel";
 import {
   homeAcademy,
   homeCapabilities,
@@ -88,8 +89,13 @@ function Hero() {
         aria-hidden
       >
         <div className="ambient-orb absolute -left-24 top-0 size-[32rem] rounded-full bg-navy blur-3xl" />
-        <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-[24rem] rounded-full bg-signal/25 blur-3xl" />
+        <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-[24rem] rounded-full bg-ember/20 blur-3xl" />
         <div className="absolute inset-0 bg-grid-fade opacity-40" />
+        <span className="hero-float-chip absolute left-[12%] top-[28%] size-3 rounded-full border border-ember/50 bg-ember/35" />
+        <span className="hero-float-chip hero-float-chip-delay absolute right-[18%] top-[22%] size-2 rounded-full bg-white/40" />
+        <span className="hero-float-chip hero-float-chip-slow absolute bottom-[18%] left-[40%] size-2.5 rounded-full border border-white/30" />
+        <span className="hero-target-ring absolute right-[8%] top-[42%] size-24 rounded-full border border-ember/30" />
+        <span className="hero-target-ring hero-target-ring-delay absolute right-[6%] top-[40%] size-32 rounded-full border border-white/10" />
       </div>
 
       <Container className="relative grid min-w-0 items-center gap-10 pb-16 pt-24 sm:gap-12 sm:pb-20 sm:pt-28 md:pb-28 md:pt-32 lg:grid-cols-[1.1fr_0.9fr]">
@@ -113,27 +119,31 @@ function Hero() {
           </p>
           <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
             <Magnetic>
-              <Button asChild variant="signal" size="lg">
+              <Button asChild variant="signal" size="lg" className="cta-pulse">
                 <Link href={homeHero.primaryCta.href}>
                   {homeHero.primaryCta.label}
                 </Link>
               </Button>
             </Magnetic>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
-            >
-              <Link href={homeHero.secondaryCta.href}>
-                {homeHero.secondaryCta.label}
-              </Link>
-            </Button>
+            <Magnetic>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
+              >
+                <Link href={homeHero.secondaryCta.href}>
+                  {homeHero.secondaryCta.label}
+                </Link>
+              </Button>
+            </Magnetic>
           </div>
         </Reveal>
 
         <Reveal mode="mount" delay={0.08}>
-          <HomeHeroVisual />
+          <div className="hero-visual-tilt">
+            <HomeHeroVisual />
+          </div>
         </Reveal>
       </Container>
     </section>
@@ -155,7 +165,7 @@ function Intro() {
         </Reveal>
         <Reveal delay={0.06}>
           <Card className="h-full bg-mist/70">
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-signal-strong">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ember">
               Who we are
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted">
@@ -189,10 +199,10 @@ function Capabilities() {
               <StaggerItem key={item.title}>
                 <Link
                   href={hrefForCapability(item.title)}
-                  className="block h-full rounded-xl focus-ring"
+                  className="capability-card group block h-full rounded-xl focus-ring"
                 >
                   <Card interactive className="h-full">
-                    <div className="flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong">
+                    <div className="flex size-10 items-center justify-center rounded-md bg-ember-soft text-ember transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                       <Icon className="size-5" aria-hidden />
                     </div>
                     <CardTitle className="mt-4">{item.title}</CardTitle>
@@ -256,7 +266,7 @@ function Academy() {
     <Section tone="ink" className="text-white">
       <Container className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
         <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ember">
             {homeAcademy.eyebrow}
           </p>
           <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
@@ -331,7 +341,7 @@ function Results() {
                     <ul className="mt-4 space-y-2 text-sm text-muted">
                       {item.highlights.map((line) => (
                         <li key={line} className="flex gap-2">
-                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ember" />
                           {line}
                         </li>
                       ))}
@@ -358,22 +368,11 @@ function Testimonials() {
         <SectionHeader
           eyebrow="What our clients say"
           title="Testimonials"
-          description="Reviews published on the Infozub homepage."
+          description="Reviews published on the Infozub homepage. Browse with the controls or let them auto-advance."
         />
-        <Stagger className="grid gap-4 md:grid-cols-2">
-          {testimonials.slice(0, 4).map((item) => (
-            <StaggerItem key={item.name}>
-              <figure className="h-full rounded-xl border border-line bg-surface p-6 shadow-soft">
-                <blockquote className="whitespace-pre-line text-sm leading-relaxed text-muted">
-                  {item.quote}
-                </blockquote>
-                <figcaption className="mt-4 text-sm font-semibold text-ink">
-                  {item.name}
-                </figcaption>
-              </figure>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <Reveal>
+          <TestimonialsCarousel items={testimonials} />
+        </Reveal>
         <Reveal className="mt-8">
           <Button asChild variant="outline">
             <Link href="/reviews">Read all reviews</Link>
@@ -400,7 +399,7 @@ function Ventures() {
         </Reveal>
         <Reveal>
           <Card>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-signal-strong">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ember">
               Current venture
             </p>
             <CardTitle className="mt-3">{homeVentures.featured.title}</CardTitle>

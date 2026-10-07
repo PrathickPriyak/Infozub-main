@@ -12,22 +12,33 @@ import {
 export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-surface">
-      <div className="mx-auto grid min-w-0 max-w-6xl gap-10 px-4 py-12 sm:px-6 sm:py-14 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
-        <div className="min-w-0 space-y-4 md:col-span-2 lg:col-span-1">
-          <BrandMark />
-          <p className="max-w-sm text-sm leading-relaxed text-muted">
+      <div className="mx-auto grid min-w-0 max-w-6xl gap-5 px-4 py-6 sm:grid-cols-[1.1fr_1fr_1fr] sm:gap-6 sm:px-6 sm:py-7 lg:px-8">
+        <div className="min-w-0 space-y-1.5">
+          <BrandMark compact className="min-h-0" />
+          <p className="max-w-xs text-xs leading-snug text-muted">
             {site.legalName}. {homeHero.supporting}
+          </p>
+          <p className="pt-1 text-xs text-muted">
+            {site.offices.map((office) => office.city).join(" · ")} ·{" "}
+            <Link
+              href="/contact#locations"
+              className="font-medium text-ember hover:underline focus-ring rounded-sm"
+            >
+              Directions
+            </Link>
           </p>
         </div>
 
         <div className="min-w-0">
-          <h2 className="font-display text-sm font-semibold text-ink">Explore</h2>
-          <ul className="mt-4 grid gap-x-4 gap-y-1 sm:grid-cols-2 lg:grid-cols-1">
+          <h2 className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-ink">
+            Explore
+          </h2>
+          <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-0">
             {primaryNavigation.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="inline-flex min-h-11 items-center rounded-sm text-sm text-muted hover:text-ink focus-ring"
+                  className="inline-flex rounded-sm py-0.5 text-sm text-muted hover:text-ink focus-ring"
                 >
                   {item.label}
                 </Link>
@@ -37,42 +48,31 @@ export function SiteFooter() {
         </div>
 
         <div className="min-w-0">
-          <h2 className="font-display text-sm font-semibold text-ink">Offices</h2>
-          <div className="mt-4 space-y-4 text-sm text-muted">
-            {site.offices.map((office) => (
-              <p key={office.city} className="break-words">
-                <span className="font-semibold text-ink">{office.city}</span>
-                <br />
-                {office.address}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        <div className="min-w-0">
-          <h2 className="font-display text-sm font-semibold text-ink">Connect</h2>
-          <div className="mt-4 space-y-2 text-sm">
+          <h2 className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-ink">
+            Connect
+          </h2>
+          <div className="mt-2 space-y-0.5 text-sm">
             <a
-              className="inline-flex min-h-11 items-center rounded-sm text-muted hover:text-ink focus-ring"
+              className="block rounded-sm text-muted hover:text-ink focus-ring"
               href={site.phoneHref}
             >
               {site.phoneDisplay}
             </a>
             <a
-              className="flex min-h-11 items-center break-all rounded-sm text-muted hover:text-ink focus-ring"
+              className="block break-all rounded-sm text-muted hover:text-ink focus-ring"
               href={site.emailHref}
             >
               {site.email}
             </a>
           </div>
-          <div className="mt-5 flex flex-wrap gap-2">
+          <div className="mt-2.5 flex flex-wrap gap-x-2.5 gap-y-1">
             {socialLinks.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-line px-3 text-xs font-medium text-muted transition hover:border-navy/20 hover:text-ink focus-ring"
+                className="rounded-sm text-xs font-medium text-muted transition hover:text-ink focus-ring"
                 aria-label={item.label}
               >
                 {item.label}
@@ -84,16 +84,16 @@ export function SiteFooter() {
 
       <Separator />
 
-      <div className="mx-auto flex min-w-0 max-w-6xl flex-col gap-3 px-4 py-5 text-xs text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-w-0 max-w-6xl flex-col gap-1.5 px-4 py-2.5 text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <p>
           © {new Date().getFullYear()} {site.name}®. All rights reserved.
         </p>
-        <div className="flex flex-wrap gap-x-4 gap-y-2">
+        <div className="flex flex-wrap gap-x-3 gap-y-1">
           {footerLegalLinks.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="inline-flex min-h-11 items-center rounded-sm hover:text-ink focus-ring"
+              className="rounded-sm hover:text-ink focus-ring"
             >
               {item.label}
             </Link>

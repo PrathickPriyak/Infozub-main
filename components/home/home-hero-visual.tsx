@@ -19,7 +19,7 @@ export function HomeHeroVisual({ className }: { className?: string }) {
       )}
     >
       <div
-        className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-signal/20 blur-3xl"
+        className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-ember/20 blur-3xl"
         aria-hidden
       />
       <div
@@ -55,7 +55,7 @@ export function HomeHeroVisual({ className }: { className?: string }) {
         {orbits.map((node, index) => (
           <span
             key={node.label}
-            className="orbit-chip absolute max-w-[40%] truncate rounded-full border border-signal/40 bg-signal/15 px-2 py-1 text-[10px] font-medium text-white/90 sm:max-w-none sm:px-2.5 sm:text-[11px]"
+            className="orbit-chip absolute max-w-[40%] truncate rounded-full border border-ember/40 bg-ember/20 px-2 py-1 text-[10px] font-medium text-white/90 sm:max-w-none sm:px-2.5 sm:text-[11px]"
             style={{
               left: node.x,
               top: node.y,
@@ -70,11 +70,11 @@ export function HomeHeroVisual({ className }: { className?: string }) {
           aria-hidden
         />
         <div
-          className="absolute inset-12 rounded-full border border-signal/20"
+          className="absolute inset-12 rounded-full border border-ember/25"
           aria-hidden
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="rounded-full bg-signal px-3 py-1 text-xs font-semibold tracking-wide text-white">
+          <span className="rounded-full bg-ember px-3 py-1 text-xs font-semibold tracking-wide text-white">
             INFOZUB
           </span>
         </div>

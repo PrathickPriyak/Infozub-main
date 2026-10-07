@@ -76,7 +76,7 @@ export function BlogIndexPage({ category }: BlogIndexProps) {
                 className="rounded-2xl border border-line bg-mist/40 px-6 py-14 text-center md:px-10"
                 role="status"
               >
-                <span className="mx-auto inline-flex size-12 items-center justify-center rounded-full bg-signal-soft text-signal-strong">
+                <span className="mx-auto inline-flex size-12 items-center justify-center rounded-full bg-ember-soft text-ember">
                   <FileText className="size-5" aria-hidden />
                 </span>
                 <h2 className="mt-5 font-display text-2xl font-semibold text-ink md:text-3xl">

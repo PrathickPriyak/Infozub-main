@@ -62,7 +62,7 @@ export function ProjectCard({
             {project.services.join(" · ")}
           </p>
         </div>
-        <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-signal-strong">
+        <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-ember">
           View
           <ArrowRight
             className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"

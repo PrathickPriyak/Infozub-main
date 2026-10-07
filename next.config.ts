@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { SECURITY_HEADERS } from "./lib/security/headers";
+import { getSecurityHeaders } from "./lib/security/headers";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -52,10 +52,14 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
+    // Rebuild on each config evaluation so `next dev` keeps unsafe-eval
+    // while production builds stay without eval.
+    // Skip `/_next/*` so Turbopack HMR websocket upgrades are not altered.
+    const securityHeaders = getSecurityHeaders();
     return [
       {
-        source: "/:path*",
-        headers: SECURITY_HEADERS,
+        source: "/((?!_next(?:/|$)).*)",
+        headers: securityHeaders,
       },
       {
         source: "/api/:path*",

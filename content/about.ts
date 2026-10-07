@@ -179,33 +179,116 @@ export const processSteps = [
   {
     title: "Discuss",
     body: "Schedule an Appointment by providing your basic business details.",
+    icon: "/about/discussion.png",
   },
   {
     title: "Understand",
     body: "Our Digital Experts will understand your Requirements and define dependencies.",
+    icon: "/about/understand.png",
   },
   {
     title: "Strategy",
     body: "We build a strategic plan based on your requirements and KPI defined in requirements.",
+    icon: "/about/Strategy.png",
   },
   {
     title: "Brainstorm",
     body: "We will give a complete walkthrough of our strategy and gain business intelligence.",
+    icon: "/about/brainstorming.png",
   },
   {
     title: "Digital Asset",
     body: "We will gain access to all your digital assets in a centralised manner.",
+    icon: "/about/digital-asset.png",
   },
   {
     title: "Campaigns",
     body: "We will setup the planned campaigns and initiate all activities.",
+    icon: "/about/campaign.png",
   },
   {
     title: "Working Model",
     body: "Build, Operate and Manage – That’s our business model. We’ll handle your digital operations.",
+    icon: "/about/manage.png",
   },
   {
     title: "Review",
     body: "We’ll be having periodic meetings to review KPI and optimise the campaigns.",
+    icon: "/about/review.png",
+  },
+] as const;
+
+/** Media from infozub.com About / Google Maps — used on the About page. */
+export const aboutMedia = {
+  hero: {
+    src: "/about/agency.png",
+    alt: "INFOZUB digital marketing presence",
+  },
+  team: {
+    src: "/about/team.png",
+    alt: "INFOZUB team",
+  },
+  founder: {
+    src: "/about/founder.webp",
+    alt: "Logesh, founder of INFOZUB",
+  },
+  officeGoogle: {
+    src: "/about/office-google.jpg",
+    alt: "INFOZUB Palladam office on Google Maps",
+  },
+  logo: {
+    src: "/about/logo-square.jpg",
+    alt: "INFOZUB logo",
+  },
+} as const;
+
+/** Certification badges published on infozub.com (Google + Meta). */
+export const aboutCertificationBadges = [
+  {
+    name: "Facebook Certified Digital Marketing Associate",
+    src: "/about/FBdigital.png",
+  },
+  {
+    name: "Facebook Certified Marketing Science Professional",
+    src: "/about/FBprofessional.png",
+  },
+  {
+    name: "Facebook Certified Creative Strategy Professional",
+    src: "/about/FBcreative.png",
+  },
+  {
+    name: "Google Search Ads Certified",
+    src: "/about/searchads.png",
+  },
+  {
+    name: "Google Display Ads Certified",
+    src: "/about/displayads.png",
+  },
+  {
+    name: "Google Video Ads Certified",
+    src: "/about/videoadsg.png",
+  },
+  {
+    name: "Google Tag Manager Certified",
+    src: "/about/GTM.png",
+  },
+  {
+    name: "Google Analytics Certified",
+    src: "/about/analytics.png",
+  },
+  {
+    name: "Google Search Console Certified",
+    src: "/about/searchconsoleg.png",
+  },
+] as const;
+
+export const aboutPressLogos = [
+  {
+    publication: "Silicon India",
+    src: "/about/startupcitysilicon.png",
+  },
+  {
+    publication: "The CEO",
+    src: "/about/CEOMagazine.png",
   },
 ] as const;

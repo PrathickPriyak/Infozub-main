@@ -6,6 +6,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { AnimatedCounter } from "@/components/motion/animated-counter";
 import { Magnetic } from "@/components/motion/magnetic";
 import { TextReveal } from "@/components/motion/text-reveal";
+import { TestimonialsCarousel } from "@/components/marketing/testimonials-carousel";
 import {
   counters,
   namedResults,
@@ -58,7 +59,7 @@ export function ResultsSection() {
                   <ul className="mt-4 space-y-2 text-sm text-muted">
                     {item.highlights.map((line) => (
                       <li key={line} className="flex gap-2">
-                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ember" />
                         {line}
                       </li>
                     ))}
@@ -85,22 +86,11 @@ export function TestimonialsSection() {
         <SectionHeader
           eyebrow="What our clients say"
           title="Testimonials"
-          description="Reviews published on the Infozub homepage."
+          description="Reviews published on the Infozub homepage. Browse with the controls or let them auto-advance."
         />
-        <Stagger className="grid gap-4 md:grid-cols-2">
-          {testimonials.map((item) => (
-            <StaggerItem key={item.name}>
-              <figure className="h-full rounded-xl border border-line bg-surface p-6 shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-elevated">
-                <blockquote className="whitespace-pre-line text-sm leading-relaxed text-muted">
-                  {item.quote}
-                </blockquote>
-                <figcaption className="mt-4 text-sm font-semibold text-ink">
-                  {item.name}
-                </figcaption>
-              </figure>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <Reveal>
+          <TestimonialsCarousel items={testimonials} />
+        </Reveal>
       </Container>
     </Section>
   );
@@ -134,7 +124,7 @@ export function ProjectClose() {
     <Section tone="ink" className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="ambient-orb absolute -left-16 top-1/2 size-64 -translate-y-1/2 rounded-full bg-navy blur-3xl" />
-        <div className="ambient-orb ambient-orb-delayed absolute -right-10 top-0 size-56 rounded-full bg-signal/25 blur-3xl" />
+        <div className="ambient-orb ambient-orb-delayed absolute -right-10 top-0 size-56 rounded-full bg-ember/25 blur-3xl" />
       </div>
       <Container className="relative text-center">
         <Reveal>

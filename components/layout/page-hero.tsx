@@ -39,7 +39,7 @@ export function PageHero({
       {inverse ? (
         <div className="pointer-events-none absolute inset-0" aria-hidden>
           <div className="ambient-orb absolute -left-20 top-0 size-72 rounded-full bg-navy blur-3xl" />
-          <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-64 rounded-full bg-signal/20 blur-3xl" />
+          <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-64 rounded-full bg-ember/20 blur-3xl" />
         </div>
       ) : null}
       <Container className="relative pb-12 pt-24 sm:pb-16 sm:pt-28 md:pb-20 md:pt-32">

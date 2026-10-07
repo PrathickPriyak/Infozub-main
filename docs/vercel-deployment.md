@@ -54,7 +54,7 @@ Recommended project settings:
 | Build Command | `npm run build` |
 | Output Directory | *(leave empty — Next.js)* |
 | Install Command | `npm install` |
-| Node.js Version | **20.x** (see `package.json` `engines` and `.nvmrc`) |
+| Node.js Version | **22.x** (see `package.json` `engines` and `.nvmrc`) |
 | Production Branch | `main` |
 | Preview | Enabled for pull requests |
 

@@ -36,7 +36,6 @@ export const contactOffices = [
     id: "palladam",
     title: "Palladam Office",
     address: "271 A3, Chinnaiyah Garden, Kosavampalayam Road, Palladam – 641664.",
-    /** Google Maps pin from /contact/ embeds (Palladam-area coordinates). */
     map: {
       lat: 10.987692,
       lng: 77.272907,
@@ -48,7 +47,6 @@ export const contactOffices = [
     title: "Tirupur Office",
     address:
       "2nd Floor, Alagendira Towers, Bungalow Stop, Tiruppur – 641602",
-    /** Google Maps pin from /contact/ embeds (Tirupur-area coordinates). */
     map: {
       lat: 11.115207,
       lng: 77.330814,
@@ -84,7 +82,14 @@ export const contactCta = {
   description: `Call ${site.phoneDisplay} or email ${site.email}. Hours: ${site.hours}.`,
 } as const;
 
-export function mapEmbedUrl(lat: number, lng: number): string {
+export function mapDirectionsUrl(lat: number, lng: number): string {
   const query = encodeURIComponent(`${lat},${lng}`);
-  return `https://maps.google.com/maps?q=${query}&z=15&output=embed`;
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
+
+/** Embeddable Google Maps URL for office lat/lng (no API key required). */
+export function mapEmbedUrl(lat: number, lng: number, zoom = 16): string {
+  const query = encodeURIComponent(`${lat},${lng}`);
+  return `https://maps.google.com/maps?q=${query}&z=${zoom}&output=embed`;
+}
+

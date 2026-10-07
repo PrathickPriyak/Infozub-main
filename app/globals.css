@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Color — Infozub logo navy (#04336b) + target blue accents */
+  /* Color — Infozub navy (#04336b) + ember orange (#f77f00) accents */
   --ink: #021a38;
   --ink-soft: #032447;
   --navy: #04336b;
@@ -9,6 +9,9 @@
   --signal: #0d5cad;
   --signal-strong: #04336b;
   --signal-soft: #e8f1fb;
+  --ember: #f77f00;
+  --ember-strong: #d96b00;
+  --ember-soft: #fff3e6;
   --mist: #f2f6fb;
   --surface: #ffffff;
   --line: #d2dceb;
@@ -27,10 +30,10 @@
   --primary-foreground: #ffffff;
   --secondary: var(--surface);
   --secondary-foreground: var(--ink);
-  --accent: var(--signal);
+  --accent: var(--ember);
   --accent-foreground: #ffffff;
   --border: var(--line);
-  --ring: var(--signal);
+  --ring: var(--ember);
   --input: var(--line);
 
   /* Radius */
@@ -254,6 +257,86 @@
   }
 }
 
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+@keyframes contact-sheen {
+  0%,
+  100% {
+    background-position: 120% 0;
+  }
+  50% {
+    background-position: -20% 0;
+  }
+}
+
+@keyframes contact-panel-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes contact-pin-pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+@keyframes hero-ring-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.7;
+  }
+}
+
+@keyframes cta-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(247, 127, 0, 0.38);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(247, 127, 0, 0);
+  }
+}
+
+@keyframes chat-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @theme inline {
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
@@ -262,6 +345,9 @@
   --color-signal: var(--signal);
   --color-signal-strong: var(--signal-strong);
   --color-signal-soft: var(--signal-soft);
+  --color-ember: var(--ember);
+  --color-ember-strong: var(--ember-strong);
+  --color-ember-soft: var(--ember-soft);
   --color-mist: var(--mist);
   --color-surface: var(--surface);
   --color-line: var(--line);
@@ -413,7 +499,13 @@
   }
 
   .gradient-signal {
-    background-image: linear-gradient(135deg, var(--ink) 0%, var(--navy) 52%, var(--signal) 100%);
+    background-image: linear-gradient(
+      135deg,
+      var(--ink) 0%,
+      var(--navy) 48%,
+      var(--signal) 78%,
+      var(--ember) 100%
+    );
   }
 
   .gradient-ink {
@@ -485,6 +577,361 @@
     animation: audience-pop 0.45s var(--ease-out) both;
   }
 
+  .hero-float-chip {
+    animation: hero-float 4.8s ease-in-out infinite;
+  }
+
+  .hero-float-chip-delay {
+    animation-delay: -1.6s;
+  }
+
+  .hero-float-chip-slow {
+    animation-duration: 6.4s;
+    animation-delay: -2.4s;
+  }
+
+  .hero-target-ring {
+    animation: hero-ring-pulse 5.5s ease-in-out infinite;
+  }
+
+  .hero-target-ring-delay {
+    animation-delay: -2.2s;
+  }
+
+  .hero-visual-tilt {
+    transition: transform 500ms var(--ease-out);
+  }
+
+  .hero-visual-tilt:hover {
+    transform: translateY(-6px) rotate(-0.4deg);
+  }
+
+  .cta-pulse {
+    animation: cta-pulse 2.8s ease-out infinite;
+  }
+
+  .capability-card {
+    transition: transform 280ms var(--ease-out);
+  }
+
+  .capability-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .chat-panel {
+    animation: chat-panel-in 280ms var(--ease-out) both;
+  }
+
+  .chat-launcher {
+    animation: cta-pulse 3.2s ease-out infinite;
+  }
+
+  .contact-form-shell {
+    transition:
+      transform 320ms var(--ease-out),
+      box-shadow 320ms var(--ease-out);
+  }
+
+  .contact-form-shell:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px rgba(4, 51, 107, 0.12);
+  }
+
+  .contact-brand-panel {
+    transition: transform 400ms var(--ease-out);
+  }
+
+  .contact-brand-panel:hover {
+    transform: scale(1.01);
+  }
+
+  .contact-brand-sheen {
+    background: linear-gradient(
+      120deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.12) 48%,
+      transparent 62%
+    );
+    background-size: 220% 100%;
+    animation: contact-sheen 7s ease-in-out infinite;
+  }
+
+  .contact-action-card {
+    transition: transform 280ms var(--ease-out);
+  }
+
+  .contact-action-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .contact-icon-bob {
+    animation: orbit-float 3.6s ease-in-out infinite;
+  }
+
+  .contact-icon-bob-delay {
+    animation-delay: -1.2s;
+  }
+
+  .contact-pathway {
+    transition:
+      transform 320ms var(--ease-out),
+      box-shadow 320ms var(--ease-out);
+  }
+
+  .contact-pathway:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(4, 51, 107, 0.16);
+  }
+
+  .contact-pathway:hover .contact-pathway-shine {
+    animation: course-shine 0.85s var(--ease-out);
+  }
+
+  .contact-map-card {
+    transition:
+      transform 320ms var(--ease-out),
+      box-shadow 320ms var(--ease-out);
+  }
+
+  .contact-map-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(4, 51, 107, 0.14);
+  }
+
+  .contact-map-card:hover .contact-map-shine {
+    animation: course-shine 0.9s var(--ease-out);
+  }
+
+  .contact-hero-collage {
+    isolation: isolate;
+  }
+
+  .contact-hero-shot {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    background: var(--ink);
+    transition: transform 450ms var(--ease-out);
+  }
+
+  .contact-hero-shot-main {
+    inset: 8% 18% 18% 8%;
+    z-index: 1;
+    animation: contact-panel-float 5.5s ease-in-out infinite;
+  }
+
+  .contact-hero-shot-a {
+    width: 42%;
+    aspect-ratio: 4 / 3;
+    right: 0;
+    top: 4%;
+    z-index: 2;
+    animation: contact-panel-float 4.8s ease-in-out infinite;
+    animation-delay: -1.4s;
+  }
+
+  .contact-hero-shot-b {
+    width: 38%;
+    aspect-ratio: 1;
+    left: 2%;
+    bottom: 0;
+    z-index: 2;
+    animation: contact-panel-float 6.2s ease-in-out infinite;
+    animation-delay: -2.2s;
+  }
+
+  .contact-hero-collage:hover .contact-hero-shot-main,
+  .contact-hero-collage:hover .contact-hero-shot-a,
+  .contact-hero-collage:hover .contact-hero-shot-b {
+    animation-play-state: paused;
+  }
+
+  .contact-hero-collage:hover .contact-hero-shot-main {
+    transform: translateY(-10px) scale(1.02);
+  }
+
+  .contact-hero-collage:hover .contact-hero-shot-a {
+    transform: translateY(-14px) rotate(2deg);
+  }
+
+  .contact-hero-collage:hover .contact-hero-shot-b {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+
+  .contact-gallery-tile {
+    animation: contact-panel-float 5.2s ease-in-out infinite;
+  }
+
+  .contact-gallery-tile-delay {
+    animation-delay: -1.5s;
+  }
+
+  .contact-gallery-tile-slow {
+    animation-duration: 6.4s;
+    animation-delay: -2.8s;
+  }
+
+  .contact-pin-ring {
+    animation: contact-pin-pulse 2.4s ease-out infinite;
+  }
+
+  .client-logo-card {
+    transition:
+      transform 320ms var(--ease-out),
+      box-shadow 320ms var(--ease-out),
+      border-color 320ms var(--ease-out);
+  }
+
+  .client-logo-card:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--ember) 40%, var(--line));
+    box-shadow: 0 18px 40px rgba(4, 51, 107, 0.12);
+  }
+
+  .testimonial-card {
+    transition:
+      transform 320ms var(--ease-out),
+      box-shadow 320ms var(--ease-out),
+      border-color 320ms var(--ease-out);
+    animation: reveal-in 0.45s var(--ease-out) both;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--ember) 35%, var(--line));
+    box-shadow: 0 16px 36px rgba(4, 51, 107, 0.1);
+  }
+
+  .client-logo-card:hover .client-logo-sheen {
+    animation: course-shine 0.85s var(--ease-out);
+  }
+
+  .client-logo-image {
+    filter: grayscale(0.2);
+  }
+
+  .client-logo-card:hover .client-logo-image {
+    filter: none;
+  }
+
+  .about-media-panel {
+    transition:
+      transform 400ms var(--ease-out),
+      box-shadow 400ms var(--ease-out);
+  }
+
+  .about-media-panel:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(4, 51, 107, 0.14);
+  }
+
+  .about-belief-card,
+  .about-capability-card,
+  .about-process-card,
+  .about-press-card,
+  .about-stat-card,
+  .about-cert-card {
+    transition:
+      transform 280ms var(--ease-out),
+      border-color 280ms var(--ease-out),
+      box-shadow 280ms var(--ease-out),
+      background-color 280ms var(--ease-out);
+  }
+
+  .about-belief-card:hover,
+  .about-capability-card:hover,
+  .about-process-card:hover,
+  .about-press-card:hover,
+  .about-stat-card:hover,
+  .about-cert-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--ember) 40%, var(--line));
+    box-shadow: 0 14px 32px rgba(4, 51, 107, 0.1);
+  }
+
+  .about-service-chip {
+    transition:
+      transform 220ms var(--ease-out),
+      background-color 220ms var(--ease-out),
+      border-color 220ms var(--ease-out);
+  }
+
+  .about-service-chip:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--ember) 45%, var(--line));
+    background-color: var(--ember-soft);
+  }
+
+  .about-year-chip {
+    transition:
+      transform 220ms var(--ease-out),
+      background-color 220ms var(--ease-out),
+      border-color 220ms var(--ease-out),
+      color 220ms var(--ease-out),
+      box-shadow 220ms var(--ease-out);
+  }
+
+  .about-year-chip:hover {
+    transform: translateY(-2px);
+  }
+
+  .about-journey-panel {
+    animation: reveal-in 0.4s var(--ease-out) both;
+  }
+
+  .about-journey-card {
+    transition:
+      transform 280ms var(--ease-out),
+      border-color 280ms var(--ease-out),
+      box-shadow 280ms var(--ease-out),
+      background-color 280ms var(--ease-out);
+  }
+
+  .about-journey-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--ember) 35%, var(--line));
+    background-color: var(--surface);
+    box-shadow: 0 14px 28px rgba(4, 51, 107, 0.08);
+  }
+
+  .about-hero-collage {
+    min-height: 18rem;
+  }
+
+  .about-hero-shot {
+    transition: transform 450ms var(--ease-out);
+  }
+
+  .about-hero-shot-main {
+    animation: contact-panel-float 5.6s ease-in-out infinite;
+  }
+
+  .about-hero-shot-a {
+    z-index: 2;
+    animation: contact-panel-float 4.9s ease-in-out infinite;
+    animation-delay: -1.4s;
+  }
+
+  .about-hero-shot-b {
+    z-index: 2;
+    animation: contact-panel-float 6.1s ease-in-out infinite;
+    animation-delay: -2.2s;
+  }
+
+  .about-hero-collage:hover .about-hero-shot-main {
+    transform: translateY(-4px) rotate(-0.4deg);
+  }
+
+  .about-hero-collage:hover .about-hero-shot-a {
+    transform: translateY(-6px) rotate(-1.2deg);
+  }
+
+  .about-hero-collage:hover .about-hero-shot-b {
+    transform: translateY(-8px) rotate(1.4deg);
+  }
+
   .academy-surface > * {
     position: relative;
     z-index: 1;
@@ -499,7 +946,7 @@
   }
 
   .focus-ring {
-    @apply outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-mist;
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-mist;
   }
 
   .animate-accordion-down {
@@ -592,6 +1039,24 @@
   .brand-target-active .brand-target-ping,
   .audience-chip,
   .course-card:hover .course-card-shine,
+  .hero-float-chip,
+  .hero-target-ring,
+  .cta-pulse,
+  .chat-launcher,
+  .chat-panel,
+  .contact-icon-bob,
+  .contact-brand-sheen,
+  .contact-hero-shot-main,
+  .contact-hero-shot-a,
+  .contact-hero-shot-b,
+  .contact-gallery-tile,
+  .contact-pin-ring,
+  .client-logo-card:hover .client-logo-sheen,
+  .contact-pathway:hover .contact-pathway-shine,
+  .contact-map-card:hover .contact-map-shine,
+  .about-hero-shot-main,
+  .about-hero-shot-a,
+  .about-hero-shot-b,
   body {
     animation: none !important;
   }
@@ -604,8 +1069,49 @@
   .group\/media:hover .media-zoom-target,
   .brand-target-aim,
   .course-card,
-  .course-card:hover {
+  .course-card:hover,
+  .contact-action-card,
+  .contact-pathway,
+  .contact-map-card,
+  .contact-brand-panel,
+  .contact-form-shell,
+  .contact-hero-shot,
+  .contact-hero-collage:hover .contact-hero-shot-main,
+  .contact-hero-collage:hover .contact-hero-shot-a,
+  .contact-hero-collage:hover .contact-hero-shot-b,
+  .client-logo-card,
+  .client-logo-card:hover,
+  .client-logo-image,
+  .testimonial-card,
+  .testimonial-card:hover,
+  .testimonials-carousel .testimonial-card,
+  .about-media-panel,
+  .about-media-panel:hover,
+  .about-belief-card,
+  .about-capability-card,
+  .about-process-card,
+  .about-press-card,
+  .about-stat-card,
+  .about-cert-card,
+  .about-belief-card:hover,
+  .about-capability-card:hover,
+  .about-process-card:hover,
+  .about-press-card:hover,
+  .about-stat-card:hover,
+  .about-cert-card:hover,
+  .about-service-chip,
+  .about-service-chip:hover,
+  .about-year-chip,
+  .about-year-chip:hover,
+  .about-journey-panel,
+  .about-journey-card,
+  .about-journey-card:hover,
+  .about-hero-shot,
+  .about-hero-collage:hover .about-hero-shot-main,
+  .about-hero-collage:hover .about-hero-shot-a,
+  .about-hero-collage:hover .about-hero-shot-b {
     transition: none !important;
     transform: none !important;
+    filter: none !important;
   }
 }

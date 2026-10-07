@@ -8,7 +8,7 @@ type MediaZoomProps = {
 
 export function MediaZoom({ children, className }: MediaZoomProps) {
   return (
-    <div className={cn("media-zoom overflow-hidden", className)}>
+    <div className={cn("media-zoom relative overflow-hidden", className)}>
       {children}
     </div>
   );

@@ -75,8 +75,8 @@ export function AcademyPage() {
                 />
               </Reveal>
               <Reveal>
-                <aside className="rounded-xl border border-signal/25 bg-signal-soft/70 p-6 shadow-soft">
-                  <p className="font-mono text-xs font-semibold uppercase tracking-wide text-signal-strong">
+                <aside className="rounded-xl border border-ember/30 bg-ember-soft/80 p-6 shadow-soft">
+                  <p className="font-mono text-xs font-semibold uppercase tracking-wide text-ember-strong">
                     INFOZUB Ventures
                   </p>
                   <p className="mt-3 text-base leading-relaxed text-ink">
@@ -102,7 +102,7 @@ export function AcademyPage() {
 
         <Section id="what-we-offer" className="relative overflow-hidden">
           <div
-            className="pointer-events-none absolute -right-24 top-10 size-72 rounded-full bg-signal/10 blur-3xl"
+            className="pointer-events-none absolute -right-24 top-10 size-72 rounded-full bg-ember/10 blur-3xl"
             aria-hidden
           />
           <div
@@ -206,11 +206,11 @@ export function AcademyPage() {
                   {academyBenefits.items.map((item, index) => (
                     <li
                       key={item}
-                      className="benefit-row flex items-start gap-3 rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-relaxed text-muted shadow-soft transition-transform duration-300 hover:-translate-x-0.5 hover:border-signal/30"
+                      className="benefit-row flex items-start gap-3 rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-relaxed text-muted shadow-soft transition-transform duration-300 hover:-translate-x-0.5 hover:border-ember/30"
                       style={{ animationDelay: `${index * 80}ms` }}
                     >
                       <CheckCircle2
-                        className="mt-0.5 size-5 shrink-0 text-signal"
+                        className="mt-0.5 size-5 shrink-0 text-ember"
                         aria-hidden
                       />
                       <span>{item}</span>
@@ -252,7 +252,7 @@ export function AcademyPage() {
             <Stagger className="grid gap-4 md:grid-cols-3">
               {academyTraining.points.map((point) => (
                 <StaggerItem key={point.title}>
-                  <div className="h-full rounded-xl border border-signal/20 bg-signal-soft/40 p-6 transition-transform duration-300 hover:-translate-y-1">
+                  <div className="h-full rounded-xl border border-ember/25 bg-ember-soft/50 p-6 transition-transform duration-300 hover:-translate-y-1">
                     <h3 className="font-display text-lg font-semibold text-ink">
                       {point.title}
                     </h3>
@@ -275,7 +275,7 @@ export function AcademyPage() {
         <Section tone="ink">
           <Container className="text-center">
             <Reveal>
-              <p className="font-mono text-xs font-semibold uppercase tracking-wide text-signal">
+              <p className="font-mono text-xs font-semibold uppercase tracking-wide text-ember">
                 INFOZUB Digital Academy
               </p>
               <h2 className="mt-4 font-display text-2xl font-semibold text-white sm:text-3xl md:text-4xl">
