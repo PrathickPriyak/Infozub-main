@@ -14,6 +14,7 @@ import {
   contactHero,
   contactOffices,
   mapDirectionsUrl,
+  mapEmbedUrl,
 } from "@/content/contact";
 import { site } from "@/content/site";
 
@@ -153,32 +154,44 @@ export function ContactPage() {
             title="INFOZUB BRANCHES"
             description="Our Locations"
           />
-          <Stagger className="grid gap-4 md:grid-cols-2">
+          <Stagger className="grid gap-5 md:grid-cols-2">
             {contactOffices.map((office) => (
               <StaggerItem key={office.id}>
-                <div className="contact-map-card flex h-full flex-col justify-between rounded-2xl border border-line bg-mist p-5 shadow-soft sm:p-6">
-                  <div>
-                    <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-                      <MapPin className="size-4 text-signal" aria-hidden />
-                      {office.title}
-                    </p>
-                    <p className="mt-3 text-sm leading-relaxed text-ink md:text-base">
-                      {office.address}
-                    </p>
+                <article className="contact-map-card flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-soft">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-mist">
+                    <iframe
+                      title={`${office.map.label} on Google Maps`}
+                      src={mapEmbedUrl(office.map.lat, office.map.lng)}
+                      className="absolute inset-0 size-full border-0"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      allowFullScreen
+                    />
                   </div>
-                  <div className="mt-5">
-                    <Button asChild variant="outline" size="sm">
-                      <a
-                        href={mapDirectionsUrl(office.map.lat, office.map.lng)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Open in Maps
-                        <ArrowUpRight className="size-3.5" aria-hidden />
-                      </a>
-                    </Button>
+                  <div className="flex flex-1 flex-col justify-between gap-4 p-5 sm:p-6">
+                    <div>
+                      <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                        <MapPin className="size-4 text-signal" aria-hidden />
+                        {office.title}
+                      </p>
+                      <p className="mt-3 text-sm leading-relaxed text-ink md:text-base">
+                        {office.address}
+                      </p>
+                    </div>
+                    <div>
+                      <Button asChild variant="outline" size="sm">
+                        <a
+                          href={mapDirectionsUrl(office.map.lat, office.map.lng)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Open in Google Maps
+                          <ArrowUpRight className="size-3.5" aria-hidden />
+                        </a>
+                      </Button>
+                    </div>
                   </div>
-                </div>
+                </article>
               </StaggerItem>
             ))}
           </Stagger>

@@ -86,3 +86,10 @@ export function mapDirectionsUrl(lat: number, lng: number): string {
   const query = encodeURIComponent(`${lat},${lng}`);
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
+
+/** Embeddable Google Maps URL for office lat/lng (no API key required). */
+export function mapEmbedUrl(lat: number, lng: number, zoom = 16): string {
+  const query = encodeURIComponent(`${lat},${lng}`);
+  return `https://maps.google.com/maps?q=${query}&z=${zoom}&output=embed`;
+}
+
