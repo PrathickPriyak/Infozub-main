@@ -1,5 +1,6 @@
 import {
   Briefcase,
+  CheckCircle2,
   GraduationCap,
   Palette,
   Sparkles,
@@ -21,6 +22,7 @@ import {
   academyAudience,
   academyBenefits,
   academyCategories,
+  academyCourses,
   academyCta,
   academyHero,
   academyIntro,
@@ -28,7 +30,6 @@ import {
   academyOrigin,
   academyTraining,
   getCoursesForCategory,
-  getFeaturedCourses,
 } from "@/content/academy";
 
 const categoryIcons: Record<string, LucideIcon> = {
@@ -39,8 +40,6 @@ const categoryIcons: Record<string, LucideIcon> = {
 };
 
 export function AcademyPage() {
-  const featured = getFeaturedCourses();
-
   return (
     <MarketingPage transparentHeader>
       <div className="academy-surface">
@@ -60,7 +59,7 @@ export function AcademyPage() {
               size="lg"
               className="border-white/30 text-white hover:bg-white/10 hover:text-white"
             >
-              <a href="#featured-courses">View courses</a>
+              <a href="#what-we-offer">View courses</a>
             </Button>
           </div>
         </PageHero>
@@ -89,7 +88,7 @@ export function AcademyPage() {
                       href={academyOrigin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-semibold text-navy underline-offset-2 hover:underline focus-ring rounded-sm"
+                      className="rounded-sm font-semibold text-navy underline-offset-2 hover:underline focus-ring"
                     >
                       academy.infozub.com
                     </a>
@@ -101,12 +100,52 @@ export function AcademyPage() {
           </Container>
         </Section>
 
-        <Section id="categories">
+        <Section id="what-we-offer" className="relative overflow-hidden">
+          <div
+            className="pointer-events-none absolute -right-24 top-10 size-72 rounded-full bg-signal/10 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -left-16 bottom-0 size-64 rounded-full bg-navy/10 blur-3xl"
+            aria-hidden
+          />
+          <Container className="relative">
+            <Reveal>
+              <SectionHeader
+                eyebrow={academyOffersHeading.eyebrow}
+                title={academyOffersHeading.title}
+                description="Each course is Online Self Placed. Start Course opens the matching page on academy.infozub.com."
+                align="center"
+                className="mx-auto max-w-3xl"
+              />
+            </Reveal>
+
+            <Stagger className="mt-2 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {academyCourses.map((course, index) => (
+                <StaggerItem key={course.slug}>
+                  <CourseCard course={course} index={index} />
+                </StaggerItem>
+              ))}
+            </Stagger>
+
+            <Reveal className="mt-10 flex flex-wrap items-center justify-center gap-3">
+              <AcademyExternalCta
+                href={academyOrigin}
+                label={academyCta.browseLabel}
+              />
+              <Button asChild variant="outline">
+                <a href="#categories">Browse by category</a>
+              </Button>
+            </Reveal>
+          </Container>
+        </Section>
+
+        <Section id="categories" tone="surface">
           <Container>
             <SectionHeader
               eyebrow="Course categories"
-              title={academyOffersHeading.title}
-              description="Browse Academy courses by skill area. Start Course opens academy.infozub.com."
+              title="Browse by skill area"
+              description="Jump to the same published courses, grouped for quicker scanning."
             />
             <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {academyCategories.map((category) => {
@@ -124,10 +163,37 @@ export function AcademyPage() {
                 );
               })}
             </Stagger>
+
+            <div className="mt-12 space-y-12">
+              {academyCategories.map((category) => {
+                const courses = getCoursesForCategory(category.courseSlugs);
+                return (
+                  <div key={category.id} id={`category-${category.id}`}>
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
+                      {category.title}
+                    </h3>
+                    <p className="mt-1 text-sm text-muted">
+                      {category.description}
+                    </p>
+                    <Stagger className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {courses.map((course, index) => (
+                        <StaggerItem key={course.slug}>
+                          <CourseCard
+                            course={course}
+                            compact
+                            index={index}
+                          />
+                        </StaggerItem>
+                      ))}
+                    </Stagger>
+                  </div>
+                );
+              })}
+            </div>
           </Container>
         </Section>
 
-        <Section tone="surface" id="benefits">
+        <Section id="benefits" pattern="dots">
           <Container>
             <div className="grid gap-10 lg:grid-cols-2">
               <Reveal>
@@ -137,12 +203,17 @@ export function AcademyPage() {
                   className="mb-6"
                 />
                 <ul className="space-y-3">
-                  {academyBenefits.items.map((item) => (
+                  {academyBenefits.items.map((item, index) => (
                     <li
                       key={item}
-                      className="rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-relaxed text-muted"
+                      className="benefit-row flex items-start gap-3 rounded-xl border border-line bg-surface px-4 py-3 text-sm leading-relaxed text-muted shadow-soft transition-transform duration-300 hover:-translate-x-0.5 hover:border-signal/30"
+                      style={{ animationDelay: `${index * 80}ms` }}
                     >
-                      {item}
+                      <CheckCircle2
+                        className="mt-0.5 size-5 shrink-0 text-signal"
+                        aria-hidden
+                      />
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -154,61 +225,19 @@ export function AcademyPage() {
                   className="mb-6"
                 />
                 <div className="flex flex-wrap gap-2">
-                  {academyAudience.items.map((item) => (
-                    <Badge key={item} variant="signal" className="gap-1.5">
+                  {academyAudience.items.map((item, index) => (
+                    <Badge
+                      key={item}
+                      variant="signal"
+                      className="audience-chip gap-1.5"
+                      style={{ animationDelay: `${index * 90}ms` }}
+                    >
                       <Users className="size-3.5" aria-hidden />
                       {item}
                     </Badge>
                   ))}
                 </div>
               </Reveal>
-            </div>
-          </Container>
-        </Section>
-
-        <Section id="featured-courses">
-          <Container>
-            <SectionHeader
-              eyebrow={academyOffersHeading.eyebrow}
-              title="Featured courses"
-              description={academyOffersHeading.title}
-            />
-            <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {featured.map((course) => (
-                <StaggerItem key={course.slug}>
-                  <CourseCard course={course} />
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </Container>
-        </Section>
-
-        <Section tone="surface" id="all-courses">
-          <Container>
-            <SectionHeader
-              eyebrow="Course catalog"
-              title="All Academy courses"
-              description="Start Course links open the Digital Academy platform — the source of truth for lessons and enrollment."
-            />
-            <div className="space-y-12">
-              {academyCategories.map((category) => {
-                const courses = getCoursesForCategory(category.courseSlugs);
-                return (
-                  <div key={category.id} id={`category-${category.id}`}>
-                    <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
-                      {category.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-muted">{category.description}</p>
-                    <Stagger className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                      {courses.map((course) => (
-                        <StaggerItem key={course.slug}>
-                          <CourseCard course={course} compact />
-                        </StaggerItem>
-                      ))}
-                    </Stagger>
-                  </div>
-                );
-              })}
             </div>
           </Container>
         </Section>
@@ -223,7 +252,7 @@ export function AcademyPage() {
             <Stagger className="grid gap-4 md:grid-cols-3">
               {academyTraining.points.map((point) => (
                 <StaggerItem key={point.title}>
-                  <div className="h-full rounded-xl border border-signal/20 bg-signal-soft/40 p-6">
+                  <div className="h-full rounded-xl border border-signal/20 bg-signal-soft/40 p-6 transition-transform duration-300 hover:-translate-y-1">
                     <h3 className="font-display text-lg font-semibold text-ink">
                       {point.title}
                     </h3>
@@ -259,7 +288,11 @@ export function AcademyPage() {
                   size="lg"
                   className="border-transparent bg-white text-ink hover:bg-mist"
                 >
-                  <a href={academyCta.primary.href} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={academyCta.primary.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {academyCta.primary.label}
                   </a>
                 </Button>
@@ -269,7 +302,11 @@ export function AcademyPage() {
                   size="lg"
                   className="border-white/30 text-white hover:bg-white/10 hover:text-white"
                 >
-                  <a href={academyOrigin} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={academyOrigin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {academyCta.browseLabel}
                   </a>
                 </Button>

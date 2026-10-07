@@ -229,6 +229,31 @@
   }
 }
 
+@keyframes course-shine {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%) skewX(12deg);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(320%) skewX(12deg);
+  }
+}
+
+@keyframes audience-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @theme inline {
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
@@ -439,6 +464,27 @@
     animation: brand-target-idle 3.2s ease-in-out infinite;
   }
 
+  .course-card {
+    transition:
+      transform 320ms var(--ease-out),
+      box-shadow 320ms var(--ease-out),
+      border-color 320ms var(--ease-out);
+  }
+
+  .course-card:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--signal) 45%, var(--line));
+    box-shadow: 0 18px 40px rgba(4, 51, 107, 0.14);
+  }
+
+  .course-card:hover .course-card-shine {
+    animation: course-shine 0.85s var(--ease-out);
+  }
+
+  .audience-chip {
+    animation: audience-pop 0.45s var(--ease-out) both;
+  }
+
   .academy-surface > * {
     position: relative;
     z-index: 1;
@@ -544,6 +590,8 @@
   .brand-target-active .brand-target-ring,
   .group:hover .brand-target-ping,
   .brand-target-active .brand-target-ping,
+  .audience-chip,
+  .course-card:hover .course-card-shine,
   body {
     animation: none !important;
   }
@@ -554,7 +602,9 @@
   .media-zoom:hover > img,
   .media-zoom:hover img,
   .group\/media:hover .media-zoom-target,
-  .brand-target-aim {
+  .brand-target-aim,
+  .course-card,
+  .course-card:hover {
     transition: none !important;
     transform: none !important;
   }
