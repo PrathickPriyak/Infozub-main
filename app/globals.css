@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  /* Color — Signal Navy */
-  --ink: #0a1628;
-  --ink-soft: #15263d;
-  --navy: #0e2a4a;
-  --navy-soft: #1c3d63;
-  --signal: #0fae9a;
-  --signal-strong: #0a7a6c;
-  --signal-soft: #d8f5f0;
-  --mist: #f3f6f9;
+  /* Color — Infozub logo navy (#04336b) + target blue accents */
+  --ink: #021a38;
+  --ink-soft: #032447;
+  --navy: #04336b;
+  --navy-soft: #0a4488;
+  --signal: #0d5cad;
+  --signal-strong: #04336b;
+  --signal-soft: #e8f1fb;
+  --mist: #f2f6fb;
   --surface: #ffffff;
-  --line: #d5dde8;
-  --muted: #5c6b7c;
-  --muted-soft: #627181;
+  --line: #d2dceb;
+  --muted: #54657a;
+  --muted-soft: #627489;
   --warning: #c47d1a;
   --danger: #c23b3b;
   --success: #1f8a5b;
@@ -28,7 +28,7 @@
   --secondary: var(--surface);
   --secondary-foreground: var(--ink);
   --accent: var(--signal);
-  --accent-foreground: #05332d;
+  --accent-foreground: #ffffff;
   --border: var(--line);
   --ring: var(--signal);
   --input: var(--line);
@@ -195,6 +195,40 @@
   }
 }
 
+@keyframes brand-target-idle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes brand-target-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes brand-target-ping {
+  0% {
+    opacity: 0.45;
+    transform: scale(0.92);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
+}
+
 @theme inline {
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
@@ -290,9 +324,9 @@
     overflow-x: clip;
     font-family: var(--font-source-sans), ui-sans-serif, sans-serif;
     background-image:
-      radial-gradient(1200px 600px at 10% -10%, rgba(15, 174, 154, 0.08), transparent 55%),
-      radial-gradient(900px 500px at 100% 0%, rgba(14, 42, 74, 0.08), transparent 50%),
-      linear-gradient(180deg, #f7f9fc 0%, var(--mist) 40%, #eef2f7 100%);
+      radial-gradient(1200px 600px at 10% -10%, rgba(13, 92, 173, 0.09), transparent 55%),
+      radial-gradient(900px 500px at 100% 0%, rgba(4, 51, 107, 0.1), transparent 50%),
+      linear-gradient(180deg, #f7f9fc 0%, var(--mist) 40%, #eaf0f8 100%);
     background-attachment: scroll;
     background-size: 100% 100%, 100% 100%, 100% 100%;
     animation: mist-shift 28s ease-in-out infinite;
@@ -354,14 +388,14 @@
   }
 
   .gradient-signal {
-    background-image: linear-gradient(135deg, var(--navy) 0%, #13466f 48%, var(--signal) 100%);
+    background-image: linear-gradient(135deg, var(--ink) 0%, var(--navy) 52%, var(--signal) 100%);
   }
 
   .gradient-ink {
     background-image: linear-gradient(160deg, var(--ink) 0%, var(--navy) 100%);
   }
 
-  /* Academy entry — signal-forward band, still Signal Navy brand */
+  /* Academy entry — logo-blue band */
   .academy-surface {
     position: relative;
   }
@@ -372,9 +406,37 @@
     position: absolute;
     inset: 0;
     background-image:
-      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(15, 174, 154, 0.12), transparent 60%),
-      linear-gradient(180deg, transparent 0%, rgba(216, 245, 240, 0.35) 45%, transparent 100%);
+      radial-gradient(ellipse 80% 40% at 50% 0%, rgba(13, 92, 173, 0.14), transparent 60%),
+      linear-gradient(180deg, transparent 0%, rgba(232, 241, 251, 0.55) 45%, transparent 100%);
     z-index: 0;
+  }
+
+  .brand-target-ring {
+    transition: transform 280ms var(--ease-out);
+  }
+
+  .brand-target-aim {
+    transition: transform 160ms var(--ease-out);
+  }
+
+  .brand-target-ping {
+    opacity: 0;
+    transform-origin: 20px 20px;
+    transform-box: fill-box;
+  }
+
+  .group:hover .brand-target-ring,
+  .brand-target-active .brand-target-ring {
+    animation: brand-target-spin 6s linear infinite;
+  }
+
+  .group:hover .brand-target-ping,
+  .brand-target-active .brand-target-ping {
+    animation: brand-target-ping 1.4s var(--ease-out) infinite;
+  }
+
+  .brand-target {
+    animation: brand-target-idle 3.2s ease-in-out infinite;
   }
 
   .academy-surface > * {
@@ -477,6 +539,11 @@
   .reveal-view,
   .stagger-view > .stagger-item,
   .orbit-chip,
+  .brand-target,
+  .group:hover .brand-target-ring,
+  .brand-target-active .brand-target-ring,
+  .group:hover .brand-target-ping,
+  .brand-target-active .brand-target-ping,
   body {
     animation: none !important;
   }
@@ -486,7 +553,8 @@
   .media-zoom > *,
   .media-zoom:hover > img,
   .media-zoom:hover img,
-  .group\/media:hover .media-zoom-target {
+  .group\/media:hover .media-zoom-target,
+  .brand-target-aim {
     transition: none !important;
     transform: none !important;
   }

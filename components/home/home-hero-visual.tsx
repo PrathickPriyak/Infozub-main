@@ -74,7 +74,7 @@ export function HomeHeroVisual({ className }: { className?: string }) {
           aria-hidden
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="rounded-full bg-signal px-3 py-1 text-xs font-semibold text-accent-foreground">
+          <span className="rounded-full bg-signal px-3 py-1 text-xs font-semibold tracking-wide text-white">
             INFOZUB
           </span>
         </div>
