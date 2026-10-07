@@ -350,7 +350,7 @@ function ContactHero() {
           <div className="contact-hero-collage relative mx-auto aspect-[5/4] w-full max-w-lg">
             {contactHeroVisuals.map((shot) => (
               <div key={shot.src} className={shot.className}>
-                <MediaZoom>
+                <MediaZoom className="absolute inset-0 size-full">
                   <Image
                     src={shot.src}
                     alt={shot.alt}
