@@ -75,11 +75,13 @@ export type AcademyCourse = {
   title: string;
   /** Deep link on academy.infozub.com — do not host lesson content here. */
   href: string;
+  /** Local copy of the published /courses/ card image. */
+  image: string;
   featured?: boolean;
 };
 
 /**
- * Featured course titles and Start Course destinations from /courses/.
+ * Course cards from https://infozub.com/courses/ (order preserved).
  * Prices and durations are not published on the company courses page.
  */
 export const academyCourses: readonly AcademyCourse[] = [
@@ -87,49 +89,58 @@ export const academyCourses: readonly AcademyCourse[] = [
     slug: "social-media-marketing",
     title: "Social Media Marketing Master Course",
     href: `${academyOrigin}/course/tamil/social-media-marketing/`,
+    image: "/academy/smm.webp",
     featured: true,
   },
   {
     slug: "adobe-photoshop",
     title: "Adobe Photoshop Master Course",
     href: `${academyOrigin}/course/tamil/adobe-photoshop/`,
+    image: "/academy/photoshop.webp",
     featured: true,
   },
   {
     slug: "web-design",
     title: "Web Design Master Course",
     href: `${academyOrigin}/course/tamil/web-design/`,
+    image: "/academy/web-design.webp",
     featured: true,
   },
   {
     slug: "canva",
     title: "Canva Master Course",
     href: `${academyOrigin}/course/tamil/canva-master-course/`,
+    image: "/academy/canva.webp",
   },
   {
     slug: "mobile-app-video-editing",
     title: "Mobile App Video Editing Master Course",
     href: `${academyOrigin}/course/tamil/mobile-app-video-editing/`,
+    image: "/academy/video-editing.webp",
   },
   {
     slug: "interview-success",
     title: "Interview Success Formula",
     href: `${academyOrigin}/course/tamil/interview-success-formula/`,
+    image: "/academy/interview.webp",
   },
   {
     slug: "ai-website-builder",
     title: "AI Website Builder Mastery",
     href: `${academyOrigin}/course/tamil/ai-website-builder-mastery/`,
+    image: "/academy/ai-web.webp",
   },
   {
     slug: "business-success",
     title: "Business Success Formula",
     href: `${academyOrigin}/course/tamil/business-success-formula/`,
+    image: "/academy/business.webp",
   },
   {
     slug: "google-ads",
     title: "Google Ads Master Course",
     href: `${academyOrigin}/course/tamil/google-ads/`,
+    image: "/academy/google-ads.webp",
     featured: true,
   },
 ] as const;
