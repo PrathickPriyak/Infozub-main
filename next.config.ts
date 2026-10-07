@@ -54,10 +54,11 @@ const nextConfig: NextConfig = {
   async headers() {
     // Rebuild on each config evaluation so `next dev` keeps unsafe-eval
     // while production builds stay without eval.
+    // Skip `/_next/*` so Turbopack HMR websocket upgrades are not altered.
     const securityHeaders = getSecurityHeaders();
     return [
       {
-        source: "/:path*",
+        source: "/((?!_next(?:/|$)).*)",
         headers: securityHeaders,
       },
       {
