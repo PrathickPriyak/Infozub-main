@@ -41,6 +41,9 @@ export const contactOffices = [
       lat: 10.987692,
       lng: 77.272907,
       label: "INFOZUB Palladam",
+      /** Snapshot from Google Maps listing for this office. */
+      previewImage: "/contact/office-palladam-google.jpg",
+      previewAlt: "Google Maps view of INFOZUB Palladam office",
     },
   },
   {
@@ -53,6 +56,8 @@ export const contactOffices = [
       lat: 11.115207,
       lng: 77.330814,
       label: "INFOZUB Tirupur",
+      previewImage: "/contact/office-tirupur-google.jpg",
+      previewAlt: "Google Maps view of INFOZUB Tirupur office",
     },
   },
 ] as const;
@@ -85,8 +90,8 @@ export const contactCta = {
 } as const;
 
 /**
- * Visual pathways on /contact — labels match OpnForm interests;
- * illustrations are generic contact visuals (not project/Academy photos).
+ * Visual pathways on /contact — labels match OpnForm interests.
+ * Images are taken from the live INFOZUB WordPress media library.
  */
 export const contactPathways = [
   {
@@ -94,50 +99,50 @@ export const contactPathways = [
     label: "Digital Marketing Suite",
     description: "Ask about campaigns, leads, and brand growth.",
     href: "/digital-suite",
-    image: "/contact/contact-pathway-marketing.jpg",
-    imageAlt: "Digital marketing consultation illustration",
+    image: "/contact/digital-marketing-company.png",
+    imageAlt: "INFOZUB digital marketing creative from infozub.com",
   },
   {
     id: "website",
     label: "Website Development",
     description: "Talk to us about websites and digital presence.",
     href: "/services",
-    image: "/contact/contact-pathway-website.jpg",
-    imageAlt: "Website development illustration",
+    image: "/contact/web-development.png",
+    imageAlt: "Website development creative from infozub.com",
   },
   {
     id: "course",
     label: "Join Course",
     description: "Enquire about INFOZUB Academy training.",
     href: "/academy",
-    image: "/contact/contact-pathway-course.jpg",
-    imageAlt: "Learning and courses illustration",
+    image: "/contact/learn-digital-marketing.png",
+    imageAlt: "Learn digital marketing creative from infozub.com",
   },
   {
     id: "career",
     label: "Career",
     description: "Reach the team about openings at INFOZUB.",
     href: "/careers",
-    image: "/contact/contact-pathway-career.jpg",
-    imageAlt: "Careers illustration",
+    image: "/contact/infozub-team.png",
+    imageAlt: "INFOZUB team photo from infozub.com",
   },
 ] as const;
 
-/** Generic contact illustrations for the hero collage. */
+/** Hero collage — INFOZUB brand/media assets from the live site. */
 export const contactHeroVisuals = [
   {
-    src: "/contact/contact-hero.jpg",
-    alt: "Business consultation workspace illustration",
+    src: "/contact/digital-marketing-company.png",
+    alt: "INFOZUB get in touch creative",
     className: "contact-hero-shot contact-hero-shot-main",
   },
   {
-    src: "/contact/contact-message.jpg",
-    alt: "Message and email illustration",
+    src: "/contact/infozub-team.png",
+    alt: "INFOZUB team",
     className: "contact-hero-shot contact-hero-shot-a",
   },
   {
-    src: "/contact/contact-phone.jpg",
-    alt: "Phone support illustration",
+    src: "/contact/infozub-support.png",
+    alt: "INFOZUB support avatar",
     className: "contact-hero-shot contact-hero-shot-b",
   },
 ] as const;
@@ -152,24 +157,24 @@ export function mapDirectionsUrl(lat: number, lng: number): string {
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
-/** Side gallery beside the contact form — generic contact visuals. */
+/** Side gallery beside the contact form — INFOZUB + Google Ads assets. */
 export const contactFormGallery = [
   {
-    src: "/contact/contact-message.jpg",
-    alt: "Message illustration",
+    src: "/contact/infozub-logo-square.jpg",
+    alt: "INFOZUB logo",
   },
   {
-    src: "/contact/contact-location.jpg",
-    alt: "Location pin illustration",
+    src: "/contact/infozub-support.png",
+    alt: "INFOZUB support",
   },
   {
-    src: "/contact/contact-phone.jpg",
-    alt: "Phone illustration",
+    src: "/contact/google-ads.png",
+    alt: "Google Ads certification graphic from INFOZUB",
   },
 ] as const;
 
 /** Primary visual beside the contact form. */
 export const contactFormFeatureImage = {
-  src: "/contact/contact-hero.jpg",
-  alt: "Schedule a consultation with INFOZUB",
+  src: "/contact/infozub-team.png",
+  alt: "The INFOZUB team",
 } as const;

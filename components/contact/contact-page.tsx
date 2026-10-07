@@ -243,6 +243,25 @@ export function ContactPage() {
             {contactOffices.map((office) => (
               <StaggerItem key={office.id}>
                 <div className="contact-map-card group overflow-hidden rounded-2xl border border-line bg-mist shadow-soft">
+                  <a
+                    href={mapDirectionsUrl(office.map.lat, office.map.lng)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative block aspect-[16/9] overflow-hidden focus-ring"
+                  >
+                    <MediaZoom className="absolute inset-0 size-full">
+                      <Image
+                        src={office.map.previewImage}
+                        alt={office.map.previewAlt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-cover"
+                      />
+                    </MediaZoom>
+                    <span className="absolute bottom-3 left-3 rounded-md bg-ink/80 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
+                      Google Maps
+                    </span>
+                  </a>
                   <div className="flex flex-wrap items-start justify-between gap-3 border-b border-line px-4 py-4 sm:px-5">
                     <div>
                       <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
