@@ -82,11 +82,30 @@ function scoreEntry(query: string, tokens: string[], entry: ChatKnowledgeEntry):
     }
   }
 
+  // Light boost when the full query clearly mentions a core topic word.
+  for (const keyword of entry.keywords) {
+    if (keyword.length >= 4 && query.includes(keyword)) {
+      score += 2;
+      break;
+    }
+  }
+
   return score;
 }
 
 const NO_MATCH_ANSWER =
   "I could not find a verified answer for that on the INFOZUB website. Please use the contact form and the team will help you.";
+
+const GREETING_ANSWER =
+  "Hi — welcome to INFOZUB! I can help with questions about our Digital Marketing Suite, Academy courses, projects, careers, and contact details. What would you like to know?";
+
+/** Pure greetings (and short hellos) should never fall through to Contact. */
+const GREETING_PATTERN =
+  /^(hi|hii|hiii|hello|hey|hey there|hi there|hello there|good morning|good afternoon|good evening|namaste|vanakkam)([!.\s]*)$/i;
+
+function isGreeting(query: string): boolean {
+  return GREETING_PATTERN.test(query.trim());
+}
 
 /**
  * Match a visitor question against verified site knowledge.
@@ -100,6 +119,22 @@ export function matchChatQuestion(rawQuestion: string): ChatMatchResult {
       reason: "no-match",
       answer: NO_MATCH_ANSWER,
       href: "/contact",
+    };
+  }
+
+  if (isGreeting(query)) {
+    const greetingEntry = chatKnowledge.find((entry) => entry.id === "greeting");
+    return {
+      ok: true,
+      entry: greetingEntry ?? {
+        id: "greeting",
+        prompts: ["hi"],
+        keywords: ["hi"],
+        answer: GREETING_ANSWER,
+      },
+      score: 100,
+      answer: greetingEntry?.answer ?? GREETING_ANSWER,
+      href: greetingEntry?.href,
     };
   }
 

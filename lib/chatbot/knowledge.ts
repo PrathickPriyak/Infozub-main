@@ -28,6 +28,22 @@ function unique(values: readonly string[]): string[] {
 
 export const chatKnowledge: readonly ChatKnowledgeEntry[] = [
   {
+    id: "greeting",
+    prompts: [
+      "hi",
+      "hello",
+      "hey",
+      "hi there",
+      "good morning",
+      "good afternoon",
+      "namaste",
+      "vanakkam",
+    ],
+    keywords: ["hi", "hello", "hey", "namaste", "vanakkam", "welcome"],
+    answer:
+      "Hi — welcome to INFOZUB! I can help with questions about our Digital Marketing Suite, Academy courses, projects, careers, and contact details. What would you like to know?",
+  },
+  {
     id: "company",
     prompts: [
       "what is infozub",
@@ -113,7 +129,18 @@ export const chatKnowledge: readonly ChatKnowledgeEntry[] = [
       "infozub academy",
       "training",
     ],
-    keywords: ["academy", "course", "learn", "training", "class", "enroll"],
+    keywords: [
+      "academy",
+      "course",
+      "courses",
+      "learn",
+      "learning",
+      "training",
+      "class",
+      "classes",
+      "enroll",
+      "enrol",
+    ],
     answer: `INFOZUB Digital Academy courses (${academyFormat}): ${academyCourses
       .map((course) => course.title)
       .join(", ")}. Lessons and enrollment are on ${academyOrigin}.`,

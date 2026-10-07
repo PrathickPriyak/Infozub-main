@@ -19,14 +19,14 @@ type ChatMessage = {
 const WELCOME: ChatMessage = {
   id: "welcome",
   role: "bot",
-  text: "Hi — I can answer questions from the INFOZUB website (services, Academy courses, projects, careers, and contact details). Ask anything about what is published here.",
+  text: "Hi — welcome to INFOZUB! I can answer questions from this website (services, Academy courses, projects, careers, and contact details). Ask anything about what is published here.",
 };
 
 const SUGGESTIONS = [
+  "Hi",
   "What services do you offer?",
   "What Academy courses are available?",
   "How can I contact INFOZUB?",
-  "Tell me about your projects",
 ] as const;
 
 export function SiteChatbot() {
