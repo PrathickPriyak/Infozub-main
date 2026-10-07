@@ -11,7 +11,7 @@ const buttonVariants = cva(
         primary:
           "bg-ink text-white shadow-soft hover:-translate-y-px hover:bg-ink-soft hover:shadow-elevated",
         signal:
-          "bg-signal text-accent-foreground shadow-soft hover:-translate-y-px hover:bg-signal-strong hover:shadow-elevated motion-safe:hover:shadow-[0_10px_28px_rgba(15,174,154,0.28)]",
+          "bg-signal text-accent-foreground shadow-soft hover:-translate-y-px hover:bg-signal-strong hover:shadow-elevated motion-safe:hover:shadow-[0_10px_28px_rgba(13,92,173,0.32)]",
         secondary:
           "bg-surface text-ink border border-line shadow-soft hover:-translate-y-px hover:border-navy/25 hover:shadow-elevated",
         outline:

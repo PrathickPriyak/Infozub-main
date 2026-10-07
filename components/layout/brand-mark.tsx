@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandTarget } from "@/components/layout/brand-target";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
@@ -25,30 +26,33 @@ export function BrandMark({
       )}
       aria-label={`${site.legalName} home`}
     >
-      <span className="relative flex size-9 items-center justify-center overflow-hidden rounded-md gradient-signal shadow-soft">
-        <span className="font-display text-sm font-bold tracking-tight text-white">
-          IZ
-        </span>
-      </span>
-      <span className="flex flex-col leading-none">
+      <span
+        className={cn(
+          "flex flex-col leading-none",
+          inverse ? "text-white" : "text-navy",
+        )}
+      >
         <span
           className={cn(
-            "font-display text-base font-semibold tracking-tight transition-colors",
+            "inline-flex items-center font-display text-lg font-bold tracking-[0.04em] transition-colors sm:text-xl",
             inverse
               ? "text-white group-hover:text-white"
-              : "text-ink group-hover:text-navy",
+              : "text-navy group-hover:text-signal",
           )}
         >
-          {site.name}
+          <span aria-hidden>INF</span>
+          <BrandTarget inverse={inverse} />
+          <span aria-hidden>ZUB</span>
+          <span className="sr-only">{site.name}</span>
         </span>
         {!compact ? (
           <span
             className={cn(
-              "mt-1 text-[10px] font-medium uppercase tracking-[0.14em]",
-              inverse ? "text-white/70" : "text-muted",
+              "mt-1 hidden text-[10px] font-medium tracking-[0.02em] sm:block",
+              inverse ? "text-white/75" : "text-muted",
             )}
           >
-            Private Limited
+            Your Targeted Marketing Partner!
           </span>
         ) : null}
       </span>
