@@ -229,7 +229,7 @@ export const aboutMedia = {
     alt: "INFOZUB team",
   },
   founder: {
-    src: "/about/founder.jpg",
+    src: "/about/founder.webp",
     alt: "Logesh, founder of INFOZUB",
   },
   officeGoogle: {

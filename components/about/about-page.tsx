@@ -117,14 +117,15 @@ export function AboutPage() {
       <Section pattern="grid" id="founder">
         <Container className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <Reveal>
-            <div className="about-media-panel relative mx-auto aspect-square max-w-md overflow-hidden rounded-2xl border border-line bg-mist shadow-soft lg:mx-0">
+            <div className="about-media-panel relative mx-auto aspect-[3/4] max-w-md overflow-hidden rounded-2xl border border-line bg-mist shadow-soft lg:mx-0">
               <MediaZoom className="absolute inset-0 size-full">
                 <Image
                   src={aboutMedia.founder.src}
                   alt={aboutMedia.founder.alt}
                   fill
                   sizes="(max-width: 1024px) 80vw, 420px"
-                  className="object-cover"
+                  className="object-cover object-top"
+                  priority
                 />
               </MediaZoom>
             </div>
