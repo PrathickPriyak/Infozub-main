@@ -115,7 +115,7 @@ export function ContactPage() {
                   className="contact-pathway group relative block overflow-hidden rounded-2xl border border-line bg-mist shadow-soft focus-ring"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <MediaZoom>
+                    <MediaZoom className="absolute inset-0 size-full">
                       <Image
                         src={pathway.image}
                         alt={pathway.imageAlt}
