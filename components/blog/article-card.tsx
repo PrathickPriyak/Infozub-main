@@ -83,7 +83,7 @@ export function ArticleCard({
           </p>
           <Link
             href={`/blog/${post.slug}`}
-            className="inline-flex items-center gap-1 font-semibold text-navy transition group-hover:text-signal-strong focus-ring rounded-sm"
+            className="inline-flex items-center gap-1 font-semibold text-navy transition group-hover:text-ember focus-ring rounded-sm"
           >
             Read
             <ArrowRight

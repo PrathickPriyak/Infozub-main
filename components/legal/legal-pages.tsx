@@ -70,7 +70,7 @@ export function PaymentsPage() {
           </Reveal>
           <Reveal delay={0.05}>
             <Card>
-              <p className="text-xs font-semibold uppercase tracking-wide text-signal-strong">
+              <p className="text-xs font-semibold uppercase tracking-wide text-ember">
                 GST
               </p>
               <p className="mt-2 font-mono text-sm text-ink">{gst}</p>

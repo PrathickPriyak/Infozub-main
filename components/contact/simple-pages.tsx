@@ -15,7 +15,7 @@ export function VenturesPage() {
       <Section>
         <Container className="grid gap-4 md:grid-cols-2">
           <Card className="h-full">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-signal-strong">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ember">
               Current venture
             </p>
             <CardTitle className="mt-3">Digital Academy</CardTitle>

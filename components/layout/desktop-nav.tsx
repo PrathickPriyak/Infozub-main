@@ -37,7 +37,7 @@ function ActiveMarker({
     <span
       className={cn(
         "pointer-events-none absolute inset-x-3 -bottom-0.5 h-0.5 origin-left rounded-full transition-transform duration-200",
-        inverse ? "bg-signal" : "bg-signal-strong",
+        inverse ? "bg-ember" : "bg-ember",
         active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100 group-data-[state=open]:scale-x-100",
       )}
       aria-hidden

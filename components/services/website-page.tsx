@@ -68,7 +68,7 @@ export function WebsiteDevelopmentPage() {
             {websiteDevelopment.packages.map((pack) => (
               <StaggerItem key={pack.name}>
                 <Card className="h-full">
-                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-signal-strong">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ember">
                     {pack.name}
                   </p>
                   <p className="mt-2 font-display text-3xl font-semibold text-ink">

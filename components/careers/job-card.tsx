@@ -32,7 +32,7 @@ export function JobCard({ job, className }: JobCardProps) {
       </p>
       <Link
         href={`/careers/${job.slug}`}
-        className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-signal-strong focus-ring rounded-sm"
+        className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-ember focus-ring rounded-sm"
       >
         View role
         <ArrowRight
@@ -68,7 +68,7 @@ export function CareersEmptyOpenings() {
       className="rounded-2xl border border-line bg-mist/40 px-6 py-10 text-center md:px-10"
       role="status"
     >
-      <span className="mx-auto inline-flex size-12 items-center justify-center rounded-full bg-signal-soft text-signal-strong">
+      <span className="mx-auto inline-flex size-12 items-center justify-center rounded-full bg-ember-soft text-ember">
         <Briefcase className="size-5" aria-hidden />
       </span>
       <h3 className="mt-5 font-display text-2xl font-semibold text-ink">

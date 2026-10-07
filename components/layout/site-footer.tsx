@@ -22,7 +22,7 @@ export function SiteFooter() {
             {site.offices.map((office) => office.city).join(" · ")} ·{" "}
             <Link
               href="/contact#locations"
-              className="font-medium text-navy hover:underline focus-ring rounded-sm"
+              className="font-medium text-ember hover:underline focus-ring rounded-sm"
             >
               Directions
             </Link>

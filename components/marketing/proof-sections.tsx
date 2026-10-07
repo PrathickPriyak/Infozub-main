@@ -58,7 +58,7 @@ export function ResultsSection() {
                   <ul className="mt-4 space-y-2 text-sm text-muted">
                     {item.highlights.map((line) => (
                       <li key={line} className="flex gap-2">
-                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ember" />
                         {line}
                       </li>
                     ))}
@@ -134,7 +134,7 @@ export function ProjectClose() {
     <Section tone="ink" className="relative overflow-hidden">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <div className="ambient-orb absolute -left-16 top-1/2 size-64 -translate-y-1/2 rounded-full bg-navy blur-3xl" />
-        <div className="ambient-orb ambient-orb-delayed absolute -right-10 top-0 size-56 rounded-full bg-signal/25 blur-3xl" />
+        <div className="ambient-orb ambient-orb-delayed absolute -right-10 top-0 size-56 rounded-full bg-ember/25 blur-3xl" />
       </div>
       <Container className="relative text-center">
         <Reveal>

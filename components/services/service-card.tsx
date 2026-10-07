@@ -72,7 +72,7 @@ export function ServiceCard({ service, className }: ServiceCardProps) {
       interactive
       className={cn("group flex h-full flex-col", className)}
     >
-      <div className="flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong transition-transform duration-200 group-hover:scale-105">
+      <div className="flex size-10 items-center justify-center rounded-md bg-ember-soft text-ember transition-transform duration-200 group-hover:scale-105">
         <ServiceIcon slug={service.slug} className="size-5" />
       </div>
       <CardTitle className="mt-4 transition-colors group-hover:text-navy">
@@ -81,7 +81,7 @@ export function ServiceCard({ service, className }: ServiceCardProps) {
       <CardDescription className="flex-1">{service.description}</CardDescription>
       <Link
         href={href}
-        className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-signal-strong focus-ring rounded-sm"
+        className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-navy transition group-hover:text-ember focus-ring rounded-sm"
       >
         {ctaLabel}
         <ArrowRight

@@ -25,7 +25,7 @@ const selectClassName = cn(
 );
 
 const fieldControlClassName =
-  "transition-[border-color,box-shadow,background-color] duration-200 focus:border-signal/50 focus:bg-white";
+  "transition-[border-color,box-shadow,background-color] duration-200 focus:border-ember/50 focus:bg-white";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
@@ -143,13 +143,13 @@ export function ContactForm({ className }: { className?: string }) {
     return (
       <div
         className={cn(
-          "rounded-2xl border border-signal/30 bg-signal-soft/50 p-6 md:p-8",
+          "rounded-2xl border border-ember/30 bg-ember-soft/60 p-6 md:p-8",
           className,
         )}
         role="status"
         aria-live="polite"
       >
-        <CheckCircle2 className="size-10 text-signal-strong" aria-hidden />
+        <CheckCircle2 className="size-10 text-ember" aria-hidden />
         <h3 className="mt-4 font-display text-2xl font-semibold text-ink">
           {contactFormMeta.successTitle}
         </h3>
@@ -217,7 +217,7 @@ export function ContactForm({ className }: { className?: string }) {
                 className={cn(
                   "rounded-full border px-3.5 py-2 text-left text-sm font-medium transition focus-ring disabled:opacity-50",
                   selected
-                    ? "border-signal bg-signal text-white shadow-soft"
+                    ? "border-ember bg-ember text-white shadow-soft"
                     : "border-line bg-surface text-muted hover:border-navy/30 hover:text-ink",
                 )}
               >

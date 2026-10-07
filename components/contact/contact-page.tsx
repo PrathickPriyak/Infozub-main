@@ -59,7 +59,7 @@ export function ContactPage() {
                 className="contact-action-card group block h-full rounded-2xl focus-ring"
               >
                 <Card interactive className="h-full">
-                  <span className="inline-flex size-11 items-center justify-center rounded-full bg-signal/10 text-signal">
+                  <span className="inline-flex size-11 items-center justify-center rounded-full bg-ember-soft text-ember">
                     <Mail className="size-5" aria-hidden />
                   </span>
                   <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
@@ -77,7 +77,7 @@ export function ContactPage() {
                 className="contact-action-card group block h-full rounded-2xl focus-ring"
               >
                 <Card interactive className="h-full">
-                  <span className="inline-flex size-11 items-center justify-center rounded-full bg-signal/10 text-signal">
+                  <span className="inline-flex size-11 items-center justify-center rounded-full bg-ember-soft text-ember">
                     <Phone className="size-5" aria-hidden />
                   </span>
                   <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
@@ -171,7 +171,7 @@ export function ContactPage() {
                   <div className="flex flex-1 flex-col justify-between gap-4 p-5 sm:p-6">
                     <div>
                       <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-                        <MapPin className="size-4 text-signal" aria-hidden />
+                        <MapPin className="size-4 text-ember" aria-hidden />
                         {office.title}
                       </p>
                       <p className="mt-3 text-sm leading-relaxed text-ink md:text-base">

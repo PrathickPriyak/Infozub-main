@@ -43,8 +43,8 @@ export function AboutTimeline() {
             className="about-timeline-item relative border-l border-line pb-8 pl-6 last:pb-0 md:border-l-0 md:border-t md:pb-0 md:pl-0 md:pt-8"
           >
             <Reveal>
-              <span className="about-timeline-dot absolute -left-[5px] top-1 size-2.5 rounded-full bg-signal md:left-0 md:top-0 md:-mt-[5px]" />
-              <p className="font-mono text-xs text-signal-strong">
+              <span className="about-timeline-dot absolute -left-[5px] top-1 size-2.5 rounded-full bg-ember md:left-0 md:top-0 md:-mt-[5px]" />
+              <p className="font-mono text-xs text-ember-strong">
                 {entry.year}
                 <span className="text-muted"> · {entry.group}</span>
               </p>
@@ -79,8 +79,8 @@ function YearChip({
       onClick={onSelect}
       className={`about-year-chip focus-ring shrink-0 rounded-md border px-3 py-1.5 text-sm font-medium transition-colors ${
         selected
-          ? "border-signal bg-signal-soft text-signal-strong"
-          : "border-line bg-surface text-muted hover:border-signal/40 hover:text-ink"
+          ? "border-ember bg-ember-soft text-ember-strong"
+          : "border-line bg-surface text-muted hover:border-ember/40 hover:text-ink"
       }`}
     >
       {label}

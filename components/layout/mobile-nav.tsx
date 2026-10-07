@@ -180,14 +180,14 @@ export function MobileNav({ inverse = false }: MobileNavProps) {
             href={site.phoneHref}
             className="flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium text-ink hover:bg-surface focus-ring"
           >
-            <Phone className="size-4 text-signal-strong" aria-hidden />
+            <Phone className="size-4 text-ember" aria-hidden />
             {site.phoneDisplay}
           </a>
           <a
             href={site.emailHref}
             className="flex min-h-11 items-center gap-2 rounded-lg px-3 text-sm font-medium text-ink hover:bg-surface focus-ring"
           >
-            <Mail className="size-4 text-signal-strong" aria-hidden />
+            <Mail className="size-4 text-ember" aria-hidden />
             {site.email}
           </a>
           <SheetClose asChild>

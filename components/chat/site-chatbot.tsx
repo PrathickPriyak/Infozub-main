@@ -122,7 +122,7 @@ export function SiteChatbot() {
                   className={cn(
                     "max-w-[92%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
                     message.role === "user"
-                      ? "ml-auto bg-signal text-white"
+                      ? "ml-auto bg-ember text-white"
                       : "bg-mist text-ink",
                   )}
                 >
@@ -149,7 +149,7 @@ export function SiteChatbot() {
                     <button
                       key={suggestion}
                       type="button"
-                      className="rounded-full border border-line bg-surface px-3 py-1.5 text-left text-xs font-medium text-muted transition hover:border-signal/40 hover:text-ink focus-ring"
+                      className="rounded-full border border-line bg-surface px-3 py-1.5 text-left text-xs font-medium text-muted transition hover:border-ember/40 hover:text-ink focus-ring"
                       onClick={() => ask(suggestion)}
                     >
                       {suggestion}

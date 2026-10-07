@@ -53,7 +53,7 @@ export function CityServicePage({ city }: { city: City }) {
             Why digital marketing is important?
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted">{data.why}</p>
-          <blockquote className="mt-6 border-l-2 border-signal pl-4 text-ink">
+          <blockquote className="mt-6 border-l-2 border-ember pl-4 text-ink">
             {data.quote}
           </blockquote>
           {"closer" in data && data.closer ? (

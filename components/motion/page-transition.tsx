@@ -19,7 +19,7 @@ export function RouteProgress({ className }: { className?: string }) {
       )}
       aria-hidden
     >
-      <div className="route-progress-bar h-full w-full origin-left bg-signal" />
+      <div className="route-progress-bar h-full w-full origin-left bg-ember" />
     </div>
   );
 }

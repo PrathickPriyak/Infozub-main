@@ -238,7 +238,7 @@ export function AboutPage() {
               return (
                 <StaggerItem key={item.title}>
                   <Card interactive className="about-capability-card h-full">
-                    <div className="flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong">
+                    <div className="flex size-10 items-center justify-center rounded-md bg-ember-soft text-ember">
                       <Icon className="size-5" aria-hidden />
                     </div>
                     <CardTitle className="mt-4 text-base">{item.title}</CardTitle>
@@ -427,12 +427,12 @@ function AboutHero() {
         aria-hidden
       >
         <div className="ambient-orb absolute -left-24 top-0 size-[28rem] rounded-full bg-navy blur-3xl" />
-        <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-[22rem] rounded-full bg-signal/25 blur-3xl" />
+        <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-[22rem] rounded-full bg-ember/20 blur-3xl" />
         <div className="absolute inset-0 bg-grid-fade opacity-40" />
-        <span className="hero-float-chip absolute left-[12%] top-[28%] size-3 rounded-full border border-signal/50 bg-signal/30" />
+        <span className="hero-float-chip absolute left-[12%] top-[28%] size-3 rounded-full border border-ember/50 bg-ember/35" />
         <span className="hero-float-chip hero-float-chip-delay absolute right-[18%] top-[22%] size-2 rounded-full bg-white/40" />
         <span className="hero-float-chip hero-float-chip-slow absolute bottom-[18%] left-[40%] size-2.5 rounded-full border border-white/30" />
-        <span className="hero-target-ring absolute right-[10%] top-[46%] size-24 rounded-full border border-signal/25" />
+        <span className="hero-target-ring absolute right-[10%] top-[46%] size-24 rounded-full border border-ember/30" />
         <span className="hero-target-ring hero-target-ring-delay absolute right-[8%] top-[44%] size-32 rounded-full border border-white/10" />
       </div>
 

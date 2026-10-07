@@ -88,12 +88,12 @@ function Hero() {
         aria-hidden
       >
         <div className="ambient-orb absolute -left-24 top-0 size-[32rem] rounded-full bg-navy blur-3xl" />
-        <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-[24rem] rounded-full bg-signal/25 blur-3xl" />
+        <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-[24rem] rounded-full bg-ember/20 blur-3xl" />
         <div className="absolute inset-0 bg-grid-fade opacity-40" />
-        <span className="hero-float-chip absolute left-[12%] top-[28%] size-3 rounded-full border border-signal/50 bg-signal/30" />
+        <span className="hero-float-chip absolute left-[12%] top-[28%] size-3 rounded-full border border-ember/50 bg-ember/35" />
         <span className="hero-float-chip hero-float-chip-delay absolute right-[18%] top-[22%] size-2 rounded-full bg-white/40" />
         <span className="hero-float-chip hero-float-chip-slow absolute bottom-[18%] left-[40%] size-2.5 rounded-full border border-white/30" />
-        <span className="hero-target-ring absolute right-[8%] top-[42%] size-24 rounded-full border border-signal/25" />
+        <span className="hero-target-ring absolute right-[8%] top-[42%] size-24 rounded-full border border-ember/30" />
         <span className="hero-target-ring hero-target-ring-delay absolute right-[6%] top-[40%] size-32 rounded-full border border-white/10" />
       </div>
 
@@ -164,7 +164,7 @@ function Intro() {
         </Reveal>
         <Reveal delay={0.06}>
           <Card className="h-full bg-mist/70">
-            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-signal-strong">
+            <p className="text-sm font-semibold uppercase tracking-[0.14em] text-ember">
               Who we are
             </p>
             <p className="mt-4 text-base leading-relaxed text-muted">
@@ -201,7 +201,7 @@ function Capabilities() {
                   className="capability-card group block h-full rounded-xl focus-ring"
                 >
                   <Card interactive className="h-full">
-                    <div className="flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+                    <div className="flex size-10 items-center justify-center rounded-md bg-ember-soft text-ember transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                       <Icon className="size-5" aria-hidden />
                     </div>
                     <CardTitle className="mt-4">{item.title}</CardTitle>
@@ -265,7 +265,7 @@ function Academy() {
     <Section tone="ink" className="text-white">
       <Container className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
         <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-signal">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ember">
             {homeAcademy.eyebrow}
           </p>
           <h2 className="mt-3 font-display text-2xl font-semibold tracking-tight text-white sm:text-3xl md:text-4xl">
@@ -340,7 +340,7 @@ function Results() {
                     <ul className="mt-4 space-y-2 text-sm text-muted">
                       {item.highlights.map((line) => (
                         <li key={line} className="flex gap-2">
-                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ember" />
                           {line}
                         </li>
                       ))}
@@ -409,7 +409,7 @@ function Ventures() {
         </Reveal>
         <Reveal>
           <Card>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-signal-strong">
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ember">
               Current venture
             </p>
             <CardTitle className="mt-3">{homeVentures.featured.title}</CardTitle>

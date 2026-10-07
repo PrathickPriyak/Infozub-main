@@ -52,7 +52,7 @@ export function CourseCard({
         />
         <Badge
           variant="signal"
-          className="absolute left-3 top-3 border-0 bg-white/95 text-signal-strong shadow-soft backdrop-blur-sm"
+          className="absolute left-3 top-3 border-0 bg-white/95 text-ember-strong shadow-soft backdrop-blur-sm"
         >
           {academyFormat}
         </Badge>
@@ -64,7 +64,7 @@ export function CourseCard({
 
       <div className={cn("flex flex-1 flex-col p-5", compact && "p-4")}>
         <div className="flex items-start gap-3">
-          <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-md bg-signal-soft text-signal-strong transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+          <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-md bg-ember-soft text-ember transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
             <BookOpen className="size-5" aria-hidden />
           </span>
           <h3
@@ -85,7 +85,7 @@ export function CourseCard({
           <div className="flex-1" />
         )}
 
-        <span className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-signal px-4 text-sm font-semibold text-white transition-[transform,background-color,box-shadow] duration-300 group-hover:-translate-y-0.5 group-hover:bg-signal-strong group-hover:shadow-[0_10px_28px_rgba(13,92,173,0.28)]">
+        <span className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-ember px-4 text-sm font-semibold text-white transition-[transform,background-color,box-shadow] duration-300 group-hover:-translate-y-0.5 group-hover:bg-ember-strong group-hover:shadow-[0_10px_28px_rgba(247,127,0,0.3)]">
           Start Course
           <ArrowUpRight
             className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -118,16 +118,16 @@ export function AcademyCategoryCard({
     <a
       href={href}
       className={cn(
-        "group block rounded-xl border border-line bg-mist/80 p-5 transition hover:-translate-y-0.5 hover:border-signal/40 hover:bg-signal-soft/40 focus-ring",
+        "group block rounded-xl border border-line bg-mist/80 p-5 transition hover:-translate-y-0.5 hover:border-ember/40 hover:bg-ember-soft/50 focus-ring",
         className,
       )}
     >
-      <span className="inline-flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong transition-transform duration-300 group-hover:scale-110">
+      <span className="inline-flex size-10 items-center justify-center rounded-md bg-ember-soft text-ember transition-transform duration-300 group-hover:scale-110">
         <Icon className="size-5" aria-hidden />
       </span>
       <h3 className="mt-4 font-display text-lg font-semibold text-ink">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-muted">{description}</p>
-      <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-signal-strong">
+      <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-ember-strong">
         {courseCount} course{courseCount === 1 ? "" : "s"}
       </p>
     </a>

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Color — Infozub logo navy (#04336b) + target blue accents */
+  /* Color — Infozub navy (#04336b) + ember orange (#f77f00) accents */
   --ink: #021a38;
   --ink-soft: #032447;
   --navy: #04336b;
@@ -9,6 +9,9 @@
   --signal: #0d5cad;
   --signal-strong: #04336b;
   --signal-soft: #e8f1fb;
+  --ember: #f77f00;
+  --ember-strong: #d96b00;
+  --ember-soft: #fff3e6;
   --mist: #f2f6fb;
   --surface: #ffffff;
   --line: #d2dceb;
@@ -27,10 +30,10 @@
   --primary-foreground: #ffffff;
   --secondary: var(--surface);
   --secondary-foreground: var(--ink);
-  --accent: var(--signal);
+  --accent: var(--ember);
   --accent-foreground: #ffffff;
   --border: var(--line);
-  --ring: var(--signal);
+  --ring: var(--ember);
   --input: var(--line);
 
   /* Radius */
@@ -316,10 +319,10 @@
 @keyframes cta-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(13, 92, 173, 0.35);
+    box-shadow: 0 0 0 0 rgba(247, 127, 0, 0.38);
   }
   70% {
-    box-shadow: 0 0 0 14px rgba(13, 92, 173, 0);
+    box-shadow: 0 0 0 14px rgba(247, 127, 0, 0);
   }
 }
 
@@ -342,6 +345,9 @@
   --color-signal: var(--signal);
   --color-signal-strong: var(--signal-strong);
   --color-signal-soft: var(--signal-soft);
+  --color-ember: var(--ember);
+  --color-ember-strong: var(--ember-strong);
+  --color-ember-soft: var(--ember-soft);
   --color-mist: var(--mist);
   --color-surface: var(--surface);
   --color-line: var(--line);
@@ -493,7 +499,13 @@
   }
 
   .gradient-signal {
-    background-image: linear-gradient(135deg, var(--ink) 0%, var(--navy) 52%, var(--signal) 100%);
+    background-image: linear-gradient(
+      135deg,
+      var(--ink) 0%,
+      var(--navy) 48%,
+      var(--signal) 78%,
+      var(--ember) 100%
+    );
   }
 
   .gradient-ink {
@@ -774,7 +786,7 @@
 
   .client-logo-card:hover {
     transform: translateY(-6px);
-    border-color: color-mix(in srgb, var(--signal) 40%, var(--line));
+    border-color: color-mix(in srgb, var(--ember) 40%, var(--line));
     box-shadow: 0 18px 40px rgba(4, 51, 107, 0.12);
   }
 
@@ -821,7 +833,7 @@
   .about-stat-card:hover,
   .about-cert-card:hover {
     transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--signal) 35%, var(--line));
+    border-color: color-mix(in srgb, var(--ember) 40%, var(--line));
     box-shadow: 0 14px 32px rgba(4, 51, 107, 0.1);
   }
 
@@ -834,8 +846,8 @@
 
   .about-service-chip:hover {
     transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--signal) 45%, var(--line));
-    background-color: var(--signal-soft);
+    border-color: color-mix(in srgb, var(--ember) 45%, var(--line));
+    background-color: var(--ember-soft);
   }
 
   .about-timeline-item {
@@ -843,7 +855,7 @@
   }
 
   .about-timeline-dot {
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--signal) 18%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--ember) 22%, transparent);
     transition: transform 280ms var(--ease-out);
   }
 
@@ -913,7 +925,7 @@
   }
 
   .focus-ring {
-    @apply outline-none focus-visible:ring-2 focus-visible:ring-signal focus-visible:ring-offset-2 focus-visible:ring-offset-mist;
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-ember focus-visible:ring-offset-2 focus-visible:ring-offset-mist;
   }
 
   .animate-accordion-down {

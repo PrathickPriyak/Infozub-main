@@ -91,7 +91,7 @@ export function ClientsPage() {
                     <ul className="mt-4 space-y-2 text-sm text-muted">
                       {item.highlights.map((line) => (
                         <li key={line} className="flex gap-2">
-                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-signal" />
+                          <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-ember" />
                           {line}
                         </li>
                       ))}
