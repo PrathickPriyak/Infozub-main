@@ -12,11 +12,20 @@ import {
 export function SiteFooter() {
   return (
     <footer className="border-t border-line bg-surface">
-      <div className="mx-auto grid min-w-0 max-w-6xl gap-6 px-4 py-7 sm:grid-cols-2 sm:gap-8 sm:px-6 sm:py-8 lg:grid-cols-4 lg:px-8">
-        <div className="min-w-0 space-y-2 sm:col-span-2 lg:col-span-1">
-          <BrandMark />
-          <p className="max-w-xs text-xs leading-relaxed text-muted">
+      <div className="mx-auto grid min-w-0 max-w-6xl gap-5 px-4 py-6 sm:grid-cols-[1.1fr_1fr_1fr] sm:gap-6 sm:px-6 sm:py-7 lg:px-8">
+        <div className="min-w-0 space-y-1.5">
+          <BrandMark compact className="min-h-0" />
+          <p className="max-w-xs text-xs leading-snug text-muted">
             {site.legalName}. {homeHero.supporting}
+          </p>
+          <p className="pt-1 text-xs text-muted">
+            {site.offices.map((office) => office.city).join(" · ")} ·{" "}
+            <Link
+              href="/contact#locations"
+              className="font-medium text-navy hover:underline focus-ring rounded-sm"
+            >
+              Directions
+            </Link>
           </p>
         </div>
 
@@ -24,12 +33,12 @@ export function SiteFooter() {
           <h2 className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-ink">
             Explore
           </h2>
-          <ul className="mt-2.5 grid grid-cols-2 gap-x-3 gap-y-0.5">
+          <ul className="mt-2 grid grid-cols-2 gap-x-3 gap-y-0">
             {primaryNavigation.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="inline-flex rounded-sm py-1 text-sm text-muted hover:text-ink focus-ring"
+                  className="inline-flex rounded-sm py-0.5 text-sm text-muted hover:text-ink focus-ring"
                 >
                   {item.label}
                 </Link>
@@ -40,24 +49,9 @@ export function SiteFooter() {
 
         <div className="min-w-0">
           <h2 className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-ink">
-            Offices
-          </h2>
-          <div className="mt-2.5 space-y-2.5 text-xs leading-relaxed text-muted">
-            {site.offices.map((office) => (
-              <p key={office.city} className="break-words">
-                <span className="font-semibold text-ink">{office.city}</span>
-                <br />
-                {office.address}
-              </p>
-            ))}
-          </div>
-        </div>
-
-        <div className="min-w-0">
-          <h2 className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-ink">
             Connect
           </h2>
-          <div className="mt-2.5 space-y-1 text-sm">
+          <div className="mt-2 space-y-0.5 text-sm">
             <a
               className="block rounded-sm text-muted hover:text-ink focus-ring"
               href={site.phoneHref}
@@ -71,7 +65,7 @@ export function SiteFooter() {
               {site.email}
             </a>
           </div>
-          <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1">
+          <div className="mt-2.5 flex flex-wrap gap-x-2.5 gap-y-1">
             {socialLinks.map((item) => (
               <a
                 key={item.href}
@@ -90,7 +84,7 @@ export function SiteFooter() {
 
       <Separator />
 
-      <div className="mx-auto flex min-w-0 max-w-6xl flex-col gap-2 px-4 py-3 text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-w-0 max-w-6xl flex-col gap-1.5 px-4 py-2.5 text-[11px] text-muted sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
         <p>
           © {new Date().getFullYear()} {site.name}®. All rights reserved.
         </p>
