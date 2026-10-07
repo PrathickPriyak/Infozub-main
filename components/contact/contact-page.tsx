@@ -14,6 +14,7 @@ import { ContactForm } from "@/components/contact/contact-form";
 import {
   contactCta,
   contactDetails,
+  contactFormFeatureImage,
   contactFormGallery,
   contactHero,
   contactHeroVisuals,
@@ -175,15 +176,17 @@ export function ContactPage() {
                 </a>
                 .
               </p>
-              <div className="contact-brand-panel relative mt-8 overflow-hidden rounded-2xl border border-navy/20 bg-ink shadow-elevated">
-                <Image
-                  src="/brand/infozub-logo.jpg"
-                  alt="INFOZUB — Your Targeted Marketing Partner"
-                  width={1200}
-                  height={900}
-                  className="h-auto w-full object-cover"
-                  priority={false}
-                />
+              <div className="contact-brand-panel relative mt-8 aspect-[4/3] overflow-hidden rounded-2xl border border-navy/20 bg-mist shadow-elevated">
+                <MediaZoom className="absolute inset-0 size-full">
+                  <Image
+                    src={contactFormFeatureImage.src}
+                    alt={contactFormFeatureImage.alt}
+                    fill
+                    sizes="(max-width: 1024px) 90vw, 420px"
+                    className="object-cover"
+                    priority={false}
+                  />
+                </MediaZoom>
                 <div
                   className="pointer-events-none absolute inset-0 contact-brand-sheen"
                   aria-hidden

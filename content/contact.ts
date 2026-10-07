@@ -86,7 +86,7 @@ export const contactCta = {
 
 /**
  * Visual pathways on /contact — labels match OpnForm interests;
- * images are existing site assets (projects / Academy).
+ * illustrations are generic contact visuals (not project/Academy photos).
  */
 export const contactPathways = [
   {
@@ -94,49 +94,50 @@ export const contactPathways = [
     label: "Digital Marketing Suite",
     description: "Ask about campaigns, leads, and brand growth.",
     href: "/digital-suite",
-    image: "/projects/suzuki-motorcycle.webp",
-    imageAlt: "Suzuki Motorcycle Tamilnadu project work",
+    image: "/contact/contact-pathway-marketing.jpg",
+    imageAlt: "Digital marketing consultation illustration",
   },
   {
     id: "website",
     label: "Website Development",
     description: "Talk to us about websites and digital presence.",
     href: "/services",
-    image: "/projects/bharath-electronics.webp",
-    imageAlt: "Bharath Electronics and Appliances project work",
+    image: "/contact/contact-pathway-website.jpg",
+    imageAlt: "Website development illustration",
   },
   {
     id: "course",
     label: "Join Course",
     description: "Enquire about INFOZUB Academy training.",
     href: "/academy",
-    image: "/academy/smm.webp",
-    imageAlt: "Social Media Marketing course",
+    image: "/contact/contact-pathway-course.jpg",
+    imageAlt: "Learning and courses illustration",
   },
   {
     id: "career",
     label: "Career",
     description: "Reach the team about openings at INFOZUB.",
     href: "/careers",
-    image: "/academy/interview.webp",
-    imageAlt: "Interview Success Formula course",
+    image: "/contact/contact-pathway-career.jpg",
+    imageAlt: "Careers illustration",
   },
 ] as const;
 
+/** Generic contact illustrations for the hero collage. */
 export const contactHeroVisuals = [
   {
-    src: "/brand/infozub-logo.jpg",
-    alt: "INFOZUB — Your Targeted Marketing Partner",
+    src: "/contact/contact-hero.jpg",
+    alt: "Business consultation workspace illustration",
     className: "contact-hero-shot contact-hero-shot-main",
   },
   {
-    src: "/projects/suzuki-motorcycle-thumb.webp",
-    alt: "Suzuki Motorcycle Tamilnadu project",
+    src: "/contact/contact-message.jpg",
+    alt: "Message and email illustration",
     className: "contact-hero-shot contact-hero-shot-a",
   },
   {
-    src: "/academy/google-ads.webp",
-    alt: "Google Ads Academy course",
+    src: "/contact/contact-phone.jpg",
+    alt: "Phone support illustration",
     className: "contact-hero-shot contact-hero-shot-b",
   },
 ] as const;
@@ -151,18 +152,24 @@ export function mapDirectionsUrl(lat: number, lng: number): string {
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }
 
-/** Side gallery beside the contact form — verified brand / project / Academy assets. */
+/** Side gallery beside the contact form — generic contact visuals. */
 export const contactFormGallery = [
   {
-    src: "/academy/web-design.webp",
-    alt: "Web Design Academy course",
+    src: "/contact/contact-message.jpg",
+    alt: "Message illustration",
   },
   {
-    src: "/projects/bharath-electronics-thumb.webp",
-    alt: "Bharath Electronics and Appliances project",
+    src: "/contact/contact-location.jpg",
+    alt: "Location pin illustration",
   },
   {
-    src: "/academy/canva.webp",
-    alt: "Canva Master Course",
+    src: "/contact/contact-phone.jpg",
+    alt: "Phone illustration",
   },
 ] as const;
+
+/** Primary visual beside the contact form. */
+export const contactFormFeatureImage = {
+  src: "/contact/contact-hero.jpg",
+  alt: "Schedule a consultation with INFOZUB",
+} as const;
