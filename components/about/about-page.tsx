@@ -266,12 +266,12 @@ export function AboutPage() {
         </Container>
       </Section>
 
-      <Section id="journey">
+      <Section tone="mist" id="journey">
         <Container>
           <SectionHeader
             eyebrow="Our path to success"
             title="Our journey"
-            description="Milestones from the About timeline, 2013 through 2021. Filter by year to explore."
+            description="Step through each published year — from the 2013 start to Digital Academy in 2021."
           />
           <AboutTimeline />
         </Container>
