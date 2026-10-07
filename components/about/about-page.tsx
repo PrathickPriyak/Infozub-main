@@ -437,8 +437,8 @@ function AboutHero() {
         <span className="hero-target-ring hero-target-ring-delay absolute right-[8%] top-[44%] size-32 rounded-full border border-white/10" />
       </div>
 
-      <Container className="relative grid min-w-0 items-center gap-10 pb-14 pt-24 sm:gap-12 sm:pb-16 sm:pt-28 md:pb-24 md:pt-32 lg:grid-cols-[1.05fr_0.95fr]">
-        <Reveal mode="mount">
+      <Container className="relative min-w-0 pb-14 pt-24 sm:pb-16 sm:pt-28 md:pb-24 md:pt-32">
+        <Reveal mode="mount" className="max-w-3xl">
           <Badge
             variant="outline"
             className="border-white/20 bg-white/5 text-white"
@@ -450,7 +450,7 @@ function AboutHero() {
             text={aboutHero.title}
             className="mt-4 block max-w-xl font-display text-3xl font-semibold tracking-tight !text-white sm:mt-5 sm:text-4xl md:text-5xl xl:text-6xl"
           />
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 sm:mt-5 sm:text-lg">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80 sm:mt-5 sm:text-lg">
             {aboutHero.description}
           </p>
           <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
@@ -469,45 +469,6 @@ function AboutHero() {
                 <Link href="#journey">Our journey</Link>
               </Button>
             </Magnetic>
-          </div>
-        </Reveal>
-
-        <Reveal mode="mount" delay={0.08}>
-          <div className="about-hero-collage relative mx-auto w-full max-w-lg lg:max-w-none">
-            <div className="about-hero-shot about-hero-shot-main relative aspect-[5/4] overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-elevated">
-              <MediaZoom className="absolute inset-0 size-full">
-                <Image
-                  src={aboutMedia.team.src}
-                  alt={aboutMedia.team.alt}
-                  fill
-                  sizes="(max-width: 1024px) 90vw, 480px"
-                  className="object-cover"
-                  priority
-                />
-              </MediaZoom>
-            </div>
-            <div className="about-hero-shot about-hero-shot-a absolute -left-3 bottom-6 hidden w-[42%] overflow-hidden rounded-xl border border-white/20 bg-ink shadow-elevated sm:block">
-              <div className="relative aspect-[4/3]">
-                <Image
-                  src={aboutMedia.hero.src}
-                  alt={aboutMedia.hero.alt}
-                  fill
-                  sizes="200px"
-                  className="object-cover"
-                />
-              </div>
-            </div>
-            <div className="about-hero-shot about-hero-shot-b absolute -right-2 top-4 hidden w-[36%] overflow-hidden rounded-xl border border-white/20 bg-white shadow-elevated sm:block">
-              <div className="relative aspect-square bg-white p-3">
-                <Image
-                  src={aboutMedia.logo.src}
-                  alt={aboutMedia.logo.alt}
-                  fill
-                  sizes="160px"
-                  className="object-contain p-2"
-                />
-              </div>
-            </div>
           </div>
         </Reveal>
       </Container>
