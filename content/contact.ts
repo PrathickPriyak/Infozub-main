@@ -145,3 +145,24 @@ export function mapEmbedUrl(lat: number, lng: number): string {
   const query = encodeURIComponent(`${lat},${lng}`);
   return `https://maps.google.com/maps?q=${query}&z=15&output=embed`;
 }
+
+export function mapDirectionsUrl(lat: number, lng: number): string {
+  const query = encodeURIComponent(`${lat},${lng}`);
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+}
+
+/** Side gallery beside the contact form — verified brand / project / Academy assets. */
+export const contactFormGallery = [
+  {
+    src: "/academy/web-design.webp",
+    alt: "Web Design Academy course",
+  },
+  {
+    src: "/projects/bharath-electronics-thumb.webp",
+    alt: "Bharath Electronics and Appliances project",
+  },
+  {
+    src: "/academy/canva.webp",
+    alt: "Canva Master Course",
+  },
+] as const;

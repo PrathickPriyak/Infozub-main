@@ -14,10 +14,12 @@ import { ContactForm } from "@/components/contact/contact-form";
 import {
   contactCta,
   contactDetails,
+  contactFormGallery,
   contactHero,
   contactHeroVisuals,
   contactOffices,
   contactPathways,
+  mapDirectionsUrl,
   mapEmbedUrl,
 } from "@/content/contact";
 import { site } from "@/content/site";
@@ -187,6 +189,26 @@ export function ContactPage() {
                   aria-hidden
                 />
               </div>
+              <div className="mt-4 grid grid-cols-3 gap-3">
+                {contactFormGallery.map((shot, index) => (
+                  <div
+                    key={shot.src}
+                    className={`contact-gallery-tile relative aspect-square overflow-hidden rounded-xl border border-line bg-mist ${
+                      index === 1 ? "contact-gallery-tile-delay" : ""
+                    } ${index === 2 ? "contact-gallery-tile-slow" : ""}`}
+                  >
+                    <MediaZoom className="absolute inset-0 size-full">
+                      <Image
+                        src={shot.src}
+                        alt={shot.alt}
+                        fill
+                        sizes="120px"
+                        className="object-cover"
+                      />
+                    </MediaZoom>
+                  </div>
+                ))}
+              </div>
               <ul className="mt-6 space-y-3 text-sm text-muted">
                 <li className="flex items-start gap-2">
                   <MapPin className="mt-0.5 size-4 shrink-0 text-signal" aria-hidden />
@@ -218,14 +240,34 @@ export function ContactPage() {
             {contactOffices.map((office) => (
               <StaggerItem key={office.id}>
                 <div className="contact-map-card group overflow-hidden rounded-2xl border border-line bg-mist shadow-soft">
-                  <div className="border-b border-line px-4 py-4 sm:px-5">
-                    <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-                      <MapPin className="size-4 text-signal" aria-hidden />
-                      {office.title}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-ink md:text-base">
-                      {office.address}
-                    </p>
+                  <div className="flex flex-wrap items-start justify-between gap-3 border-b border-line px-4 py-4 sm:px-5">
+                    <div>
+                      <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                        <span className="contact-pin-pulse relative inline-flex size-5 items-center justify-center">
+                          <span
+                            className="contact-pin-ring absolute inset-0 rounded-full bg-signal/30"
+                            aria-hidden
+                          />
+                          <MapPin className="relative size-4 text-signal" aria-hidden />
+                        </span>
+                        {office.title}
+                      </p>
+                      <p className="mt-2 text-sm leading-relaxed text-ink md:text-base">
+                        {office.address}
+                      </p>
+                    </div>
+                    <Magnetic>
+                      <Button asChild variant="outline" size="sm">
+                        <a
+                          href={mapDirectionsUrl(office.map.lat, office.map.lng)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Open in Maps
+                          <ArrowUpRight className="size-3.5" aria-hidden />
+                        </a>
+                      </Button>
+                    </Magnetic>
                   </div>
                   <div className="relative overflow-hidden">
                     <iframe
@@ -347,7 +389,7 @@ function ContactHero() {
         </Reveal>
 
         <Reveal mode="mount" delay={0.08}>
-          <div className="contact-hero-collage relative mx-auto aspect-[5/4] w-full max-w-lg">
+          <div className="contact-hero-collage group/collage relative mx-auto aspect-[5/4] w-full max-w-lg">
             {contactHeroVisuals.map((shot) => (
               <div key={shot.src} className={shot.className}>
                 <MediaZoom className="absolute inset-0 size-full">

@@ -286,6 +286,21 @@
   }
 }
 
+@keyframes contact-pin-pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
 @keyframes hero-ring-pulse {
   0%,
   100% {
@@ -686,6 +701,7 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
     background: var(--ink);
+    transition: transform 450ms var(--ease-out);
   }
 
   .contact-hero-shot-main {
@@ -712,6 +728,41 @@
     z-index: 2;
     animation: contact-panel-float 6.2s ease-in-out infinite;
     animation-delay: -2.2s;
+  }
+
+  .contact-hero-collage:hover .contact-hero-shot-main,
+  .contact-hero-collage:hover .contact-hero-shot-a,
+  .contact-hero-collage:hover .contact-hero-shot-b {
+    animation-play-state: paused;
+  }
+
+  .contact-hero-collage:hover .contact-hero-shot-main {
+    transform: translateY(-10px) scale(1.02);
+  }
+
+  .contact-hero-collage:hover .contact-hero-shot-a {
+    transform: translateY(-14px) rotate(2deg);
+  }
+
+  .contact-hero-collage:hover .contact-hero-shot-b {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+
+  .contact-gallery-tile {
+    animation: contact-panel-float 5.2s ease-in-out infinite;
+  }
+
+  .contact-gallery-tile-delay {
+    animation-delay: -1.5s;
+  }
+
+  .contact-gallery-tile-slow {
+    animation-duration: 6.4s;
+    animation-delay: -2.8s;
+  }
+
+  .contact-pin-ring {
+    animation: contact-pin-pulse 2.4s ease-out infinite;
   }
 
   .academy-surface > * {
@@ -831,6 +882,8 @@
   .contact-hero-shot-main,
   .contact-hero-shot-a,
   .contact-hero-shot-b,
+  .contact-gallery-tile,
+  .contact-pin-ring,
   .contact-pathway:hover .contact-pathway-shine,
   .contact-map-card:hover .contact-map-shine,
   body {
@@ -850,7 +903,11 @@
   .contact-pathway,
   .contact-map-card,
   .contact-brand-panel,
-  .contact-form-shell {
+  .contact-form-shell,
+  .contact-hero-shot,
+  .contact-hero-collage:hover .contact-hero-shot-main,
+  .contact-hero-collage:hover .contact-hero-shot-a,
+  .contact-hero-collage:hover .contact-hero-shot-b {
     transition: none !important;
     transform: none !important;
   }
