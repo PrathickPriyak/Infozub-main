@@ -90,6 +90,11 @@ function Hero() {
         <div className="ambient-orb absolute -left-24 top-0 size-[32rem] rounded-full bg-navy blur-3xl" />
         <div className="ambient-orb ambient-orb-delayed absolute bottom-0 right-0 size-[24rem] rounded-full bg-signal/25 blur-3xl" />
         <div className="absolute inset-0 bg-grid-fade opacity-40" />
+        <span className="hero-float-chip absolute left-[12%] top-[28%] size-3 rounded-full border border-signal/50 bg-signal/30" />
+        <span className="hero-float-chip hero-float-chip-delay absolute right-[18%] top-[22%] size-2 rounded-full bg-white/40" />
+        <span className="hero-float-chip hero-float-chip-slow absolute bottom-[18%] left-[40%] size-2.5 rounded-full border border-white/30" />
+        <span className="hero-target-ring absolute right-[8%] top-[42%] size-24 rounded-full border border-signal/25" />
+        <span className="hero-target-ring hero-target-ring-delay absolute right-[6%] top-[40%] size-32 rounded-full border border-white/10" />
       </div>
 
       <Container className="relative grid min-w-0 items-center gap-10 pb-16 pt-24 sm:gap-12 sm:pb-20 sm:pt-28 md:pb-28 md:pt-32 lg:grid-cols-[1.1fr_0.9fr]">
@@ -113,27 +118,31 @@ function Hero() {
           </p>
           <div className="mt-7 flex flex-wrap gap-3 sm:mt-8">
             <Magnetic>
-              <Button asChild variant="signal" size="lg">
+              <Button asChild variant="signal" size="lg" className="cta-pulse">
                 <Link href={homeHero.primaryCta.href}>
                   {homeHero.primaryCta.label}
                 </Link>
               </Button>
             </Magnetic>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
-            >
-              <Link href={homeHero.secondaryCta.href}>
-                {homeHero.secondaryCta.label}
-              </Link>
-            </Button>
+            <Magnetic>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
+              >
+                <Link href={homeHero.secondaryCta.href}>
+                  {homeHero.secondaryCta.label}
+                </Link>
+              </Button>
+            </Magnetic>
           </div>
         </Reveal>
 
         <Reveal mode="mount" delay={0.08}>
-          <HomeHeroVisual />
+          <div className="hero-visual-tilt">
+            <HomeHeroVisual />
+          </div>
         </Reveal>
       </Container>
     </section>
@@ -189,10 +198,10 @@ function Capabilities() {
               <StaggerItem key={item.title}>
                 <Link
                   href={hrefForCapability(item.title)}
-                  className="block h-full rounded-xl focus-ring"
+                  className="capability-card group block h-full rounded-xl focus-ring"
                 >
                   <Card interactive className="h-full">
-                    <div className="flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong">
+                    <div className="flex size-10 items-center justify-center rounded-md bg-signal-soft text-signal-strong transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
                       <Icon className="size-5" aria-hidden />
                     </div>
                     <CardTitle className="mt-4">{item.title}</CardTitle>

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { SiteChatbot } from "@/components/chat/site-chatbot";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SkipLink } from "@/components/layout/skip-link";
@@ -28,6 +29,7 @@ export function MarketingPage({
         {children}
       </main>
       <SiteFooter />
+      <SiteChatbot />
     </>
   );
 }

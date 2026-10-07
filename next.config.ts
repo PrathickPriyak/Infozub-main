@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import { SECURITY_HEADERS } from "./lib/security/headers";
+import { getSecurityHeaders } from "./lib/security/headers";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -52,10 +52,13 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
+    // Rebuild on each config evaluation so `next dev` keeps unsafe-eval
+    // while production builds stay without eval.
+    const securityHeaders = getSecurityHeaders();
     return [
       {
         source: "/:path*",
-        headers: SECURITY_HEADERS,
+        headers: securityHeaders,
       },
       {
         source: "/api/:path*",
