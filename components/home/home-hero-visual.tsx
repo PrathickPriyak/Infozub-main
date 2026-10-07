@@ -27,7 +27,7 @@ export function HomeHeroVisual({ className }: { className?: string }) {
         aria-hidden
       />
 
-      <p className="relative font-mono text-[11px] uppercase tracking-[0.18em] text-white/50">
+      <p className="relative font-mono text-[11px] uppercase tracking-[0.18em] text-white/70">
         Premier Digital Suite
       </p>
       <p className="relative mt-2 font-display text-lg font-semibold text-white sm:text-xl">
@@ -38,9 +38,9 @@ export function HomeHeroVisual({ className }: { className?: string }) {
         {previewStats.map((stat) => (
           <div
             key={stat.label}
-            className="flex min-w-0 items-baseline justify-between gap-4 rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 sm:px-4"
+            className="flex min-w-0 items-baseline justify-between gap-4 rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 sm:px-4"
           >
-            <dt className="min-w-0 text-[11px] leading-snug text-white/55">
+            <dt className="min-w-0 text-[11px] font-medium leading-snug text-white/90 sm:text-xs">
               {stat.label}
             </dt>
             <dd className="shrink-0 font-display text-base font-semibold tabular-nums tracking-tight text-white sm:text-lg">
