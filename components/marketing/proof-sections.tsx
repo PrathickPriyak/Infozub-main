@@ -6,6 +6,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { AnimatedCounter } from "@/components/motion/animated-counter";
 import { Magnetic } from "@/components/motion/magnetic";
 import { TextReveal } from "@/components/motion/text-reveal";
+import { TestimonialsCarousel } from "@/components/marketing/testimonials-carousel";
 import {
   counters,
   namedResults,
@@ -85,22 +86,11 @@ export function TestimonialsSection() {
         <SectionHeader
           eyebrow="What our clients say"
           title="Testimonials"
-          description="Reviews published on the Infozub homepage."
+          description="Reviews published on the Infozub homepage. Browse with the controls or let them auto-advance."
         />
-        <Stagger className="grid gap-4 md:grid-cols-2">
-          {testimonials.map((item) => (
-            <StaggerItem key={item.name}>
-              <figure className="h-full rounded-xl border border-line bg-surface p-6 shadow-soft transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-elevated">
-                <blockquote className="whitespace-pre-line text-sm leading-relaxed text-muted">
-                  {item.quote}
-                </blockquote>
-                <figcaption className="mt-4 text-sm font-semibold text-ink">
-                  {item.name}
-                </figcaption>
-              </figure>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <Reveal>
+          <TestimonialsCarousel items={testimonials} />
+        </Reveal>
       </Container>
     </Section>
   );

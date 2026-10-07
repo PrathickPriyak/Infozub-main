@@ -21,6 +21,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { TextReveal } from "@/components/motion/text-reveal";
 import { AnimatedCounter } from "@/components/motion/animated-counter";
 import { HomeHeroVisual } from "@/components/home/home-hero-visual";
+import { TestimonialsCarousel } from "@/components/marketing/testimonials-carousel";
 import {
   homeAcademy,
   homeCapabilities,
@@ -367,22 +368,11 @@ function Testimonials() {
         <SectionHeader
           eyebrow="What our clients say"
           title="Testimonials"
-          description="Reviews published on the Infozub homepage."
+          description="Reviews published on the Infozub homepage. Browse with the controls or let them auto-advance."
         />
-        <Stagger className="grid gap-4 md:grid-cols-2">
-          {testimonials.slice(0, 4).map((item) => (
-            <StaggerItem key={item.name}>
-              <figure className="h-full rounded-xl border border-line bg-surface p-6 shadow-soft">
-                <blockquote className="whitespace-pre-line text-sm leading-relaxed text-muted">
-                  {item.quote}
-                </blockquote>
-                <figcaption className="mt-4 text-sm font-semibold text-ink">
-                  {item.name}
-                </figcaption>
-              </figure>
-            </StaggerItem>
-          ))}
-        </Stagger>
+        <Reveal>
+          <TestimonialsCarousel items={testimonials} />
+        </Reveal>
         <Reveal className="mt-8">
           <Button asChild variant="outline">
             <Link href="/reviews">Read all reviews</Link>
