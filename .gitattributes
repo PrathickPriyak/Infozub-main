@@ -1,0 +1,21 @@
+# Normalize text files to LF in the repository
+* text=auto eol=lf
+
+# Keep Windows batch files CRLF if added later
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binary assets — never treat as text
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.mp4 binary
+*.webm binary
