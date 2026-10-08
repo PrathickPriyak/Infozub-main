@@ -1,6 +1,6 @@
 # Infozub production architecture
 
-Status: architecture only. No page UI implementation yet.
+Status: implemented in this repository (App Router site under `app/`, `components/`, `content/`, `public/`). This document remains the design reference; prefer the live tree and `README.md` when they differ from early scaffold notes.
 
 Based on: `docs/website-audit.md`, `docs/content-inventory.md`.
 

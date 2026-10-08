@@ -1,6 +1,4 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Dependencies
 /node_modules
 /.pnp
 .pnp.*
@@ -10,36 +8,40 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
+# Testing
 /coverage
 
-# next.js
+# Next.js
 /.next/
 /out/
 
-# production
+# Production
 /build
 
-# misc
+# Misc
 .DS_Store
 *.pem
+Thumbs.db
 
-# debug
+# Debug logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# Environment — commit only the example template
 .env*
 !.env.example
 
-# vercel
+# Vercel local link / pull artifacts
 .vercel
 
-# typescript
+# TypeScript build info (regenerated locally)
 *.tsbuildinfo
+
+# Next.js generates this on first dev/build; keep local-only
 next-env.d.ts
 
+# Local agent instruction files (not part of the product)
 AGENTS.md
 CLAUDE.md

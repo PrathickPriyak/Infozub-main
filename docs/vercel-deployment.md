@@ -2,7 +2,7 @@
 
 GitHub → Vercel for the Next.js 16 App Router marketing site.
 
-Do not deploy to production until `npm run build` succeeds on the commit you intend to ship. This document does not record a live Vercel deploy.
+Do not deploy to production until `npm run build` (or `npm run check`) succeeds on the commit you intend to ship. Preview/production hosts may use a Vercel project such as `infozub-main`; set env vars before the first production build.
 
 ---
 
