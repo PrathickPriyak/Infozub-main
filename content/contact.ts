@@ -13,9 +13,10 @@ export const contactSeo = {
 } as const;
 
 export const contactHero = {
-  eyebrow: "Contact",
-  title: "Get in Touch With INFOZUB",
-  description: "Send a message or schedule a business consultation.",
+  eyebrow: "Digital Marketing Enquiry",
+  title: "Looking for Digital Marketing Services? Let's Talk.",
+  description:
+    "Enquire about Digital Marketing services or courses. Share a few details and our team will get back to you.",
 } as const;
 
 export const contactDetails = {
@@ -56,23 +57,30 @@ export const contactOffices = [
 ] as const;
 
 export const contactFormMeta = {
-  heading: "GET IN TOUCH",
-  submitLabel: "Submit",
-  successTitle: "Thank you",
+  heading: "Digital Marketing Enquiry",
+  submitLabel: "Submit Enquiry",
+  successTitle: "Enquiry received",
   successMessage:
-    "We have received your contact information. We will get in touch with you soon!",
+    "Thank you. We have received your Digital Marketing enquiry and will contact you soon.",
   successPhone: site.phoneDisplay,
+  consentLabel:
+    "I agree to be contacted by INFOZUB about this Digital Marketing enquiry.",
   /** Legacy OpnForm used on the WordPress contact page — kept as reference only. */
   legacyFormUrl: "https://forms.infozub.com/forms/contact-infozub-tgwsra",
 } as const;
 
-/** Select options from the Contact OpnForm. */
+/**
+ * Enquiry types for lead capture.
+ * Labels are product-facing; keep stable for CRM webhook mapping.
+ */
 export const contactInterestOptions = [
-  "Digital Marketing Suite",
-  "Website Development",
-  "Join Course",
-  "Career",
-  "Others",
+  "Digital Marketing Services",
+  "SEO Services",
+  "Social Media Marketing",
+  "Google Ads",
+  "Meta Ads",
+  "Digital Marketing Course",
+  "Other",
 ] as const;
 
 export type ContactInterest = (typeof contactInterestOptions)[number];

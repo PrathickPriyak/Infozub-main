@@ -1,10 +1,13 @@
 "use client";
 
 import { useId, useRef, useState, useTransition } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
   contactFormMeta,
@@ -14,6 +17,7 @@ import {
 import { site } from "@/content/site";
 import {
   emptyContactFormValues,
+  isContactInterest,
   validateContactForm,
   type ContactFieldErrors,
   type ContactFormValues,
@@ -31,10 +35,29 @@ type FormStatus = "idle" | "submitting" | "success" | "error";
 
 const MESSAGE_MAX = 2000;
 
+function initialValuesFromUrl(
+  pathname: string,
+  searchParams: URLSearchParams,
+): ContactFormValues {
+  const interestParam = searchParams.get("interest");
+  const search = searchParams.toString();
+  return {
+    ...emptyContactFormValues,
+    sourcePage: search ? `${pathname}?${search}` : pathname,
+    interest:
+      interestParam && isContactInterest(interestParam) ? interestParam : "",
+  };
+}
+
 export function ContactForm({ className }: { className?: string }) {
   const formId = useId();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const honeypotRef = useRef<HTMLInputElement>(null);
-  const [values, setValues] = useState<ContactFormValues>(emptyContactFormValues);
+  const submitLockRef = useRef(false);
+  const [values, setValues] = useState<ContactFormValues>(() =>
+    initialValuesFromUrl(pathname, searchParams),
+  );
   const [errors, setErrors] = useState<ContactFieldErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
   const [formError, setFormError] = useState<string | null>(null);
@@ -61,24 +84,34 @@ export function ContactForm({ className }: { className?: string }) {
   function selectInterest(interest: ContactInterest) {
     updateField("interest", interest);
     queueMicrotask(() => {
-      document.getElementById(`${formId}-message`)?.focus();
+      document.getElementById(`${formId}-name`)?.focus();
     });
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitLockRef.current || submitting) return;
+
     setFormError(null);
 
-    const validation = validateContactForm(values);
+    const sourcePage =
+      values.sourcePage ||
+      (searchParams.toString()
+        ? `${pathname}?${searchParams.toString()}`
+        : pathname);
+
+    const validation = validateContactForm({ ...values, sourcePage });
     if (!validation.ok) {
       setErrors(validation.errors);
       setStatus("error");
       const fieldOrder: (keyof ContactFieldErrors)[] = [
+        "interest",
         "name",
         "email",
         "phone",
-        "interest",
+        "company",
         "message",
+        "consent",
       ];
       const firstInvalid = fieldOrder.find((key) => validation.errors[key]);
       if (firstInvalid) {
@@ -91,6 +124,7 @@ export function ContactForm({ className }: { className?: string }) {
 
     setErrors({});
     setStatus("submitting");
+    submitLockRef.current = true;
 
     const honeypot = honeypotRef.current?.value ?? "";
 
@@ -114,23 +148,28 @@ export function ContactForm({ className }: { className?: string }) {
         };
 
         if (!response.ok || !payload.ok) {
+          submitLockRef.current = false;
           if (payload.errors) setErrors(payload.errors);
           setFormError(
             payload.error ??
-              "We could not send your message. Please try again or email us.",
+              "We could not send your enquiry. Please try again or email us.",
           );
           setStatus("error");
           return;
         }
 
         setStatus("success");
-        setValues(emptyContactFormValues);
+        setValues({
+          ...emptyContactFormValues,
+          sourcePage,
+        });
         queueMicrotask(() => {
           document.getElementById("contact-form")?.scrollIntoView({
             block: "start",
           });
         });
       } catch {
+        submitLockRef.current = false;
         setFormError(
           `Network error. Please email ${site.email} or call ${site.phoneDisplay}.`,
         );
@@ -169,9 +208,12 @@ export function ContactForm({ className }: { className?: string }) {
           type="button"
           variant="outline"
           className="mt-6"
-          onClick={() => setStatus("idle")}
+          onClick={() => {
+            submitLockRef.current = false;
+            setStatus("idle");
+          }}
         >
-          Send another message
+          Send another enquiry
         </Button>
       </div>
     );
@@ -201,10 +243,12 @@ export function ContactForm({ className }: { className?: string }) {
       </div>
 
       <fieldset className="space-y-3">
-        <legend className="text-sm font-semibold text-ink">
-          What can we help you with?
-        </legend>
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Topic">
+        <legend className="text-sm font-semibold text-ink">Enquiry type</legend>
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-label="Enquiry type"
+        >
           {contactInterestOptions.map((option) => {
             const selected = values.interest === option;
             return (
@@ -241,7 +285,11 @@ export function ContactForm({ className }: { className?: string }) {
       </fieldset>
 
       <div className="grid gap-5 sm:grid-cols-2">
-        <Field label="Name" htmlFor={`${formId}-name`} error={errors.name}>
+        <Field
+          label="Full Name"
+          htmlFor={`${formId}-name`}
+          error={errors.name}
+        >
           <Input
             id={`${formId}-name`}
             name="name"
@@ -274,30 +322,51 @@ export function ContactForm({ className }: { className?: string }) {
         </Field>
       </div>
 
-      <Field
-        label="Phone Number"
-        htmlFor={`${formId}-phone`}
-        error={errors.phone}
-      >
-        <Input
-          id={`${formId}-phone`}
-          name="phone"
-          type="tel"
-          autoComplete="tel"
-          inputMode="tel"
-          required
-          disabled={submitting}
-          value={values.phone}
-          placeholder="+91 …"
-          aria-invalid={Boolean(errors.phone)}
-          className={fieldControlClassName}
-          onChange={(event) => updateField("phone", event.target.value)}
-        />
-      </Field>
+      <div className="grid gap-5 sm:grid-cols-2">
+        <Field
+          label="Phone Number"
+          htmlFor={`${formId}-phone`}
+          hint="Indian mobile number"
+          error={errors.phone}
+        >
+          <Input
+            id={`${formId}-phone`}
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            inputMode="tel"
+            required
+            disabled={submitting}
+            value={values.phone}
+            placeholder="+91 9XXXXXXXXX"
+            aria-invalid={Boolean(errors.phone)}
+            className={fieldControlClassName}
+            onChange={(event) => updateField("phone", event.target.value)}
+          />
+        </Field>
 
-      {/* Keep a native select for progressive enhancement / autofill parity */}
+        <Field
+          label="Company or Business Name"
+          htmlFor={`${formId}-company`}
+          hint="Optional"
+          error={errors.company}
+        >
+          <Input
+            id={`${formId}-company`}
+            name="company"
+            autoComplete="organization"
+            disabled={submitting}
+            value={values.company}
+            placeholder="Your business name"
+            aria-invalid={Boolean(errors.company)}
+            className={fieldControlClassName}
+            onChange={(event) => updateField("company", event.target.value)}
+          />
+        </Field>
+      </div>
+
       <div className="sr-only">
-        <label htmlFor={`${formId}-interest-select`}>Topic</label>
+        <label htmlFor={`${formId}-interest-select`}>Enquiry type</label>
         <select
           id={`${formId}-interest-select`}
           className={selectClassName}
@@ -311,7 +380,7 @@ export function ContactForm({ className }: { className?: string }) {
           }
         >
           <option value="" disabled>
-            Select a topic
+            Select an enquiry type
           </option>
           {contactInterestOptions.map((option) => (
             <option key={option} value={option}>
@@ -325,17 +394,17 @@ export function ContactForm({ className }: { className?: string }) {
         <Field
           label="Message"
           htmlFor={`${formId}-message`}
+          hint="Optional"
           error={errors.message}
         >
           <Textarea
             id={`${formId}-message`}
             name="message"
-            required
-            rows={6}
+            rows={5}
             disabled={submitting}
             value={values.message}
             maxLength={MESSAGE_MAX}
-            placeholder="Share a short brief — goals, timeline, or questions."
+            placeholder="Share goals, timeline, or questions (optional)."
             aria-invalid={Boolean(errors.message)}
             className={fieldControlClassName}
             onChange={(event) => updateField("message", event.target.value)}
@@ -344,6 +413,31 @@ export function ContactForm({ className }: { className?: string }) {
         <p className="mt-2 text-right text-xs text-muted" aria-live="polite">
           {messageLength}/{MESSAGE_MAX}
         </p>
+      </div>
+
+      <div className="space-y-2">
+        <div className="flex items-start gap-3">
+          <Checkbox
+            id={`${formId}-consent`}
+            checked={values.consent}
+            disabled={submitting}
+            aria-invalid={Boolean(errors.consent)}
+            onCheckedChange={(checked) =>
+              updateField("consent", checked === true)
+            }
+          />
+          <Label
+            htmlFor={`${formId}-consent`}
+            className="text-sm font-normal leading-snug text-muted"
+          >
+            {contactFormMeta.consentLabel}
+          </Label>
+        </div>
+        {errors.consent ? (
+          <p className="text-sm text-danger" role="alert">
+            {errors.consent}
+          </p>
+        ) : null}
       </div>
 
       {formError ? (

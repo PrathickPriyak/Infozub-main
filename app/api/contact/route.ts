@@ -50,11 +50,18 @@ function readSubmission(raw: unknown): ContactSubmissionInput | null {
     name: typeof value.name === "string" ? value.name : "",
     email: typeof value.email === "string" ? value.email : "",
     phone: typeof value.phone === "string" ? value.phone : "",
+    company: typeof value.company === "string" ? value.company : "",
     interest:
       typeof value.interest === "string"
         ? (value.interest as ContactSubmissionInput["interest"])
         : "",
     message: typeof value.message === "string" ? value.message : "",
+    consent:
+      value.consent === true ||
+      value.consent === "true" ||
+      value.consent === "on" ||
+      value.consent === "1",
+    sourcePage: typeof value.sourcePage === "string" ? value.sourcePage : "",
     website: typeof value.website === "string" ? value.website : "",
     startedAt: typeof value.startedAt === "number" ? value.startedAt : undefined,
   };

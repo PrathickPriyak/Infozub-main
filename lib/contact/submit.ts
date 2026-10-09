@@ -77,6 +77,7 @@ export async function deliverContactSubmission(
     // Do not log email, phone, name, or message (PII).
     console.info("[contact] submission accepted (no webhook configured)", {
       interest: data.interest,
+      sourcePage: data.sourcePage,
       receivedAt: context.receivedAt,
     });
     return { ok: true };

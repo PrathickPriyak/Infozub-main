@@ -16,7 +16,9 @@ export function WebsiteDevelopmentPage() {
         description={websiteDevelopment.description}
       >
         <Button asChild variant="signal" size="lg">
-          <Link href="/contact">Get quote</Link>
+          <Link href="/contact?interest=Other#contact-form">
+            Enquire About Digital Marketing
+          </Link>
         </Button>
       </PageHero>
 
@@ -80,7 +82,9 @@ export function WebsiteDevelopmentPage() {
                     ))}
                   </ul>
                   <Button asChild variant="outline" className="mt-6 w-full">
-                    <Link href="/contact">Get started</Link>
+                    <Link href="/contact?interest=Other#contact-form">
+                      Enquire Now
+                    </Link>
                   </Button>
                 </Card>
               </StaggerItem>

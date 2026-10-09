@@ -53,7 +53,9 @@ export function SiteChatbot() {
   useEffect(() => {
     if (!pendingRedirect) return;
     const timer = window.setTimeout(() => {
-      router.push("/contact#contact-form");
+      router.push(
+        "/contact?interest=Digital%20Marketing%20Services#contact-form",
+      );
       setPendingRedirect(false);
       setOpen(false);
     }, 2200);

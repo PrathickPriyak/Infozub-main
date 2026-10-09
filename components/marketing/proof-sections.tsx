@@ -138,7 +138,9 @@ export function ProjectClose() {
           </p>
           <Magnetic className="mt-8">
             <Button asChild variant="signal" size="lg">
-              <Link href="/contact">Get in touch</Link>
+              <Link href="/contact#contact-form">
+                Enquire About Digital Marketing
+              </Link>
             </Button>
           </Magnetic>
         </Reveal>

@@ -42,7 +42,9 @@ export function CityServicePage({ city }: { city: City }) {
             size="lg"
             className="border-white/30 text-white hover:bg-white/10 hover:text-white"
           >
-            <Link href="/contact">Get quote</Link>
+            <Link href="/contact?interest=Digital%20Marketing%20Services#contact-form">
+              Enquire About Digital Marketing
+            </Link>
           </Button>
         </div>
       </PageHero>

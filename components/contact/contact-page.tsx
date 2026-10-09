@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { MarketingPage } from "@/components/layout/marketing-page";
@@ -11,6 +12,7 @@ import { ContactForm } from "@/components/contact/contact-form";
 import {
   contactCta,
   contactDetails,
+  contactFormMeta,
   contactHero,
   contactOffices,
   mapDirectionsUrl,
@@ -29,7 +31,7 @@ export function ContactPage() {
         <div className="flex flex-wrap gap-3">
           <Magnetic>
             <Button asChild variant="signal" size="lg">
-              <a href="#contact-form">Send a message</a>
+              <a href="#contact-form">Enquire About Digital Marketing</a>
             </Button>
           </Magnetic>
           <Magnetic>
@@ -39,7 +41,7 @@ export function ContactPage() {
               size="lg"
               className="border-white/30 text-white hover:bg-white/10 hover:text-white"
             >
-              <a href={site.phoneHref}>Call now</a>
+              <a href={site.phoneHref}>Talk to Our Team</a>
             </Button>
           </Magnetic>
         </div>
@@ -123,14 +125,20 @@ export function ContactPage() {
           <div className="mx-auto max-w-3xl">
             <Reveal>
               <SectionHeader
-                eyebrow="Contact form"
-                title="Send a message"
-                description="Tell us about Digital Marketing Suite, Website Development, courses, careers, or anything else. We will get back to you soon."
+                eyebrow={contactFormMeta.heading}
+                title="Submit a Digital Marketing enquiry"
+                description="Choose an enquiry type, share your contact details, and our team will get back to you."
               />
             </Reveal>
             <Reveal>
               <div className="contact-form-shell rounded-2xl border border-line bg-surface p-5 shadow-soft md:p-8">
-                <ContactForm />
+                <Suspense
+                  fallback={
+                    <p className="text-sm text-muted">Loading enquiry form…</p>
+                  }
+                >
+                  <ContactForm />
+                </Suspense>
               </div>
             </Reveal>
             <p className="mt-6 text-center text-sm text-muted">

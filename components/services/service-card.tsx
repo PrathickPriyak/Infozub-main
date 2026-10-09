@@ -111,8 +111,11 @@ export function RelatedServices({ services }: RelatedServicesProps) {
 
 export function ServiceContactCta({
   className,
+  interestHref = "/contact#contact-form",
 }: {
   className?: string;
+  /** Prefills enquiry type when linking to /contact */
+  interestHref?: string;
 }) {
   return (
     <div
@@ -122,10 +125,10 @@ export function ServiceContactCta({
       )}
     >
       <p className="mr-auto text-sm text-muted">
-        Ready to talk about this service? Reach the INFOZUB team.
+        Looking for Digital Marketing Services? Let&apos;s talk.
       </p>
       <Button asChild variant="signal">
-        <Link href="/contact">Get in touch</Link>
+        <Link href={interestHref}>Enquire About Digital Marketing</Link>
       </Button>
       <Button asChild variant="outline">
         <Link href="/digital-suite">Digital Suite</Link>

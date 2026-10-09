@@ -1,4 +1,4 @@
-import { headerCta } from "@/content/navigation";
+import { enquiryCta } from "@/content/enquiry";
 
 /**
  * Homepage copy. Facts come from the audited WordPress homepage.
@@ -12,15 +12,12 @@ export const homeSeo = {
 } as const;
 
 export const homeHero = {
-  headline: "Premier Digital Marketing Agency",
-  supporting: "We engage your business with the right audience, online.",
+  headline: "Grow Your Business with Digital Marketing",
+  supporting: "Looking for Digital Marketing Services? Let's Talk.",
   detail:
     "Targeted marketing, personalised ads, and a digital operations suite built around visibility, brand response, and return on ad spend.",
-  primaryCta: {
-    href: "/digital-suite",
-    label: "Explore Digital Suite",
-  },
-  secondaryCta: headerCta,
+  primaryCta: enquiryCta.primary,
+  secondaryCta: enquiryCta.consultation,
 } as const;
 
 export const homeIntro = {
@@ -86,6 +83,10 @@ export const homeAcademy = {
   body: "Digital Academy is a destination for ambitious individuals who aspire to learn about Digital Marketing and build a career on their own terms.",
   label: "INFOZUB Digital Academy",
   cta: { href: "/academy", label: "View Courses" },
+  enquireCta: {
+    href: "/contact?interest=Digital%20Marketing%20Course#contact-form",
+    label: "Enquire About Course",
+  },
 } as const;
 
 export const homeVentures = {
@@ -100,8 +101,8 @@ export const homeVentures = {
 } as const;
 
 export const homeCta = {
-  title: "Ready to start a project?",
-  body: "Get in touch for Digital Suite, website development, academy, or a conversation about your next campaign.",
-  primary: headerCta,
-  secondary: { href: "/digital-suite", label: "Explore Digital Suite" },
+  title: "Get the Right Digital Marketing Strategy for Your Business.",
+  body: "Enquire about Digital Marketing services or courses — our team will help you take the next step.",
+  primary: enquiryCta.primary,
+  secondary: enquiryCta.talk,
 } as const;
