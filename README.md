@@ -47,8 +47,12 @@ Copy `.env.example` → `.env.local`. Do **not** commit `.env.local` or real sec
 | `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical site origin (no trailing slash). Defaults to `https://infozub.com` if unset. |
 | `CONTACT_FORM_WEBHOOK_URL` | Optional* | HTTPS webhook for enquiry submissions (server-only). Use the Google Apps Script URL from `docs/enquiry-excel-setup.md` to store rows in a sheet (download as Excel). |
 | `CONTACT_FORM_WEBHOOK_TOKEN` | Optional | Bearer token for the webhook (server-only). |
+| `GEMINI_API_KEY` | Optional† | Google Gemini key for the Ask INFOZUB chatbot (server-only). |
+| `GEMINI_MODEL` | Optional | Defaults to `gemini-flash-latest`. |
 
 \*Required in production if you need enquiries saved to a spreadsheet/CRM. Without it, the form still validates and shows success only after the API accepts — but nothing is stored.
+
+†Without `GEMINI_API_KEY`, the chatbot still answers from verified site knowledge; AI answers for broader questions are disabled.
 
 Never prefix webhook values with `NEXT_PUBLIC_`.
 
