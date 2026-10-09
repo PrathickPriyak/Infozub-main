@@ -14,6 +14,7 @@ import {
   ServiceIcon,
 } from "@/components/services/service-card";
 import { processSteps } from "@/content/about";
+import { enquiryHref, interestForServiceSlug } from "@/content/enquiry";
 import {
   getRelatedServices,
   getServiceBySlug,
@@ -40,6 +41,7 @@ export function ServiceDetailPage({ slug }: { slug: string }) {
     (item) => item.id === service.category,
   );
   const related = getRelatedServices(service.slug);
+  const enquireHref = enquiryHref(interestForServiceSlug(service.slug));
   const processLabels =
     service.process ??
     (service.category === "paid-media" || service.category === "social-brand"
@@ -77,7 +79,7 @@ export function ServiceDetailPage({ slug }: { slug: string }) {
         </div>
         <div className="flex flex-wrap gap-3">
           <Button asChild variant="signal" size="lg">
-            <Link href="/contact">Get in touch</Link>
+            <Link href={enquireHref}>Enquire About Digital Marketing</Link>
           </Button>
           <Button
             asChild
@@ -85,7 +87,7 @@ export function ServiceDetailPage({ slug }: { slug: string }) {
             size="lg"
             className="border-white/30 text-white hover:bg-white/10 hover:text-white"
           >
-            <Link href="/services">All services</Link>
+            <Link href="/contact#contact-form">Get a Free Consultation</Link>
           </Button>
         </div>
       </PageHero>
@@ -192,7 +194,7 @@ export function ServiceDetailPage({ slug }: { slug: string }) {
         <Container>
           <SectionHeader title="Related services" />
           <RelatedServices services={related} />
-          <ServiceContactCta className="mt-10" />
+          <ServiceContactCta className="mt-10" interestHref={enquireHref} />
         </Container>
       </Section>
 

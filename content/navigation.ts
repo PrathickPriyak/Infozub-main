@@ -60,9 +60,10 @@ export const primaryNavigation: readonly NavItem[] = [
   { href: "/contact", label: "Contact" },
 ] as const;
 
+/** Compact header label; full phrasing lives on page heroes via content/enquiry. */
 export const headerCta: NavCta = {
-  href: "/contact",
-  label: "Get in touch",
+  href: "/contact#contact-form",
+  label: "Enquire Now",
 } as const;
 
 export const mobileHomeLink: NavItem = {

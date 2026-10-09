@@ -280,14 +280,26 @@ function Academy() {
           </p>
         </Reveal>
         <Reveal>
-          <Button
-            asChild
-            variant="secondary"
-            size="lg"
-            className="border-transparent bg-white text-ink hover:bg-white/90"
-          >
-            <Link href={homeAcademy.cta.href}>{homeAcademy.cta.label}</Link>
-          </Button>
+          <div className="flex flex-wrap gap-3">
+            <Button
+              asChild
+              variant="signal"
+              size="lg"
+              className="cta-pulse"
+            >
+              <Link href={homeAcademy.enquireCta.href}>
+                {homeAcademy.enquireCta.label}
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="secondary"
+              size="lg"
+              className="border-transparent bg-white text-ink hover:bg-white/90"
+            >
+              <Link href={homeAcademy.cta.href}>{homeAcademy.cta.label}</Link>
+            </Button>
+          </div>
         </Reveal>
       </Container>
     </Section>

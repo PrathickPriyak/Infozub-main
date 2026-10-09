@@ -1,5 +1,5 @@
 /**
- * Shared contact form schema — used by the client UI and /api/contact.
+ * Shared contact / enquiry form schema — used by the client UI and /api/contact.
  * Keep field names stable so CRM/email adapters can map without UI changes.
  */
 
@@ -12,9 +12,19 @@ export type ContactFormValues = {
   name: string;
   email: string;
   phone: string;
+  /** Optional business name */
+  company: string;
   interest: ContactInterest | "";
+  /** Optional brief */
   message: string;
+  /** Must be true to submit */
+  consent: boolean;
+  /** Path (+ query) where the visitor started the enquiry */
+  sourcePage: string;
 };
+
+export const contactChannels = ["page", "modal"] as const;
+export type ContactChannel = (typeof contactChannels)[number];
 
 /** Payload accepted by POST /api/contact (includes spam traps). */
 export type ContactSubmissionInput = ContactFormValues & {
@@ -22,7 +32,13 @@ export type ContactSubmissionInput = ContactFormValues & {
   website?: string;
   /** Client timestamp when the form mounted (ms). */
   startedAt?: number;
+  /** Where the visitor submitted from */
+  channel?: ContactChannel;
 };
+
+export function isContactChannel(value: string): value is ContactChannel {
+  return (contactChannels as readonly string[]).includes(value);
+}
 
 export type ContactFieldErrors = Partial<
   Record<keyof ContactFormValues, string>
@@ -33,7 +49,15 @@ export type ContactValidationResult =
   | { ok: false; errors: ContactFieldErrors };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const PHONE_RE = /^[+]?[\d\s()-]{7,20}$/;
+
+/** Indian mobile: 10 digits starting 6–9, optional 0 / +91 / 91 prefix. */
+export function isIndianMobile(phone: string): boolean {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.length === 10 && /^[6-9]\d{9}$/.test(digits)) return true;
+  if (digits.length === 11 && /^0[6-9]\d{9}$/.test(digits)) return true;
+  if (digits.length === 12 && /^91[6-9]\d{9}$/.test(digits)) return true;
+  return false;
+}
 
 export function isContactInterest(
   value: string,
@@ -42,17 +66,27 @@ export function isContactInterest(
 }
 
 export function validateContactForm(
-  input: Partial<ContactFormValues>,
+  input: Partial<Omit<ContactFormValues, "consent">> & {
+    consent?: boolean | string;
+  },
 ): ContactValidationResult {
   const errors: ContactFieldErrors = {};
 
   const name = (input.name ?? "").trim();
   const email = (input.email ?? "").trim();
   const phone = (input.phone ?? "").trim();
+  const company = (input.company ?? "").trim();
   const interest = (input.interest ?? "").trim();
   const message = (input.message ?? "").trim();
+  const sourcePage = (input.sourcePage ?? "").trim().slice(0, 500);
+  const consentRaw = input.consent;
+  const consent =
+    consentRaw === true ||
+    consentRaw === "true" ||
+    consentRaw === "on" ||
+    consentRaw === "1";
 
-  if (!name) errors.name = "Name is required.";
+  if (!name) errors.name = "Full name is required.";
   else if (name.length < 2) errors.name = "Enter your full name.";
   else if (name.length > 120) errors.name = "Name is too long.";
 
@@ -61,19 +95,18 @@ export function validateContactForm(
   else if (email.length > 200) errors.email = "Email is too long.";
 
   if (!phone) errors.phone = "Phone number is required.";
-  else if (!PHONE_RE.test(phone))
-    errors.phone = "Enter a valid phone number.";
-  else if (phone.replace(/\D/g, "").length < 7)
-    errors.phone = "Enter a valid phone number.";
+  else if (!isIndianMobile(phone))
+    errors.phone = "Enter a valid Indian mobile number (10 digits).";
 
-  if (!interest) errors.interest = "Please select a topic.";
+  if (company.length > 160) errors.company = "Company name is too long.";
+
+  if (!interest) errors.interest = "Please select an enquiry type.";
   else if (!isContactInterest(interest))
-    errors.interest = "Please select a valid topic.";
+    errors.interest = "Please select a valid enquiry type.";
 
-  if (!message) errors.message = "Message is required.";
-  else if (message.length < 10)
-    errors.message = "Please add a bit more detail (at least 10 characters).";
-  else if (message.length > 5000) errors.message = "Message is too long.";
+  if (message.length > 5000) errors.message = "Message is too long.";
+
+  if (!consent) errors.consent = "Please confirm we may contact you.";
 
   if (Object.keys(errors).length > 0) {
     return { ok: false, errors };
@@ -85,8 +118,11 @@ export function validateContactForm(
       name,
       email,
       phone,
+      company,
       interest: interest as ContactInterest,
       message,
+      consent: true,
+      sourcePage: sourcePage || "/",
     },
   };
 }
@@ -95,6 +131,9 @@ export const emptyContactFormValues: ContactFormValues = {
   name: "",
   email: "",
   phone: "",
+  company: "",
   interest: "",
   message: "",
+  consent: false,
+  sourcePage: "",
 };

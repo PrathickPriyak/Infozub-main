@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   Briefcase,
   CheckCircle2,
@@ -31,6 +32,7 @@ import {
   academyTraining,
   getCoursesForCategory,
 } from "@/content/academy";
+import { enquiryCta, enquiryHref } from "@/content/enquiry";
 
 const categoryIcons: Record<string, LucideIcon> = {
   "digital-marketing": GraduationCap,
@@ -49,10 +51,11 @@ export function AcademyPage() {
           description={academyHero.description}
         >
           <div className="flex flex-wrap gap-3">
-            <AcademyExternalCta
-              href={academyCta.secondary.href}
-              label={academyCta.secondary.label}
-            />
+            <Button asChild variant="signal" size="lg" className="cta-pulse">
+              <Link href={enquiryHref("Digital Marketing Course")}>
+                {enquiryCta.course.label}
+              </Link>
+            </Button>
             <Button
               asChild
               variant="outline"
@@ -281,20 +284,19 @@ export function AcademyPage() {
               <h2 className="mt-4 font-display text-2xl font-semibold text-white sm:text-3xl md:text-4xl">
                 {academyCta.title}
               </h2>
+              <p className="mx-auto mt-4 max-w-xl text-base text-white/70">
+                Interested in Learning Digital Marketing? Enquire Today.
+              </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Button
                   asChild
-                  variant="secondary"
+                  variant="signal"
                   size="lg"
-                  className="border-transparent bg-white text-ink hover:bg-mist"
+                  className="cta-pulse"
                 >
-                  <a
-                    href={academyCta.primary.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {academyCta.primary.label}
-                  </a>
+                  <Link href={enquiryHref("Digital Marketing Course")}>
+                    {enquiryCta.course.label}
+                  </Link>
                 </Button>
                 <Button
                   asChild

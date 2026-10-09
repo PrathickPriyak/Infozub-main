@@ -36,7 +36,9 @@ export function ServicesOverviewPage() {
       >
         <div className="flex flex-wrap gap-3">
           <Button asChild variant="signal" size="lg">
-            <Link href="/contact">Get quote</Link>
+            <Link href="/contact?interest=Digital%20Marketing%20Services#contact-form">
+              Enquire About Digital Marketing
+            </Link>
           </Button>
           <Button
             asChild
