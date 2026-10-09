@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { SiteChatbot } from "@/components/chat/site-chatbot";
+import { EnquiryModal } from "@/components/contact/enquiry-modal";
 import { StickyEnquire } from "@/components/contact/sticky-enquire";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -31,6 +32,7 @@ export function MarketingPage({
       </main>
       <SiteFooter />
       <StickyEnquire />
+      <EnquiryModal />
       <SiteChatbot />
     </>
   );

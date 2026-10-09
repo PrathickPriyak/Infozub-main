@@ -19,6 +19,7 @@ import {
   emptyContactFormValues,
   isContactInterest,
   validateContactForm,
+  type ContactChannel,
   type ContactFieldErrors,
   type ContactFormValues,
 } from "@/lib/contact/schema";
@@ -49,15 +50,37 @@ function initialValuesFromUrl(
   };
 }
 
-export function ContactForm({ className }: { className?: string }) {
+type ContactFormProps = {
+  className?: string;
+  /** Tighter spacing for modal layouts */
+  compact?: boolean;
+  /** Submission source for spreadsheet / analytics */
+  channel?: ContactChannel;
+  /** Called after a successful API response */
+  onSuccess?: () => void;
+  /** Prefill enquiry type (e.g. modal default) */
+  defaultInterest?: ContactInterest;
+};
+
+export function ContactForm({
+  className,
+  compact = false,
+  channel = "page",
+  onSuccess,
+  defaultInterest,
+}: ContactFormProps) {
   const formId = useId();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const honeypotRef = useRef<HTMLInputElement>(null);
   const submitLockRef = useRef(false);
-  const [values, setValues] = useState<ContactFormValues>(() =>
-    initialValuesFromUrl(pathname, searchParams),
-  );
+  const [values, setValues] = useState<ContactFormValues>(() => {
+    const initial = initialValuesFromUrl(pathname, searchParams);
+    if (!initial.interest && defaultInterest) {
+      return { ...initial, interest: defaultInterest };
+    }
+    return initial;
+  });
   const [errors, setErrors] = useState<ContactFieldErrors>({});
   const [status, setStatus] = useState<FormStatus>("idle");
   const [formError, setFormError] = useState<string | null>(null);
@@ -136,6 +159,7 @@ export function ContactForm({ className }: { className?: string }) {
           credentials: "same-origin",
           body: JSON.stringify({
             ...validation.data,
+            channel,
             website: honeypot,
             startedAt,
           }),
@@ -163,11 +187,14 @@ export function ContactForm({ className }: { className?: string }) {
           ...emptyContactFormValues,
           sourcePage,
         });
-        queueMicrotask(() => {
-          document.getElementById("contact-form")?.scrollIntoView({
-            block: "start",
+        onSuccess?.();
+        if (!compact) {
+          queueMicrotask(() => {
+            document.getElementById("contact-form")?.scrollIntoView({
+              block: "start",
+            });
           });
-        });
+        }
       } catch {
         submitLockRef.current = false;
         setFormError(
@@ -204,17 +231,19 @@ export function ContactForm({ className }: { className?: string }) {
             {contactFormMeta.successPhone}
           </a>
         </p>
-        <Button
-          type="button"
-          variant="outline"
-          className="mt-6"
-          onClick={() => {
-            submitLockRef.current = false;
-            setStatus("idle");
-          }}
-        >
-          Send another enquiry
-        </Button>
+        {!compact ? (
+          <Button
+            type="button"
+            variant="outline"
+            className="mt-6"
+            onClick={() => {
+              submitLockRef.current = false;
+              setStatus("idle");
+            }}
+          >
+            Send another enquiry
+          </Button>
+        ) : null}
       </div>
     );
   }
@@ -222,7 +251,7 @@ export function ContactForm({ className }: { className?: string }) {
   return (
     <form
       onSubmit={handleSubmit}
-      className={cn("relative space-y-6", className)}
+      className={cn("relative", compact ? "space-y-4" : "space-y-6", className)}
       noValidate
       aria-busy={submitting}
     >
@@ -400,7 +429,7 @@ export function ContactForm({ className }: { className?: string }) {
           <Textarea
             id={`${formId}-message`}
             name="message"
-            rows={5}
+            rows={compact ? 3 : 5}
             disabled={submitting}
             value={values.message}
             maxLength={MESSAGE_MAX}

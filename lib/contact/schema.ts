@@ -23,13 +23,22 @@ export type ContactFormValues = {
   sourcePage: string;
 };
 
+export const contactChannels = ["page", "modal"] as const;
+export type ContactChannel = (typeof contactChannels)[number];
+
 /** Payload accepted by POST /api/contact (includes spam traps). */
 export type ContactSubmissionInput = ContactFormValues & {
   /** Honeypot — must stay empty. */
   website?: string;
   /** Client timestamp when the form mounted (ms). */
   startedAt?: number;
+  /** Where the visitor submitted from */
+  channel?: ContactChannel;
 };
+
+export function isContactChannel(value: string): value is ContactChannel {
+  return (contactChannels as readonly string[]).includes(value);
+}
 
 export type ContactFieldErrors = Partial<
   Record<keyof ContactFormValues, string>

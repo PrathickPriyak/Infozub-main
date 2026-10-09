@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import {
+  isContactChannel,
   validateContactForm,
   type ContactSubmissionInput,
 } from "@/lib/contact/schema";
@@ -62,6 +63,10 @@ function readSubmission(raw: unknown): ContactSubmissionInput | null {
       value.consent === "on" ||
       value.consent === "1",
     sourcePage: typeof value.sourcePage === "string" ? value.sourcePage : "",
+    channel:
+      typeof value.channel === "string" && isContactChannel(value.channel)
+        ? value.channel
+        : "page",
     website: typeof value.website === "string" ? value.website : "",
     startedAt: typeof value.startedAt === "number" ? value.startedAt : undefined,
   };
@@ -137,6 +142,7 @@ export async function POST(request: Request) {
     receivedAt: new Date().toISOString(),
     ip,
     userAgent: request.headers.get("user-agent") ?? undefined,
+    channel: body.channel ?? "page",
   });
 
   if (!delivery.ok) {

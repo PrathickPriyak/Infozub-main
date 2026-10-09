@@ -45,8 +45,10 @@ Copy `.env.example` → `.env.local`. Do **not** commit `.env.local` or real sec
 | Variable | Required | Notes |
 | --- | --- | --- |
 | `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical site origin (no trailing slash). Defaults to `https://infozub.com` if unset. |
-| `CONTACT_FORM_WEBHOOK_URL` | Optional | HTTPS webhook for contact submissions (server-only). |
+| `CONTACT_FORM_WEBHOOK_URL` | Optional* | HTTPS webhook for enquiry submissions (server-only). Use the Google Apps Script URL from `docs/enquiry-excel-setup.md` to store rows in a sheet (download as Excel). |
 | `CONTACT_FORM_WEBHOOK_TOKEN` | Optional | Bearer token for the webhook (server-only). |
+
+\*Required in production if you need enquiries saved to a spreadsheet/CRM. Without it, the form still validates and shows success only after the API accepts — but nothing is stored.
 
 Never prefix webhook values with `NEXT_PUBLIC_`.
 

@@ -1,12 +1,15 @@
 /**
  * Contact delivery adapter.
- * Swap or extend `deliverContactSubmission` to connect email, CRM, or OpnForm
- * without changing the contact form UI.
+ * Swap or extend `deliverContactSubmission` to connect email, CRM, Sheets,
+ * or OpnForm without changing the contact form UI.
  *
  * Secrets (webhook URLs, API keys) must live in server env only.
  */
 
-import type { ContactFormValues } from "@/lib/contact/schema";
+import type {
+  ContactChannel,
+  ContactFormValues,
+} from "@/lib/contact/schema";
 import { assertSafeWebhookUrl } from "@/lib/security/webhook-url";
 
 export type ContactDeliveryResult =
@@ -19,13 +22,35 @@ export type ContactDeliveryContext = {
   /** Best-effort client IP (may be empty behind some proxies) */
   ip?: string;
   userAgent?: string;
+  channel?: ContactChannel;
 };
 
 const WEBHOOK_TIMEOUT_MS = 8_000;
 
+/** Flat row shape for Google Sheets / Excel-friendly webhooks. */
+export function buildEnquirySheetRow(
+  data: ContactFormValues,
+  context: ContactDeliveryContext,
+) {
+  return {
+    timestamp: context.receivedAt,
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
+    company: data.company,
+    enquiryType: data.interest,
+    message: data.message,
+    sourcePage: data.sourcePage,
+    channel: context.channel ?? "page",
+    consent: data.consent ? "Yes" : "No",
+  };
+}
+
 /**
  * POST JSON to CONTACT_FORM_WEBHOOK_URL when configured.
- * Expected env (server-only): CONTACT_FORM_WEBHOOK_URL
+ * Point this at the Google Apps Script web app from docs/enquiry-google-sheet.gs
+ * to append each enquiry as a spreadsheet row (File → Download → Excel).
+ *
  * Optional: CONTACT_FORM_WEBHOOK_TOKEN (sent as Bearer)
  */
 async function deliverViaWebhook(
@@ -43,16 +68,25 @@ async function deliverViaWebhook(
   const token = process.env.CONTACT_FORM_WEBHOOK_TOKEN?.trim();
   if (token) headers.Authorization = `Bearer ${token}`;
 
+  const sheetRow = buildEnquirySheetRow(data, context);
+
   const response = await fetch(safeUrl, {
     method: "POST",
     headers,
+    // Google Apps Script web apps often 302; follow redirects.
     body: JSON.stringify({
       source: "infozub-website",
-      form: "contact",
+      form: context.channel === "modal" ? "enquiry-modal" : "contact",
       ...data,
-      meta: context,
+      channel: context.channel ?? "page",
+      sheetRow,
+      meta: {
+        receivedAt: context.receivedAt,
+        ip: context.ip,
+        userAgent: context.userAgent,
+      },
     }),
-    redirect: "error",
+    redirect: "follow",
     signal: AbortSignal.timeout(WEBHOOK_TIMEOUT_MS),
   });
 
@@ -73,11 +107,12 @@ export async function deliverContactSubmission(
     if (webhookResult) return webhookResult;
 
     // No webhook configured yet — accept so the UI can be verified.
-    // Operators should set CONTACT_FORM_WEBHOOK_URL for production delivery.
+    // Operators should set CONTACT_FORM_WEBHOOK_URL for spreadsheet delivery.
     // Do not log email, phone, name, or message (PII).
     console.info("[contact] submission accepted (no webhook configured)", {
       interest: data.interest,
       sourcePage: data.sourcePage,
+      channel: context.channel ?? "page",
       receivedAt: context.receivedAt,
     });
     return { ok: true };
