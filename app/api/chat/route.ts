@@ -112,9 +112,13 @@ export async function POST(request: Request) {
     );
   }
 
-  // Prefer verified knowledge matches for accuracy + speed.
+  // Strong knowledge hits stay instant/verified. Broader questions use Gemini
+  // (when configured) so visitors get Infozub-focused conversational answers.
   const matched = matchChatQuestion(body.message);
-  if (matched.ok && matched.score >= 6) {
+  const geminiReady = isGeminiConfigured();
+  const strongKnowledge = matched.ok && matched.score >= (geminiReady ? 10 : 4);
+
+  if (strongKnowledge && matched.ok) {
     return json(
       {
         ok: true,
@@ -126,7 +130,7 @@ export async function POST(request: Request) {
     );
   }
 
-  if (isGeminiConfigured()) {
+  if (geminiReady) {
     const ai = await askInfozubGemini(body.message, body.history);
     if (ai.ok) {
       return json(
@@ -142,7 +146,7 @@ export async function POST(request: Request) {
     console.error("[chat] gemini failed", ai.error);
   }
 
-  // Fallback: weaker knowledge hit, or contact nudge if nothing works.
+  // Fallback: any knowledge hit if Gemini is unavailable.
   if (matched.ok) {
     return json(
       {
