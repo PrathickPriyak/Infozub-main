@@ -73,7 +73,8 @@ async function deliverViaWebhook(
   const response = await fetch(safeUrl, {
     method: "POST",
     headers,
-    // Google Apps Script web apps often 302; follow redirects.
+    // Apps Script web apps 302 to googleusercontent after doPost runs.
+    // Do not follow — following re-POSTs the echo URL and returns 405.
     body: JSON.stringify({
       source: "infozub-website",
       form: context.channel === "modal" ? "enquiry-modal" : "contact",
@@ -86,16 +87,17 @@ async function deliverViaWebhook(
         userAgent: context.userAgent,
       },
     }),
-    redirect: "follow",
+    redirect: "manual",
     signal: AbortSignal.timeout(WEBHOOK_TIMEOUT_MS),
   });
 
-  if (!response.ok) {
-    console.error("[contact] webhook failed", response.status);
-    return { ok: false, error: "Delivery failed. Please try again or email us." };
+  // 2xx = normal webhook. 3xx = typical Google Apps Script success redirect.
+  if (response.ok || (response.status >= 300 && response.status < 400)) {
+    return { ok: true };
   }
 
-  return { ok: true };
+  console.error("[contact] webhook failed", response.status);
+  return { ok: false, error: "Delivery failed. Please try again or email us." };
 }
 
 export async function deliverContactSubmission(
