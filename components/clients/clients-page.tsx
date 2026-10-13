@@ -49,10 +49,10 @@ export function ClientsPage() {
             title={clientsLogosHeading.title}
             description={clientsLogosHeading.description}
           />
-          <Stagger className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+          <Stagger className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {clientLogos.map((client) => (
               <StaggerItem key={client.id}>
-                <article className="client-logo-card group relative flex aspect-[5/3] items-center justify-center overflow-hidden rounded-2xl border border-line bg-surface px-4 py-5 shadow-soft">
+                <article className="client-logo-card group relative flex aspect-[4/3] items-center justify-center overflow-hidden rounded-2xl border border-line bg-mist/50 px-3 py-3 shadow-soft sm:px-4 sm:py-4">
                   <span
                     className="client-logo-sheen pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0"
                     aria-hidden
@@ -60,10 +60,10 @@ export function ClientsPage() {
                   <Image
                     src={client.src}
                     alt={`${client.name} logo`}
-                    width={220}
-                    height={120}
-                    className="client-logo-image max-h-14 w-auto max-w-full object-contain transition duration-500 group-hover:scale-105"
-                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 22vw, 160px"
+                    width={280}
+                    height={160}
+                    className="client-logo-image h-auto max-h-[4.5rem] w-auto max-w-[90%] object-contain transition duration-500 group-hover:scale-105 sm:max-h-20 md:max-h-24"
+                    sizes="(max-width: 640px) 45vw, (max-width: 1024px) 28vw, 200px"
                   />
                   <p className="sr-only">{client.name}</p>
                 </article>

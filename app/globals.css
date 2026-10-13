@@ -849,7 +849,7 @@
   }
 
   .client-logo-image {
-    filter: grayscale(0.2);
+    filter: none;
   }
 
   .client-logo-card:hover .client-logo-image {
