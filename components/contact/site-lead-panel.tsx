@@ -179,9 +179,9 @@ export function SiteLeadPanel() {
           <section
             id={panelId}
             aria-label="INFOZUB enquiry form"
-            className="chat-panel flex h-[min(34rem,70vh)] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-elevated"
+            className="chat-panel flex h-[min(36rem,75vh)] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-elevated"
           >
-            <header className="flex items-center justify-between gap-3 border-b border-line bg-ink px-4 py-3 text-white">
+            <header className="flex shrink-0 items-center justify-between gap-3 border-b border-line bg-ink px-4 py-3 text-white">
               <div>
                 <p className="font-display text-sm font-semibold">
                   Enquire with INFOZUB
@@ -200,13 +200,13 @@ export function SiteLeadPanel() {
               </button>
             </header>
 
-            <div className="flex-1 overflow-y-auto px-4 py-4">
-              {status === "success" ? (
-                <div
-                  className="rounded-xl border border-ember/30 bg-ember-soft/60 p-5"
-                  role="status"
-                  aria-live="polite"
-                >
+            {status === "success" ? (
+              <div
+                className="flex-1 overflow-y-auto px-4 py-4"
+                role="status"
+                aria-live="polite"
+              >
+                <div className="rounded-xl border border-ember/30 bg-ember-soft/60 p-5">
                   <CheckCircle2 className="size-9 text-ember" aria-hidden />
                   <h3 className="mt-3 font-display text-xl font-semibold text-ink">
                     {contactFormMeta.successTitle}
@@ -233,29 +233,31 @@ export function SiteLeadPanel() {
                     Send another message
                   </Button>
                 </div>
-              ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  className="relative space-y-3.5"
-                  noValidate
-                  aria-busy={submitting}
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="relative flex min-h-0 flex-1 flex-col"
+                noValidate
+                aria-busy={submitting}
+              >
+                <div
+                  className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+                  aria-hidden="true"
                 >
-                  <div
-                    className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
-                    aria-hidden="true"
-                  >
-                    <label htmlFor={`${formId}-website`}>Website</label>
-                    <input
-                      ref={honeypotRef}
-                      id={`${formId}-website`}
-                      name="website"
-                      type="text"
-                      tabIndex={-1}
-                      autoComplete="off"
-                      defaultValue=""
-                    />
-                  </div>
+                  <label htmlFor={`${formId}-website`}>Website</label>
+                  <input
+                    ref={honeypotRef}
+                    id={`${formId}-website`}
+                    name="website"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    defaultValue=""
+                  />
+                </div>
 
+                <div className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4">
                   <Field
                     label="Name"
                     htmlFor={`${formId}-name`}
@@ -352,11 +354,6 @@ export function SiteLeadPanel() {
                     </p>
                   </div>
 
-                  <p className="text-xs leading-snug text-muted">
-                    By submitting, you agree to be contacted by INFOZUB about
-                    this enquiry.
-                  </p>
-
                   {formError ? (
                     <p
                       className="rounded-md border border-danger/30 bg-danger/5 px-3 py-2 text-sm text-danger"
@@ -365,7 +362,13 @@ export function SiteLeadPanel() {
                       {formError}
                     </p>
                   ) : null}
+                </div>
 
+                <div className="shrink-0 space-y-2.5 border-t border-line px-4 py-3">
+                  <p className="text-xs leading-snug text-muted">
+                    By submitting, you agree to be contacted by INFOZUB about
+                    this enquiry.
+                  </p>
                   <Button
                     type="submit"
                     variant="signal"
@@ -382,9 +385,9 @@ export function SiteLeadPanel() {
                       "Submit"
                     )}
                   </Button>
-                </form>
-              )}
-            </div>
+                </div>
+              </form>
+            )}
           </section>
         ) : null}
 
