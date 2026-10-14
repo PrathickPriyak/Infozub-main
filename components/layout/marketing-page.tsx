@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-import { SiteChatbot } from "@/components/chat/site-chatbot";
+import { Suspense, type ReactNode } from "react";
 import { EnquiryModal } from "@/components/contact/enquiry-modal";
+import { SiteLeadPanel } from "@/components/contact/site-lead-panel";
 import { StickyEnquire } from "@/components/contact/sticky-enquire";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -33,7 +33,9 @@ export function MarketingPage({
       <SiteFooter />
       <StickyEnquire />
       <EnquiryModal />
-      <SiteChatbot />
+      <Suspense fallback={null}>
+        <SiteLeadPanel />
+      </Suspense>
     </>
   );
 }
