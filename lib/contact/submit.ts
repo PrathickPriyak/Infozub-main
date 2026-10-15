@@ -77,7 +77,12 @@ async function deliverViaWebhook(
     // Do not follow — following re-POSTs the echo URL and returns 405.
     body: JSON.stringify({
       source: "infozub-website",
-      form: context.channel === "modal" ? "enquiry-modal" : "contact",
+      form:
+        context.channel === "modal"
+          ? "enquiry-modal"
+          : context.channel === "assistant"
+            ? "assistant-panel"
+            : "contact",
       ...data,
       channel: context.channel ?? "page",
       sheetRow,

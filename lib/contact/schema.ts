@@ -23,7 +23,7 @@ export type ContactFormValues = {
   sourcePage: string;
 };
 
-export const contactChannels = ["page", "modal"] as const;
+export const contactChannels = ["page", "modal", "assistant"] as const;
 export type ContactChannel = (typeof contactChannels)[number];
 
 /** Payload accepted by POST /api/contact (includes spam traps). */

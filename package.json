@@ -9,11 +9,13 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/verify-local-images.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "check": "npm run lint && npm run typecheck && npm run build"
+    "verify:images": "node scripts/verify-local-images.mjs",
+    "check": "npm run lint && npm run typecheck && npm run verify:images && npm run build"
   },
 
   "dependencies": {
