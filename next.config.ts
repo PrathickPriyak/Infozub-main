@@ -11,7 +11,28 @@ const nextConfig: NextConfig = {
     deviceSizes: [360, 414, 640, 768, 1024, 1280, 1440, 1920],
     imageSizes: [64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    // Production images must stay local under /public — do not add remote hosts.
     remotePatterns: [],
+    localPatterns: [
+      {
+        pathname: "/brand/**",
+      },
+      {
+        pathname: "/clients/**",
+      },
+      {
+        pathname: "/about/**",
+      },
+      {
+        pathname: "/academy/**",
+      },
+      {
+        pathname: "/projects/**",
+      },
+      {
+        pathname: "/og/**",
+      },
+    ],
   },
   compiler: {
     removeConsole:
