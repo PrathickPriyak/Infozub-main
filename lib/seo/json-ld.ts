@@ -1,4 +1,9 @@
-import { absoluteUrl, organizationProfile, SITE_ORIGIN } from "@/lib/seo/site";
+import {
+  absoluteUrl,
+  ORGANIZATION_LOGO_PATH,
+  organizationProfile,
+  SITE_ORIGIN,
+} from "@/lib/seo/site";
 
 type JsonLdPrimitive = string | number | boolean | null;
 type JsonLdValue =
@@ -19,7 +24,7 @@ export function organizationJsonLd(): JsonLd {
     email: organizationProfile.email,
     telephone: organizationProfile.telephone,
     foundingDate: organizationProfile.foundingDate,
-    logo: absoluteUrl("/og/default.png"),
+    logo: absoluteUrl(ORGANIZATION_LOGO_PATH),
     sameAs: [...organizationProfile.sameAs],
     address: organizationProfile.address.map((item) => ({ ...item })),
     contactPoint: [

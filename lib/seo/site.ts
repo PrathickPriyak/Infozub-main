@@ -9,7 +9,11 @@ import { socialLinks } from "@/content/navigation";
 export const SITE_ORIGIN =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "https://infozub.com";
 
+/** Local Open Graph image under `public/og/` — never point at WordPress CDN. */
 export const DEFAULT_OG_PATH = "/og/default.png";
+
+/** Local organization logo under `public/about/` for JSON-LD. */
+export const ORGANIZATION_LOGO_PATH = "/about/logo-square.jpg";
 
 export const TWITTER_HANDLE = "@infozubltd";
 
